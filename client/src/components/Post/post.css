@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+.postGrid {
+    border: outset rgb(191, 188, 188);
+    border-radius: 2%;
+    display: flex;
+    height:75vh;
+    width: 60vw;
+    padding: 1%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.hover-link:hover {
+    cursor: pointer;
+}

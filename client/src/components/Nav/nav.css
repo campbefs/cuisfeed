@@ -1,0 +1,23 @@
+.flex-row {
+    display: flex;
+  }
+  
+  /* Header {
+    padding-top: 2%;
+    padding-left: 2%;
+    position: relative;
+    justify-content: flex-start;
+  } */
+  
+  .nav {
+    position: absolute;
+    right: 2%;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  .hover-link:hover {
+    cursor: pointer;
+  }
