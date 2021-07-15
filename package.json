@@ -1,5 +1,5 @@
 {
-  "name": "recipe-roster",
+  "name": "cuisfeed",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/campbefs/recipe-roster.git"
+    "url": "git+https://github.com/campbefs/cuisfeed.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/campbefs/recipe-roster/issues"
+    "url": "https://github.com/campbefs/cuisfeed/issues"
   },
-  "homepage": "https://github.com/campbefs/recipe-roster#readme",
+  "homepage": "https://github.com/campbefs/cuisfeed#readme",
   "devDependencies": {
     "concurrently": "^6.2.0"
   },

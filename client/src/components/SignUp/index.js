@@ -54,7 +54,7 @@ const SignUp = () => {
       
     <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
-        <h1>Become a Recipe Roster member today!</h1>
+        <h1>Become a Cuisfeed member today!</h1>
         <Form.Field>
           <label>Username</label>
           <input 

@@ -10,7 +10,7 @@ function Nav(props) {
     <Segment basic>
       <Header as="h2" floated="left" className="header flex-row px-1">
         <Icon name="food" />
-        <span className="hover-link" onClick={() => window.location.href = "/home"}>Recipe Roster</span>
+        <span className="hover-link" onClick={() => window.location.href = "/home"}>Cuisfeed</span>
       </Header>
 
       <Header as="h3" floated="right">
