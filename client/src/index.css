@@ -12,14 +12,19 @@ code {
     monospace;
 }
 
-header {
+#header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
   width: 100%;
+  padding: 10px 20px;
 }
 
-#head-title {
+#top-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-top: 20px;
-  padding-left: 50px;
 }
+
+
+
