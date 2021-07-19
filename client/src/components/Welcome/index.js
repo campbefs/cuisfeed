@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Text, Collage, Mask, Image, Button, IconButton } from 'gestalt';
-
+import { Box,  Collage, Mask, Image, } from 'gestalt';
+import SignUp from '../SignUp';
+import Login from '../Login';
 
 import pexel1 from '../../assets/images/welcome/pexels-photo-704569.jpeg';
 import pexel2 from '../../assets/images/welcome/pexels-photo-315755.jpeg';
@@ -10,7 +11,6 @@ import pexel5 from '../../assets/images/welcome/pexels-photo-1279330.jpeg';
 import pexel6 from '../../assets/images/welcome/pexels-photo-1109197.jpeg';
 import pexel7 from '../../assets/images/welcome/pexels-photo-461428.jpeg';
 import pexel8 from '../../assets/images/welcome/pexels-photo-196643.jpeg';
-
 
 
 import pexel11 from '../../assets/images/welcome/pexels-photo-784631.jpeg';
@@ -720,18 +720,19 @@ function Welcome() {
 
       
       <div id="welcome-container-right">
-        <h1 id="welcome-title">Welcome to <span style={{fontWeight: "bold", color: "rgba(1,116,232)"}}>Cuisfeed</span></h1>
+        <h1 id="welcome-title">Welcome to <span style={{fontWeight: "bold", color: "rgba(0,116,232)"}}>Cuisfeed</span></h1>
 
         <div id="login-container">
-          <Button className='login-button' size="lg" icon="facebook" text="Continue with Facebook"/>
+          {/* <Button className='login-button' size="lg" icon="facebook" text="Continue with Facebook"/>
           <hr></hr>
           <Button className='login-button' size="lg" text="Continue with Google" />
+          <hr></hr> */}
+          {/* <Button className='login-button' color="blue" size="lg" text="Sign Up" /> */}
+          <SignUp/>
           <hr></hr>
-          <Button className='login-button' color="blue" size="lg" text="Sign Up" />
-          <hr></hr>
-          <Button className='login-button' color="red" size="lg" text="Login" />
+          {/* <Button className='login-button' color="red" size="lg" text="Login" /> */}
+          <Login/>
         </div>
-
       </div>
 
     </section>
