@@ -36,9 +36,11 @@ function Nav() {
             accessibilityControls="menu"
             accessibilityExpanded={selectedMenu}
             accessibilityHaspopup
-            selectedMenu={selectedMenu}
+            selected={selectedMenu}
             icon="menu"
-            onClick={() => setSelectedMenu(!selectedMenu)}
+            onClick={() => {
+              setSelectedMenu(!selectedMenu);
+            }}
             ref={anchorRef}
           />
           {selectedMenu && (
@@ -78,7 +80,7 @@ function Nav() {
             accessibilityControls="person"
             accessibilityExpanded={selectedAccount}
             accessibilityHaspopup
-            selectedMenu={selectedAccount}
+            selected={selectedAccount}
             icon="person"
             size="md"
             onClick={() => setSelectedAccount(!selectedAccount)}
@@ -106,7 +108,7 @@ function Nav() {
                   </Box>
                   <Box padding={2}>
                     <Text weight="bold">
-                      Logout
+                      Option 2
                     </Text>
                   </Box>
                 </Box>
