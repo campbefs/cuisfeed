@@ -26,5 +26,28 @@ code {
   padding-top: 20px;
 }
 
+#welcome-container {
+  display: flex; 
+  height: calc(100vh - 0px);
+  width: 100%;
+  justify-content: left;
+  overflow: hidden;
+}
+
+#box {
+  width: 50%;
+  max-height: calc(100vh - 0px);
+  overflow: hidden;
+}
+
+#login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 50px;
+}
+
+
+
 
 

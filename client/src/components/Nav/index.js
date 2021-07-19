@@ -60,12 +60,12 @@ function Nav() {
                 >
                   <Box padding={2}>
                     <Text weight="bold">
-                      Option 1
+                      Home
                     </Text>
                   </Box>
                   <Box padding={2}>
                     <Text weight="bold">
-                      Option 2
+                      My Profile
                     </Text>
                   </Box>
                 </Box>
@@ -108,7 +108,7 @@ function Nav() {
                   </Box>
                   <Box padding={2}>
                     <Text weight="bold">
-                      Option 2
+                      Logout
                     </Text>
                   </Box>
                 </Box>
