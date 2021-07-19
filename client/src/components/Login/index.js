@@ -10,12 +10,12 @@ export default function Login(props) {
 
     return (
       <Modal
-        accessibilityModalLabel="Create new board"
-        heading="Create board"
+        accessibilityModalLabel="Login Credentials"
+        heading="Login"
         onDismiss={onDismiss}
         footer={
           <Flex alignItems="center" justifyContent="end">
-            <Button inline color="red" text="Create"/>
+            <Button inline color="red" text="Login"/>
           </Flex>
         }
         size="sm"
@@ -23,24 +23,28 @@ export default function Login(props) {
         <Box paddingX={8}>
           <Box marginBottom={8}>
             <TextField
-              id="name"
+              id="username"
               onChange={({ value }) => console.log(value)}
-              placeholder='Like "Places to go" or "Recipes to Make"'
-              label="Name"
+              placeholder='Username'
+              label="Username"
               type="text"
             />
           </Box>
-          <Checkbox
-            checked={false}
-            id="secret"
-            label="Keep this board secret"
-            subtext="So only you and collaborators can see it."
-            name="languages"
-            onChange={({ checked }) => {
-              console.log(checked);
-            }}
-          />
         </Box>
+
+        <Box paddingX={8}>
+          <Box marginBottom={8}>
+            <TextField
+              id="password"
+              onChange={({ value }) => console.log(value)}
+              placeholder='Password'
+              label="Password"
+              type="password"
+            />
+          </Box>
+        </Box>
+
+
       </Modal>
     );
   };

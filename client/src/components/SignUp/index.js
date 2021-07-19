@@ -1,5 +1,6 @@
 import React from "react";
-// import "../node_modules/gestalt/dist/gestalt.css"
+// import "../node_modules/gestalt/dist/gestalt.css;"
+// import "../../../node_modules/gestalt/dist/gestant.css";
 import { Box, Button, Checkbox, CompositeZIndex, FixedZIndex, Flex, Layer, Modal, TextField } from "gestalt";
 
 export default function SignUp(props) {
@@ -23,24 +24,40 @@ export default function SignUp(props) {
         <Box paddingX={8}>
           <Box marginBottom={8}>
             <TextField
-              id="name"
+              id="username"
               onChange={({ value }) => console.log(value)}
-              placeholder='Like "Places to go" or "Recipes to Make"'
-              label="Name"
+              placeholder='Username'
+              label="Username"
               type="text"
             />
           </Box>
-          <Checkbox
-            checked={false}
-            id="secret"
-            label="Keep this board secret"
-            subtext="So only you and collaborators can see it."
-            name="languages"
-            onChange={({ checked }) => {
-              console.log(checked);
-            }}
-          />
         </Box>
+
+        <Box paddingX={8}>
+          <Box marginBottom={8}>
+            <TextField
+              id="email"
+              onChange={({ value }) => console.log(value)}
+              placeholder='Email'
+              label="Email"
+              type="text"
+            />
+          </Box>
+        </Box>
+
+        <Box paddingX={8}>
+          <Box marginBottom={8}>
+            <TextField
+              id="password"
+              onChange={({ value }) => console.log(value)}
+              placeholder='Password'
+              label="Password"
+              type="password"
+            />
+          </Box>
+        </Box>
+
+
       </Modal>
     );
   };
