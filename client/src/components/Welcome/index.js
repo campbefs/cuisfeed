@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Collage, Mask, Image, Button } from 'gestalt';
+import { Box, Text, Collage, Mask, Image, Button, IconButton } from 'gestalt';
 
 
 import pexel1 from '../../assets/images/welcome/pexels-photo-704569.jpeg';
@@ -31,7 +31,7 @@ function Welcome() {
     <section id='welcome-container'>
 
       <Box display="flex" wrap id="box">
-          <Box key={1} padding={0}>
+          <Box key={0} padding={0}>
             {/* <Box><Text>layoutKey = {1}</Text></Box> */}
             <Collage
               columns={4}
@@ -107,7 +107,7 @@ function Welcome() {
             />
           </Box>
 
-          <Box key={0} padding={0}>
+          <Box key={1} padding={0}>
             {/* <Box><Text>layoutKey = {1}</Text></Box> */}
             <Collage
               columns={4}
@@ -182,7 +182,7 @@ function Welcome() {
               }}
             />
           </Box>
-          <Box key={1} padding={0}>
+          <Box key={2} padding={0}>
             {/* <Box><Text>layoutKey = {1}</Text></Box> */}
             <Collage
               columns={4}
@@ -258,7 +258,7 @@ function Welcome() {
             />
           </Box>
 
-          <Box key={0} padding={0}>
+          <Box key={3} padding={0}>
             {/* <Box><Text>layoutKey = {1}</Text></Box> */}
             <Collage
               columns={4}
@@ -335,7 +335,7 @@ function Welcome() {
           </Box>
 
           
-          <Box key={0} padding={0}>
+          <Box key={4} padding={0}>
             {/* <Box><Text>layoutKey = {1}</Text></Box> */}
             <Collage
               columns={4}
@@ -411,7 +411,235 @@ function Welcome() {
             />
           </Box>
 
-          <Box key={0} padding={0}>
+          <Box key={5} padding={0}>
+            {/* <Box><Text>layoutKey = {1}</Text></Box> */}
+            <Collage
+              columns={4}
+              height={350}
+              width={300}
+              layoutKey={0}
+              renderImage={({ index, width, height }) => {
+                const images = [
+                  {
+                    color: 'rgb(111, 91, 77)',
+                    naturalHeight: 751,
+                    naturalWidth: 564,
+                    src: pexel11,
+                  },
+                  {
+                    color: 'rgb(231, 186, 176)',
+                    naturalHeight: 200,
+                    naturalWidth: 98,
+                    src: pexel12,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 300,
+                    naturalWidth: 200,
+                    src: pexel13,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 517,
+                    naturalWidth: 564,
+                    src: pexel14,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 806,
+                    naturalWidth: 564,
+                    src: pexel15,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 200,
+                    naturalWidth: 200,
+                    src: pexel16,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 806,
+                    naturalWidth: 564,
+                    src: pexel17,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 200,
+                    naturalWidth: 200,
+                    src: pexel18,
+                  },
+
+                ];
+                const image = images[index];
+                return (
+                  <Mask wash width={width} height={height}>
+                    <Image
+                      alt="collage image"
+                      color={image.color}
+                      fit="cover"
+                      naturalHeight={image.naturalHeight}
+                      naturalWidth={image.naturalWidth}
+                      src={image.src}
+                    />
+                  </Mask>
+                );
+              }}
+            />
+          </Box>
+
+          <Box key={6} padding={0}>
+            {/* <Box><Text>layoutKey = {1}</Text></Box> */}
+            <Collage
+              columns={4}
+              height={350}
+              width={300}
+              layoutKey={0}
+              renderImage={({ index, width, height }) => {
+                const images = [
+                  {
+                    color: 'rgb(111, 91, 77)',
+                    naturalHeight: 751,
+                    naturalWidth: 564,
+                    src: pexel11,
+                  },
+                  {
+                    color: 'rgb(231, 186, 176)',
+                    naturalHeight: 200,
+                    naturalWidth: 98,
+                    src: pexel12,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 300,
+                    naturalWidth: 200,
+                    src: pexel13,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 517,
+                    naturalWidth: 564,
+                    src: pexel14,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 806,
+                    naturalWidth: 564,
+                    src: pexel15,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 200,
+                    naturalWidth: 200,
+                    src: pexel16,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 806,
+                    naturalWidth: 564,
+                    src: pexel17,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 200,
+                    naturalWidth: 200,
+                    src: pexel18,
+                  },
+
+                ];
+                const image = images[index];
+                return (
+                  <Mask wash width={width} height={height}>
+                    <Image
+                      alt="collage image"
+                      color={image.color}
+                      fit="cover"
+                      naturalHeight={image.naturalHeight}
+                      naturalWidth={image.naturalWidth}
+                      src={image.src}
+                    />
+                  </Mask>
+                );
+              }}
+            />
+          </Box>
+
+          <Box key={7} padding={0}>
+            {/* <Box><Text>layoutKey = {1}</Text></Box> */}
+            <Collage
+              columns={4}
+              height={350}
+              width={300}
+              layoutKey={0}
+              renderImage={({ index, width, height }) => {
+                const images = [
+                  {
+                    color: 'rgb(111, 91, 77)',
+                    naturalHeight: 751,
+                    naturalWidth: 564,
+                    src: pexel11,
+                  },
+                  {
+                    color: 'rgb(231, 186, 176)',
+                    naturalHeight: 200,
+                    naturalWidth: 98,
+                    src: pexel12,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 300,
+                    naturalWidth: 200,
+                    src: pexel13,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 517,
+                    naturalWidth: 564,
+                    src: pexel14,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 806,
+                    naturalWidth: 564,
+                    src: pexel15,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 200,
+                    naturalWidth: 200,
+                    src: pexel16,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 806,
+                    naturalWidth: 564,
+                    src: pexel17,
+                  },
+                  {
+                    color: '#000',
+                    naturalHeight: 200,
+                    naturalWidth: 200,
+                    src: pexel18,
+                  },
+
+                ];
+                const image = images[index];
+                return (
+                  <Mask wash width={width} height={height}>
+                    <Image
+                      alt="collage image"
+                      color={image.color}
+                      fit="cover"
+                      naturalHeight={image.naturalHeight}
+                      naturalWidth={image.naturalWidth}
+                      src={image.src}
+                    />
+                  </Mask>
+                );
+              }}
+            />
+          </Box>
+
+          <Box key={8} padding={0}>
             {/* <Box><Text>layoutKey = {1}</Text></Box> */}
             <Collage
               columns={4}
@@ -491,17 +719,20 @@ function Welcome() {
       </Box>
 
       
+      <div id="welcome-container-right">
+        <h1 id="welcome-title">Welcome to <span style={{fontWeight: "bold", color: "rgba(1,116,232)"}}>Cuisfeed</span></h1>
 
-      <div id="login-container">
-        <Button className='login-button' size="lg" text="Continue with Facebook" />
-        <hr></hr>
-        <Button className='login-button' size="lg" text="Continue with Google" />
-        <hr></hr>
-        <Button className='login-button' color="blue" size="lg" text="Sign Up" />
-        <hr></hr>
-        <Button className='login-button' color="red" size="lg" text="Login" />
+        <div id="login-container">
+          <Button className='login-button' size="lg" icon="facebook" text="Continue with Facebook"/>
+          <hr></hr>
+          <Button className='login-button' size="lg" text="Continue with Google" />
+          <hr></hr>
+          <Button className='login-button' color="blue" size="lg" text="Sign Up" />
+          <hr></hr>
+          <Button className='login-button' color="red" size="lg" text="Login" />
+        </div>
+
       </div>
-
 
     </section>
   )

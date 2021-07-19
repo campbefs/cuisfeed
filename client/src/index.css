@@ -34,6 +34,20 @@ code {
   overflow: hidden;
 }
 
+#welcome-container-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  margin-left: 50px;
+}
+
+#welcome-title {
+  margin-bottom: 50px;
+  font-size: 50px;
+}
+
+
 #box {
   width: 50%;
   max-height: calc(100vh - 0px);
@@ -44,7 +58,7 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 50px;
+  width: 80%;
 }
 
 
