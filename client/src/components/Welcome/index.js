@@ -2,6 +2,9 @@ import React from 'react';
 import { Box,  Collage, Mask, Image, } from 'gestalt';
 import SignUp from '../SignUp';
 import Login from '../Login';
+import google from '../../assets/images/Google__G__Logo.png';
+import facebook from '../../assets/images/facebook-logo-2019.png';
+
 
 import pexel1 from '../../assets/images/welcome/pexels-photo-704569.jpeg';
 import pexel2 from '../../assets/images/welcome/pexels-photo-315755.jpeg';
@@ -728,8 +731,16 @@ function Welcome() {
           <Button className='login-button' size="lg" text="Continue with Google" />
           <hr></hr> */}
           {/* <Button className='login-button' color="blue" size="lg" text="Sign Up" /> */}
+          <button class="copy-button">
+            <img alt="Facebook logo 2019 Icon by Icon Mafia" src={facebook}/><span>&nbsp;&nbsp;Continue with Facebook</span>
+          </button>
+          <hr/>
+          <button class="copy-button">
+            <img alt="google logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/24px-Google_%22G%22_Logo.svg.png"/><span id="google-text">&nbsp;&nbsp;Continue with Google</span>
+          </button>
+          <hr/>
           <SignUp/>
-          <hr></hr>
+          <hr/>
           {/* <Button className='login-button' color="red" size="lg" text="Login" /> */}
           <Login/>
         </div>

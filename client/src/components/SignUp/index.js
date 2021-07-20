@@ -2,6 +2,7 @@ import React from "react";
 // import "../node_modules/gestalt/dist/gestalt.css;"
 // import "../../../node_modules/gestalt/dist/gestant.css";
 import { Box, Button, Checkbox, CompositeZIndex, FixedZIndex, Flex, Layer, Modal, TextField } from "gestalt";
+import google from '../../assets/images/Google__G__Logo.svg';
 
 export default function SignUp(props) {
 

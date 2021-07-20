@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // import "../node_modules/gestalt/dist/gestalt.css"
 import { Box, Button, CompositeZIndex, FixedZIndex, Flex, Layer, Modal, TextField } from "gestalt";
 import Auth from '../../utils/auth';
+import google from '../../assets/images/Google__G__Logo.svg'
 
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
@@ -66,16 +67,12 @@ export default function Login(props) {
       <Button 
         inline
         className='login-button' 
-        color="red" 
+        // color="red"
         size="lg" 
         text="Login"
         onClick={() => setShouldShow(true)}
+        id="test1"
       />
-      {/* <Button
-        inline
-        text="View Modal"
-        onClick={() => setShouldShow(true)}
-      /> */}
       {shouldShow && (
         <Layer zIndex={modalZIndex}>
           <ModalWithHeading onDismiss={() => setShouldShow(false)} />
