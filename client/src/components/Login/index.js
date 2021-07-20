@@ -89,13 +89,14 @@ export default function Login(props) {
 
       try {
         const { data } = await loginUser({
-          variables: { email: 'test1@test.com', password: passwordValue }
+          variables: { username: usernameValue, password: passwordValue }
         });
         
         console.log(data.login);
         Auth.login(data.login.token);
       } catch (err) {
         console.error(err);
+        setErrorMessage('Invalid Credentials');
       }
 
     } 
@@ -114,17 +115,27 @@ export default function Login(props) {
           heading="Login"
           onDismiss={onDismiss}
           footer={
-            <Flex alignItems="center" justifyContent="end">
-              <Button 
-                inline color="red" text="Login"
-                type="submit"
-              />
-            </Flex>
+            <>
+              {errorMessage && (
+                <div>
+                  {/* <p className="error-text">{errorMessage}</p> */}
+                  <div style={{marginLeft: "8px"}}><Text color="red" align="start">{errorMessage}</Text></div>
+                  
+                </div>
+              )}
+              <Flex alignItems="center" justifyContent="end">
+                <Button 
+                  inline color="red" text="Login"
+                  type="submit"
+                />
+              </Flex>
+            </>
+
           }
           size="sm"
         >
           <Box paddingX={8}>
-            <Box marginBottom={8}>
+            <Box marginBottom={5}>
               <TextField
                 id="username"
                 // onChange={({ value }) => {
@@ -150,7 +161,7 @@ export default function Login(props) {
           </Box>
 
           <Box paddingX={8}>
-            <Box marginBottom={8}>
+            <Box marginBottom={3}>
               <TextField
                 id="password"
                 onChange={({ value }) => null}
@@ -161,15 +172,7 @@ export default function Login(props) {
               />
             </Box>
           </Box>
-
-          {errorMessage && (
-            <div>
-              {/* <p className="error-text">{errorMessage}</p> */}
-              <div style={{marginLeft: "36px"}}><Text color="red" align="start">{errorMessage}</Text></div>
-              
-            </div>
-          )}
-
+          
 
         </Modal>
       </form>
