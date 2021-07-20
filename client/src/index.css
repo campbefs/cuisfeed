@@ -54,6 +54,10 @@ code {
   overflow: hidden;
 }
 
+Box {
+  font-size: 20px;
+}
+
 #login-container {
   display: flex;
   flex-direction: column;
