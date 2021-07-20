@@ -726,22 +726,17 @@ function Welcome() {
         <h1 id="welcome-title">Welcome to <span style={{fontWeight: "bold", color: "rgba(0,116,232)"}}>Cuisfeed</span></h1>
 
         <div id="login-container">
-          {/* <Button className='login-button' size="lg" icon="facebook" text="Continue with Facebook"/>
-          <hr></hr>
-          <Button className='login-button' size="lg" text="Continue with Google" />
-          <hr></hr> */}
-          {/* <Button className='login-button' color="blue" size="lg" text="Sign Up" /> */}
-          <button class="copy-button">
+
+          <button className="copy-button">
             <img alt="Facebook logo 2019 Icon by Icon Mafia" src={facebook}/><span>&nbsp;&nbsp;Continue with Facebook</span>
           </button>
           <hr/>
-          <button class="copy-button">
+          <button className="copy-button">
             <img alt="google logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/24px-Google_%22G%22_Logo.svg.png"/><span id="google-text">&nbsp;&nbsp;Continue with Google</span>
           </button>
           <hr/>
           <SignUp/>
           <hr/>
-          {/* <Button className='login-button' color="red" size="lg" text="Login" /> */}
           <Login/>
         </div>
       </div>
