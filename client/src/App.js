@@ -35,11 +35,12 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-          {Auth.loggedIn() ? <Nav/> : '' }
+          <Welcome/>
+          {/* {Auth.loggedIn() ? <Nav/> : '' }
           <Switch>
             <Route exact path='/' component={Welcome} />
             <Route exact path='/home' component={Home} />
-          </Switch>
+          </Switch> */}
         </>
       </Router>
 

@@ -10,7 +10,7 @@ function Nav() {
 
   const anchorRef = React.useRef();
 
-  return (
+  return ( 
     <header id='header'>
 
       <Flex gap={4} alignItems="center" flex="grow">
