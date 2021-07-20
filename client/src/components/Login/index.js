@@ -17,6 +17,8 @@ export default function Login(props) {
   const [ formState, setFormState ] = useState( {username: '', password: ''});
   const { username, email, password } = formState;
 
+  const [loginUser, { error }] = useMutation(LOGIN_USER);
+
 
   // function handleChange(e) {
   //   // e.event.preventDefault();
@@ -46,11 +48,57 @@ export default function Login(props) {
 
   // }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(e.nativeEvent.target.username.value);
-    console.log(e.nativeEvent.target.password.value);
+    // console.log(e.nativeEvent.target.username.value);
+    // console.log(e.nativeEvent.target.password.value);
+    // console.log(e.nativeEvent.target.username.id);
+    // console.log(e.nativeEvent.target.password.id);
+
+    let usernameValue = e.nativeEvent.target.username.value
+    let passwordValue = e.nativeEvent.target.password.value
+
+    console.log('username', usernameValue);
+
+    // add some validation
+    if ('1' === 'email') { // not using this part for login. '1' substituted
+      const isValid = validateEmail(e.value);
+
+      if (!isValid) {
+        setErrorMessage('Your email is invalid.');
+        return;
+      }
+    } else if (!usernameValue) {
+        setErrorMessage(`Username is required`);
+        return;
+    } else if (!passwordValue) { 
+      setErrorMessage(`Password is required`);
+      return;
+    } else {
+        setErrorMessage('');
+    }
+
+    console.log(usernameValue);
+    console.log(passwordValue);
+
+    if (!errorMessage) {
+      console.log('no error');
+      // setFormState( {...formState, username: e.nativeEvent.target.username.value });
+      // setFormState( {...formState, password: e.nativeEvent.target.password.value });
+
+      try {
+        const { data } = await loginUser({
+          variables: { email: 'test1@test.com', password: passwordValue }
+        });
+        
+        console.log(data.login);
+        Auth.login(data.login.token);
+      } catch (err) {
+        console.error(err);
+      }
+
+    } 
     
   }
 
@@ -117,7 +165,7 @@ export default function Login(props) {
           {errorMessage && (
             <div>
               {/* <p className="error-text">{errorMessage}</p> */}
-              <p style={{marginLeft: "36px"}}><Text color="red" align="start">{errorMessage}</Text></p>
+              <div style={{marginLeft: "36px"}}><Text color="red" align="start">{errorMessage}</Text></div>
               
             </div>
           )}
