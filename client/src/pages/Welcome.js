@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { Box,  Collage, Mask, Image, } from 'gestalt';
 import SignUp from '../components/SignUp';
 import Login from '../components/Login';
 import google from '../assets/images/Google__G__Logo.png';
 import facebook from '../assets/images/facebook-logo-2019.png';
 import WelcomeCollage from '../components/WelcomeCollage';
+import Auth from '../utils/auth';
 
 
 function Welcome() {
+
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      window.location.href = "/home";
+    }
+  }, []);
 
   return (
 

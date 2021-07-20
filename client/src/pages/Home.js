@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import Auth from '../utils/auth';
 
 export default function Home() {
 

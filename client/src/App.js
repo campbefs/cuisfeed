@@ -30,15 +30,30 @@ const client = new ApolloClient({
 
 
 function App() {
+
+  // useEffect(() => {
+  //   window.location.href = "/";
+  // });
   
   return (
     <ApolloProvider client={client}>
       <Router>
         <>
+          {!Auth.loggedIn() ? (
           <Welcome/>
-          {/* {Auth.loggedIn() ? <Nav/> : '' }
+           ) : (
+             <>
+              <Nav/>
+              <Switch>
+                <Route exact path='/' component={Welcome} />
+                <Route exact path='/home' component={Home} />
+              </Switch>
+             </>
+           )}
+          
+          {/* <Nav/>
           <Switch>
-            <Route exact path='/' component={Welcome} />
+            <Route exact path='/' component={Home} />
             <Route exact path='/home' component={Home} />
           </Switch> */}
         </>
