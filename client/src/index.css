@@ -110,6 +110,7 @@ code {
   max-height: var(--home-height); */
   /* height: var(--home-height); */
   height: 100vh;
+  min-width: 100px;
   /* flex-grow: 1; */
 }
 
@@ -129,6 +130,7 @@ code {
   height: 100vh;
   right: 10%;
   overflow: scroll;
+  min-width: 300px;
 
   /* height: 100vh;
   display: flex;
