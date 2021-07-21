@@ -16,7 +16,7 @@ import Auth from '../utils/auth';
 
 function Welcome() {
 
-  let location = useLocation(); 
+  let location = useLocation();
 
   useEffect(() => {
     if (Auth.loggedIn()) {

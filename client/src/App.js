@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Auth from './utils/auth';
@@ -30,10 +30,6 @@ const client = new ApolloClient({
 
 
 function App() {
-
-  // useEffect(() => {
-  //   window.location.href = "/";
-  // });
   
   return (
     <ApolloProvider client={client}>
