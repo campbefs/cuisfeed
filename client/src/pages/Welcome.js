@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 // import { Box,  Collage, Mask, Image, } from 'gestalt';
+import { useLocation } from 'react-router-dom';
 import SignUp from '../components/SignUp';
 import Login from '../components/Login';
 import google from '../assets/images/Google__G__Logo.png';
@@ -8,13 +9,22 @@ import WelcomeCollage from '../components/WelcomeCollage';
 import Auth from '../utils/auth';
 
 
+// let location = useLocation();
+// if (location !== '/') {
+  
+// }
+
 function Welcome() {
+
+  let location = useLocation(); 
 
   useEffect(() => {
     if (Auth.loggedIn()) {
       window.location.href = "/home";
+    } else if (location.pathname !== '/') {
+      window.location.href = "/";
     }
-  }, []);
+  }, [location]);
 
   return (
 
