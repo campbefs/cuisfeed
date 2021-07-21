@@ -9,12 +9,12 @@ import { ADD_USER } from '../../utils/mutations';
 
 export default function SignUp(props) {
 
-  const [validated] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+  // const [validated] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
 
-  const [ formState, setFormState ] = useState( {username: '', email: '', password: ''});
-  const { username, email, password } = formState;
+  // const [ formState, setFormState ] = useState( {username: '', email: '', password: ''});
+  // const { username, email, password } = formState;
 
   const [addUser, { error }] = useMutation(ADD_USER);
 

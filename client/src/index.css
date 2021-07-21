@@ -1,3 +1,7 @@
+:root {
+  --home-height: calc(100vh - 78px);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -16,7 +20,9 @@ code {
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 10px 20px;
+  padding: 2px 10%;
+  position: fixed;
+  background-color: white;
 }
 
 #top-icon {
@@ -88,6 +94,28 @@ code {
   background-color: #e2e2e2;
 }
 
+#home-container {
+  display: flex;
+  padding-top: 78px;
+  padding-left: 10%;
+  padding-right: 10%;
+  overflow: hidden;
+}
 
+.left-bar {
+  background-color: green;
+  min-height: var(--home-height);
+  flex-grow: 1;
+}
 
+.middle-bar {
+  background-color: blueviolet;
+  min-height: var(--home-height);
+  flex-grow: 2;
+}
 
+.right-bar {
+  background-color: blue;
+  min-height: var(--home-height);
+  flex-grow: 1;
+}

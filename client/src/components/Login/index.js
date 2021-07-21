@@ -9,15 +9,14 @@ import { LOGIN_USER } from '../../utils/mutations';
 export default function Login(props) {
 
   // const [userFormData, setUserFormData] = useState({ username: '', password: ''});
-  const [validated] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+  // const [validated] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
   const [ errorMessage, setErrorMessage ] = useState('');
 
-  const [ formState, setFormState ] = useState( {username: '', password: ''});
-  const { username, email, password } = formState;
+  // const [ formState, setFormState ] = useState( {username: '', password: ''});
+  // const { username, email, password } = formState;
 
   const [loginUser, { error }] = useMutation(LOGIN_USER);
-
 
   // function handleChange(e) {
   //   // e.event.preventDefault();
