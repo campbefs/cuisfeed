@@ -16,7 +16,72 @@ export default function Home() {
         Feed
       </div>
       <div className="right-bar">
-        Follows
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+        Follows<br/>
+
       </div>
     </section>
   );

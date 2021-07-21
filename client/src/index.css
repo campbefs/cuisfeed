@@ -104,18 +104,37 @@ code {
 
 .left-bar {
   background-color: green;
-  min-height: var(--home-height);
-  flex-grow: 1;
+  position: fixed;
+  width: 20%;
+  /* min-height: var(--home-height);
+  max-height: var(--home-height); */
+  /* height: var(--home-height); */
+  height: 100vh;
+  /* flex-grow: 1; */
 }
 
 .middle-bar {
+  margin-left: 25%;
+  margin-right: 25%;
+  /* margin-right: 25%; */
   background-color: blueviolet;
-  min-height: var(--home-height);
+  min-height: calc(100vh*2);  /*var(--home-height); */
   flex-grow: 2;
 }
 
 .right-bar {
   background-color: blue;
-  min-height: var(--home-height);
+  position: fixed;
+  width: 20%;
+  height: 100vh;
+  right: 10%;
+  overflow: scroll;
+
+  /* height: 100vh;
+  display: flex;
+  margin-left: auto;
+  float: right;
+  justify-content: right;
   flex-grow: 1;
+  top: 0; */
 }
