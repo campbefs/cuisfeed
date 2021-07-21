@@ -30,26 +30,30 @@ function Welcome() {
 
     <section id='welcome-container'>
 
-      <WelcomeCollage/>
-      
-      <div id="welcome-container-right">
-        <h1 id="welcome-title">Welcome to <span style={{fontWeight: "bold", color: "rgba(0,116,232)"}}>Cuisfeed</span></h1>
+      {!Auth.loggedIn() ? (
+        <>
+          <WelcomeCollage/>
+          <div id="welcome-container-right">
+            <h1 id="welcome-title">Welcome to <span style={{fontWeight: "bold", color: "rgba(0,116,232)"}}>Cuisfeed</span></h1>
 
-        <div id="login-container">
+            <div id="login-container">
 
-          <button className="copy-button">
-            <img alt="Facebook logo 2019 Icon by Icon Mafia" src={facebook}/><span>&nbsp;&nbsp;Continue with Facebook</span>
-          </button>
-          <hr/>
-          <button className="copy-button">
-            <img alt="google logo" src={google}/><span id="google-text">&nbsp;&nbsp;Continue with Google</span>
-          </button>
-          <hr/>
-          <SignUp/>
-          <hr/>
-          <Login/>
-        </div>
-      </div>
+              <button className="copy-button">
+                <img alt="Facebook logo 2019 Icon by Icon Mafia" src={facebook}/><span>&nbsp;&nbsp;Continue with Facebook</span>
+              </button>
+              <hr/>
+              <button className="copy-button">
+                <img alt="google logo" src={google}/><span id="google-text">&nbsp;&nbsp;Continue with Google</span>
+              </button>
+              <hr/>
+              <SignUp/>
+              <hr/>
+              <Login/>
+            </div>
+          </div>
+        </>
+      )
+      : ''}
 
     </section>
   )

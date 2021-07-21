@@ -57,7 +57,6 @@ export default function SignUp(props) {
       // setFormState( {...formState, username: e.nativeEvent.target.username.value });
       // setFormState( {...formState, password: e.nativeEvent.target.password.value });
 
-
       try {
         const { data } = await addUser({
           variables: { username: usernameValue, email: emailValue, password: passwordValue }
