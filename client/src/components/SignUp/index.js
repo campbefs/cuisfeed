@@ -62,13 +62,11 @@ export default function SignUp(props) {
         const { data } = await addUser({
           variables: { username: usernameValue, email: emailValue, password: passwordValue }
         });
-
-        console.log('data', data);
         
         Auth.login(data.addUser.token);
       } catch (err) {
         console.error(err);
-        setErrorMessage('Something went wrong...');
+        setErrorMessage('Username/email already exists...');
       }
 
     }
