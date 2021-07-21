@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "../node_modules/gestalt/dist/gestalt.css"
 import { Text, Box, Button, CompositeZIndex, FixedZIndex, Flex, Layer, Modal, TextField } from "gestalt";
 import Auth from '../../utils/auth';
 import { validateEmail } from '../../utils/helpers';
@@ -59,7 +58,6 @@ export default function Login(props) {
     let usernameValue = e.nativeEvent.target.username.value
     let passwordValue = e.nativeEvent.target.password.value
 
-    console.log('username', usernameValue);
 
     // add some validation
     if ('1' === 'email') { // not using this part for login. '1' substituted
@@ -79,11 +77,7 @@ export default function Login(props) {
         setErrorMessage('');
     }
 
-    console.log(usernameValue);
-    console.log(passwordValue);
-
     if (!errorMessage) {
-      console.log('no error');
       // setFormState( {...formState, username: e.nativeEvent.target.username.value });
       // setFormState( {...formState, password: e.nativeEvent.target.password.value });
 
@@ -92,7 +86,6 @@ export default function Login(props) {
           variables: { username: usernameValue, password: passwordValue }
         });
         
-        console.log(data.login);
         Auth.login(data.login.token);
       } catch (err) {
         console.error(err);

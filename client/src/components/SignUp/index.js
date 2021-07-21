@@ -1,65 +1,157 @@
-import React from "react";
-// import "../node_modules/gestalt/dist/gestalt.css;"
-// import "../../../node_modules/gestalt/dist/gestant.css";
-import { Box, Button, Checkbox, CompositeZIndex, FixedZIndex, Flex, Layer, Modal, TextField } from "gestalt";
-import google from '../../assets/images/Google__G__Logo.svg';
+import React, { useState } from "react";
+// import "../node_modules/gestalt/dist/gestalt.css"
+import { Text, Box, Button, CompositeZIndex, FixedZIndex, Flex, Layer, Modal, TextField } from "gestalt";
+import Auth from '../../utils/auth';
+import { validateEmail } from '../../utils/helpers';
+
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../../utils/mutations';
 
 export default function SignUp(props) {
+
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [ errorMessage, setErrorMessage ] = useState('');
+
+  const [ formState, setFormState ] = useState( {username: '', email: '', password: ''});
+  const { username, email, password } = formState;
+
+  const [addUser, { error }] = useMutation(ADD_USER);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    // console.log(e.nativeEvent.target.username.value);
+    // console.log(e.nativeEvent.target.password.value);
+    // console.log(e.nativeEvent.target.username.id);
+    // console.log(e.nativeEvent.target.password.id);
+
+    let usernameValue = e.nativeEvent.target.username.value;
+    let passwordValue = e.nativeEvent.target.password.value;
+    let emailValue = e.nativeEvent.target.email.value;
+
+    console.log('email', emailValue);
+
+    // add some validation
+    if ('1' === 'email') { // email validation is built into gestalt
+      const isValid = validateEmail(e.value);
+
+      if (!isValid) {
+        setErrorMessage('Your email is invalid.');
+        return;
+      }
+    } else if (!usernameValue) {
+        setErrorMessage(`Username is required`);
+        return;
+    } else if (!emailValue) {
+        setErrorMessage(`Email is required`);
+        return;
+    } else if (!passwordValue) { 
+      setErrorMessage(`Password is required`);
+      return;
+    } else {
+        setErrorMessage('');
+    }
+
+    if (!errorMessage) {
+      // setFormState( {...formState, username: e.nativeEvent.target.username.value });
+      // setFormState( {...formState, password: e.nativeEvent.target.password.value });
+
+
+      try {
+        const { data } = await addUser({
+          variables: { username: usernameValue, email: emailValue, password: passwordValue }
+        });
+
+        console.log('data', data);
+        
+        Auth.login(data.addUser.token);
+      } catch (err) {
+        console.error(err);
+        setErrorMessage('Something went wrong...');
+      }
+
+    }
+    
+  }
+
 
   const ModalWithHeading = ({
     onDismiss,
   }) => {
 
     return (
-      <Modal
-        accessibilityModalLabel="Sign Up"
-        heading="Sign Up"
-        onDismiss={onDismiss}
-        footer={
-          <Flex alignItems="center" justifyContent="end">
-            <Button inline color="red" text="Sign Up"/>
-          </Flex>
-        }
-        size="sm"
-      >
-        <Box paddingX={8}>
-          <Box marginBottom={8}>
-            <TextField
-              id="username"
-              onChange={({ value }) => console.log(value)}
-              placeholder='Username'
-              label="Username"
-              type="text"
-            />
+      <form onSubmit={handleSubmit}>
+        <Modal
+          accessibilityModalLabel="Sign Up Form"
+          heading="Sign Up"
+          onDismiss={onDismiss}
+          footer={
+            <>
+              {errorMessage && (
+                <div>
+                  {/* <p className="error-text">{errorMessage}</p> */}
+                  <div style={{marginLeft: "8px"}}><Text color="red" align="start">{errorMessage}</Text></div>
+                  
+                </div>
+              )}
+              <Flex alignItems="center" justifyContent="end">
+                <Button 
+                  inline color="red" text="Sign Up"
+                  type="submit"
+                />
+              </Flex>
+            </>
+
+          }
+          size="sm"
+        >
+          <Box paddingX={8}>
+            <Box marginBottom={5}>
+              <TextField
+                id="username"
+                // onChange={({ value }) => {
+                //   setValue(value);
+                // }}
+                onChange={({ value }) => null}
+                placeholder="Add Username"
+                label="Username"
+                // value={value}
+                type="text"
+                autoComplete="username"
+              />
+            </Box>
           </Box>
-        </Box>
 
-        <Box paddingX={8}>
-          <Box marginBottom={8}>
-            <TextField
-              id="email"
-              onChange={({ value }) => console.log(value)}
-              placeholder='Email'
-              label="Email"
-              type="text"
-            />
+          <Box paddingX={8}>
+            <Box marginBottom={5}>
+              <TextField
+                id="email"
+                onChange={({ value }) => null}
+                placeholder='Email'
+                label="Email"
+                type="email"
+                // onBlur={handleChange}
+              />
+            </Box>
           </Box>
-        </Box>
 
-        <Box paddingX={8}>
-          <Box marginBottom={8}>
-            <TextField
-              id="password"
-              onChange={({ value }) => console.log(value)}
-              placeholder='Password'
-              label="Password"
-              type="password"
-            />
+          <Box paddingX={8}>
+            <Box marginBottom={1}>
+              <TextField
+                id="password"
+                onChange={({ value }) => null}
+                placeholder='Password'
+                label="Password"
+                type="password"
+                // onBlur={handleChange}
+              />
+            </Box>
           </Box>
-        </Box>
+          
 
-
-      </Modal>
+        </Modal>
+      </form>
     );
   };
 
@@ -69,19 +161,14 @@ export default function SignUp(props) {
 
   return (
     <React.Fragment>
-      <Button 
+      <Button
         inline
-        className='login-button' 
-        color="blue" 
+        className='signup-button' 
+        color="blue"
         size="lg" 
         text="Sign Up"
         onClick={() => setShouldShow(true)}
       />
-      {/* <Button
-        inline
-        text="View Modal"
-        onClick={() => setShouldShow(true)}
-      /> */}
       {shouldShow && (
         <Layer zIndex={modalZIndex}>
           <ModalWithHeading onDismiss={() => setShouldShow(false)} />
