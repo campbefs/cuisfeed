@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Heading, SearchField, Flex, IconButton, Layer, Popover, Box,
         Text} from 'gestalt';
+import Auth from '../../utils/auth';
 
 function Nav() {
   const [value, setValue ] = React.useState('');
@@ -14,12 +16,16 @@ function Nav() {
     <header id='header'>
 
       <Flex gap={4} alignItems="center" flex="grow">
-        <Heading size="lg" id="head-title">Cuisfeed</Heading>
-        <div id="top-icon">
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAABGElEQVRoQ+2Z0Q3CMAxEr5vAaEwCbMIIsAmjwASgoID4SIsVW41trj9VpdT1+dlO605IekxJdeGvhB0A7CvJI4By/TAmewZQbF+N7X7MtYitIaw4cAOwrWdzfSOFFTE7ACdzVUCzxn4R09Zly765th5iFDaDIQQxabd8d9eilcI0haetsbTEeoIaIhUp7CsCIYilrTEKq/tXmH2MzSNa8yAxEuvJgcY92nfFHjdCbNAUxhrryQHW2PLAlMOcaMMcoyp4mXE1MLUSdgewyTbivtTPmFV/SlgRGWpH2+GGOr/0cApzi2bGMRIjMScRYCo6ASF2g8TEoXKykMScgBC7QWLiUDlZSGJOQIjdIDFxqJwsJDEnIMRuPAHZTaA39FQ9CQAAAABJRU5ErkJggg=="
-            alt="cookbook"
-          />
-        </div>
+        <Link id="home-link" to='/home'>
+          <Heading size="lg" id="head-title">Cuisfeed</Heading>
+        </Link>
+        <Link id="home-link" to='/home'>
+          <div id="top-icon">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAABGElEQVRoQ+2Z0Q3CMAxEr5vAaEwCbMIIsAmjwASgoID4SIsVW41trj9VpdT1+dlO605IekxJdeGvhB0A7CvJI4By/TAmewZQbF+N7X7MtYitIaw4cAOwrWdzfSOFFTE7ACdzVUCzxn4R09Zly765th5iFDaDIQQxabd8d9eilcI0haetsbTEeoIaIhUp7CsCIYilrTEKq/tXmH2MzSNa8yAxEuvJgcY92nfFHjdCbNAUxhrryQHW2PLAlMOcaMMcoyp4mXE1MLUSdgewyTbivtTPmFV/SlgRGWpH2+GGOr/0cApzi2bGMRIjMScRYCo6ASF2g8TEoXKykMScgBC7QWLiUDlZSGJOQIjdIDFxqJwsJDEnIMRuPAHZTaA39FQ9CQAAAABJRU5ErkJggg=="
+              alt="cookbook"
+            />
+          </div>
+        </Link>
 
         <Flex.Item flex="grow">
           <SearchField
@@ -61,14 +67,18 @@ function Nav() {
                   padding={2}
                 >
                   <Box padding={2}>
-                    <Text weight="bold">
-                      Home
-                    </Text>
+                    <Link Home to='/home'>
+                      <Text weight="bold">
+                        Home
+                      </Text>
+                    </Link>
                   </Box>
                   <Box padding={2}>
-                    <Text weight="bold">
-                      My Profile
-                    </Text>
+                    <Link to='/myprofile'>
+                      <Text weight="bold">
+                        My Profile
+                      </Text>
+                    </Link>
                   </Box>
                 </Box>
               </Popover>
@@ -109,9 +119,11 @@ function Nav() {
                     </Text>
                   </Box>
                   <Box padding={2}>
-                    <Text weight="bold">
-                      Logout
-                    </Text>
+                    <Link onClick={Auth.logout}>
+                      <Text weight="bold">
+                        Logout
+                      </Text>
+                    </Link>
                   </Box>
                 </Box>
               </Popover>
