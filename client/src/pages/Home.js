@@ -1,7 +1,8 @@
-import { exact } from "prop-types";
+// import { exact } from "prop-types";
 import React, { useEffect } from "react";
-import { useLocation } from 'react-router-dom';
-import Auth from '../utils/auth';
+// import { useLocation } from 'react-router-dom';
+// import Auth from '../utils/auth';
+import LeftNav from '../components/LeftNav';
 
 export default function Home() {
 
@@ -10,7 +11,7 @@ export default function Home() {
     // add padding for edges
     <section id="home-container"> 
       <div className="left-bar">
-        Left Nav
+        <LeftNav/>
       </div>
       <div className="middle-bar">
         Feed
