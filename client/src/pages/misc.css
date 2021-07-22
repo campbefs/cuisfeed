@@ -1,0 +1,83 @@
+.home {
+  display: flex;
+  flex-direction: row;
+  /* padding-top: 5%; */
+  justify-content: center;
+  position: relative;
+  padding-top: 100px;
+}
+
+
+.header {
+  text-align: left;
+}
+
+.homeHeader {
+  align-content: center;
+  text-align: center;
+  font-weight:bolder ;
+  padding-bottom: 3%;
+
+}
+
+
+
+.posts {
+  padding-top: 5%;
+  max-height: 100%;
+  align-content: left;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+/* .img {
+  position: relative;
+}
+
+.title {
+  position: absolute;
+
+} */
+
+.hover-link { 
+  color: black;
+}
+
+.hover-link:hover { 
+  color: rgba(48, 46, 46, 0.678);
+}
+
+#hover-link:hover {
+  color: gray;
+}
+
+.title {
+  padding-top: 3%;
+  text-align: center;
+  background-color: rgba(44, 81, 162, 0.338);
+}
+
+.follow {
+  padding-top: 10%;
+}
+
+.follow-header {
+  text-align: center;
+  padding-bottom: 3%;
+}
+
+.following {
+  text-align: center;
+ padding-bottom: 5%;
+}
+
+.modal {
+  text-align: center;
+}
+
+.follow-btn {
+  padding-top: 2%;
+
+}

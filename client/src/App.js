@@ -8,6 +8,12 @@ import Welcome from './pages/Welcome';
 import Nav from './components/Nav';
 import Home from './pages/Home';
 
+import MyProfile from './pages/MyProfile';
+import UserProfile from './pages/UserProfile';
+import RecipeSearch from './pages/RecipeSearch';
+import Post from './pages/Post';
+
+
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql'
   // uri: 'graphql',
@@ -43,6 +49,10 @@ function App() {
               <Switch>
                 <Route exact path='/' component={Welcome} />
                 <Route exact path='/home' component={Home} />
+                <Route exact path='/myprofile/' component={MyProfile}/>
+                <Route exact path='/profile/:username' component={UserProfile}/>
+                <Route exact path='/recipesearch' component={RecipeSearch} />
+                <Route exact path='/post/:postId' component={Post} />
               </Switch>
              </>
            )}
