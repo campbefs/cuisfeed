@@ -16,7 +16,7 @@ import Post from './pages/Post';
 
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql'
+  uri: process.env.NODE_ENV === 'production' ? '/graphql' : 'http://localhost:3001/graphql'
   // uri: 'graphql',
 });
 
