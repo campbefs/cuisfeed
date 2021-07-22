@@ -40,7 +40,7 @@ function MyProfile() {
   }
 
   return (
-    <section class='topic-conatiner' style={{paddingLeft: "230px"}}>
+    <section class='topic-conatiner' style={{marginLeft: "10%", paddingLeft: "230px"}}>
       <div className="home" id="myprofile-home">
        
         <Grid divided stackable columns={3}>

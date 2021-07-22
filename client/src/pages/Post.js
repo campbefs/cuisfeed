@@ -90,7 +90,7 @@ function Post() {
 
   return (
     <>
-      <div className="container">
+      <div className="container topic-container">
         <div className="postGrid">
           <Grid stackable divided>
             <Grid.Row  columns={2}>
