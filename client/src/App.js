@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Auth from './utils/auth';
 
 import Welcome from './pages/Welcome';
-import Nav from './components/Nav';
+import TopNav from './components/TopNav';
+import LeftNav from './components/LeftNav';
 import Home from './pages/Home';
 
 import MyProfile from './pages/MyProfile';
@@ -36,6 +37,18 @@ const client = new ApolloClient({
 
 
 function App() {
+
+  const [pages] = useState([
+    'Home',
+    'Search',
+    'Discover',
+    'Notifications',
+    'Inbox',
+    'My Recipe Book',
+    'Profile'
+  ])
+
+  const [currentPage, setCurrentPage] = useState(pages[0]);
   
   return (
     <ApolloProvider client={client}>
@@ -45,7 +58,13 @@ function App() {
           <Welcome/>
            ) : (
              <>
-              <Nav/>
+              <TopNav/>
+              <div className="left-bar">
+                <LeftNav
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
               <Switch>
                 <Route exact path='/' component={Welcome} />
                 <Route exact path='/home' component={Home} />
