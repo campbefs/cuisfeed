@@ -52,8 +52,8 @@ function UserProfile() {
   }
 
   return (
-    <>
-      <div className="home">
+    <section class='topic-conatiner'>
+      <div className="home" style={{paddingLeft: "300px"}}>
        
         <Grid divided stackable>
         
@@ -135,7 +135,7 @@ function UserProfile() {
           </div>
         </Grid>
       </div>
-    </>
+    </section>
   );
 }
 
