@@ -9,10 +9,10 @@ export default function Home() {
   
   return(
     // add padding for edges
-    <section class="topic-container"> 
-      {/* <div className="left-bar">
-        <LeftNav/>
-      </div> */}
+    <section 
+      class="topic-container"
+    > 
+
       <div className="middle-bar">
         Feed<br/>
         Feed<br/>

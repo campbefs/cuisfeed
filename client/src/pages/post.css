@@ -1,3 +1,4 @@
+
 .container {
   display: flex;
   justify-content: center;
@@ -14,10 +15,11 @@
   overflow: scroll;
   overflow-x: hidden;
 }
-::-webkit-scrollbar {
+
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .hover-link:hover {
   cursor: pointer;
-}
+} 

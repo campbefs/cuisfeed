@@ -3,6 +3,7 @@
   --gestalt-blue: #0074E8;
 }
 
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,9 +11,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* overflow: scroll;
-  width: 100vw; */
-}
+  /* width: 100vw; */
+  /* overflow-y: auto; */
+} 
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -41,7 +44,6 @@ code {
   height: calc(100vh - 0px);
   width: 100%;
   justify-content: left;
-  /* overflow: scroll; */
 }
 
 #welcome-container-right {
@@ -77,14 +79,12 @@ code {
   min-width: 60px;
   box-sizing: border-box;
   min-height: 48px;
-  /* display: inline-block; */
   background-color: #EFEFEF;
   cursor: pointer;
   border-radius: 24px;
   color: #111111;
   text-align: center;
   align-items: flex-start;
-  /* font: 400 13.3333px Arial; */
   font-weight: 700;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,ヒラギノ角ゴ Pro W3,Hiragino Kaku Gothic Pro,メイリオ,Meiryo,ＭＳ Ｐゴシック,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   box-sizing: inherit;
@@ -96,9 +96,12 @@ code {
 
 .copy-button:hover {
   background-color: #e2e2e2;
-}
+} 
+
 
 /* LEFT NAV BAR */
+
+
 .left-bar {
   position: fixed;
   width: 230px;
@@ -127,14 +130,12 @@ code {
   min-width: 60px;
   box-sizing: border-box;
   min-height: 48px;
-  /* display: inline-block; */
   background-color: transparent;
   cursor: pointer;
   border-radius: 24px;
   color: #111111;
   text-align: center;
   align-items: flex-start;
-  /* font: 400 13.3333px Arial; */
   font-weight: 700;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,ヒラギノ角ゴ Pro W3,Hiragino Kaku Gothic Pro,メイリオ,Meiryo,ＭＳ Ｐゴシック,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   box-sizing: inherit;
@@ -152,32 +153,34 @@ code {
 
 .nav-active {
   color: var(--gestalt-blue);
-}
+} 
+
 
 /* END LEFT NAV BAR */
+
 
 .topic-container {
   display: flex;
   margin-left: 10%;
-  /* margin-right: 5%; */
   padding-left: 230px;
   padding-top: 78px;
-  overflow: scroll;
   margin-right: 10%;
-}
+} 
+
+
 
 .middle-bar {
   margin-right: 340px;
-  /* padding-right: 380px; */
   position: relative;
   min-width: 350px;
   width: 100%;
   padding-left: 40px;
   background-color: blueviolet;
-  /* flex-grow: .94; */
+  min-height: 150vh;
   z-index: 3;
-  overflow-y: scroll;
-}
+} 
+
+
 
 .right-bar {
   background-color: blue;
@@ -189,4 +192,4 @@ code {
   overflow: scroll;
   min-width: 200px;
   z-index: 0;
-}
+} 
