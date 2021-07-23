@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Heading, SearchField, Flex, IconButton, Layer, Popover, Box,
-        Text} from 'gestalt';
+        Text,
+        FixedZIndex} from 'gestalt';
 import Auth from '../../utils/auth';
 
 function Nav() {
@@ -11,6 +12,8 @@ function Nav() {
   const [selectedAccount, setSelectedAccount] = React.useState(false);
 
   const anchorRef = React.useRef();
+
+  const fixedZindex = new FixedZIndex(6);
 
   return ( 
     <header id='header'>
@@ -99,7 +102,9 @@ function Nav() {
             ref={anchorRef}
           />
           {selectedAccount && (
-            <Layer>
+            <Layer
+              zIndex={fixedZindex }
+            >
               <Popover
                 anchor={anchorRef.current}
                 idealDirection="down"

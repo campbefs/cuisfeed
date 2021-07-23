@@ -1,6 +1,7 @@
 :root {
   --home-height: calc(100vh - 78px);
   --gestalt-blue: #0074E8;
+  --fb-light-gray: #F0F2F5;
 }
 
 
@@ -15,7 +16,9 @@ body {
   /* overflow-y: auto; */
 } 
 
-
+#root {
+  background-color: var(--fb-light-gray);
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -29,7 +32,8 @@ code {
   padding: 2px 10%;
   position: fixed;
   background-color: white;
-  z-index: 99; 
+  z-index: 5; 
+  box-shadow: 0px 2px 4px lightgray;  
 }
 
 #top-icon {
@@ -109,6 +113,7 @@ code {
   margin-left: 10%;
   margin-top: 78px;
   z-index: 4;
+  background-color: var(--fb-light-gray);
 }
 
 #left-nav-bar {
@@ -193,3 +198,7 @@ code {
   min-width: 200px;
   z-index: 0;
 } 
+
+#menu {
+  z-index: 99;
+}
