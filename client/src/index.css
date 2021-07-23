@@ -163,6 +163,18 @@ code {
   color: var(--gestalt-blue);
 } 
 
+#create-post {
+  background-color: #007fE8;
+  color: white; 
+  font-size: 18px; 
+  padding-left: 35px; 
+  padding-right: 35px;
+  box-shadow: 5px 4px 4px gray;
+}
+
+#create-post:hover {
+  background-color: #0073d1;
+}
 
 /* END LEFT NAV BAR */
 

@@ -9,6 +9,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
+import CreateIcon from '@material-ui/icons/Create';
 
 
 export default function LeftNav(props) {
@@ -20,6 +21,22 @@ export default function LeftNav(props) {
   // <Link id="home-link" to='/home'>
   return (
     <section id="left-nav-bar">
+
+      <Link className="left-nav-item">
+        <Flex gap={2}>
+          <button
+            id="create-post"
+            className={`left-nav-button ${currentPage === 'Create Post' && 'nav-active'}`}
+            onClick={() => setCurrentPage('Create Post')}
+          >
+            <CreateIcon fontSize="large"/>&nbsp;Create Post
+          </button>
+        </Flex>
+      </Link>
+
+      <hr/>
+      <hr/>
+
       <Link className="left-nav-item" to='/home'>
         <Flex gap={2}>
           <button 

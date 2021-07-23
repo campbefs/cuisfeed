@@ -45,7 +45,8 @@ function App() {
     'Notifications',
     'Inbox',
     'My Recipe Book',
-    'Profile'
+    'Profile',
+    'Create Post'
   ])
 
   const [currentPage, setCurrentPage] = useState(pages[0]);
