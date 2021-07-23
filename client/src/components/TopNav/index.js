@@ -147,7 +147,7 @@ function Nav() {
                   </Box>
                   <Box padding={2}>
                     <Text weight="bold">
-                      Feedback
+                      Give Feedback
                     </Text>
                   </Box>
                   <Box padding={2}>

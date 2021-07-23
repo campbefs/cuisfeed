@@ -43,7 +43,7 @@ export default function LeftNav(props) {
             className={`left-nav-button ${currentPage === 'Home' && 'nav-active'}`}
             onClick={() => setCurrentPage('Home')}
           >
-            <HomeIcon fontSize="large"/>&nbsp;Home
+            <HomeIcon fontSize="large"/>&nbsp;&nbsp;Home
           </button>
         </Flex>
       </Link>
@@ -56,7 +56,7 @@ export default function LeftNav(props) {
             className={`left-nav-button ${currentPage === 'Search' && 'nav-active'}`}
             onClick={() => setCurrentPage('Search')}
           >
-            <SearchIcon fontSize="large"/>&nbsp;Search
+            <SearchIcon fontSize="large"/>&nbsp;&nbsp;Search
           </button>
         </Flex>
       </Link>
@@ -69,7 +69,7 @@ export default function LeftNav(props) {
             className={`left-nav-button ${currentPage === 'Discover' && 'nav-active'}`}
             onClick={() => setCurrentPage('Discover')}
           >
-            <ArrowForwardIosIcon fontSize="large"/>&nbsp;Discover
+            <ArrowForwardIosIcon fontSize="large"/>&nbsp;&nbsp;Discover
           </button>
         </Flex>
       </div>
@@ -95,7 +95,7 @@ export default function LeftNav(props) {
             className={`left-nav-button ${currentPage === 'Inbox' && 'nav-active'}`}
             onClick={() => setCurrentPage('Inbox')}
           >
-            <MailIcon fontSize="large"/>&nbsp;Inbox
+            <MailIcon fontSize="large"/>&nbsp;&nbsp;Inbox
           </button>
         </Flex>
       </div>
@@ -108,7 +108,7 @@ export default function LeftNav(props) {
             className={`left-nav-button ${currentPage === 'My Recipe Book' && 'nav-active'}`}
             onClick={() => setCurrentPage('My Recipe Book')}
           >
-            <MenuBookIcon fontSize="large"/>&nbsp;Recipe Book
+            <MenuBookIcon fontSize="large"/>&nbsp;&nbsp;Recipe Book
           </button>
         </Flex>
       </div>
@@ -121,7 +121,7 @@ export default function LeftNav(props) {
             className={`left-nav-button ${currentPage === 'Profile' && 'nav-active'}`}
             onClick={() => setCurrentPage('Profile')}
           >
-            <PersonIcon fontSize="large"/>&nbsp;Profile
+            <PersonIcon fontSize="large"/>&nbsp;&nbsp;Profile
           </button>
         </Flex>
       </Link>

@@ -1,8 +1,8 @@
 // import { exact } from "prop-types";
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 // import { useLocation } from 'react-router-dom';
 // import Auth from '../utils/auth';
-import LeftNav from '../components/LeftNav';
+import Feed from '../components/Feed';
 
 export default function Home() {
 
@@ -12,107 +12,8 @@ export default function Home() {
     <section 
       class="topic-container"
     > 
-
       <div className="middle-bar">
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
-        Feed<br/>
+        <Feed/>
       </div>
       <div className="right-bar">
         Follows<br/>

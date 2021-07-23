@@ -169,7 +169,7 @@ code {
   font-size: 18px; 
   padding-left: 35px; 
   padding-right: 35px;
-  box-shadow: 5px 4px 4px gray;
+  box-shadow: 3px 3px 4px gray;
 }
 
 #create-post:hover {
@@ -177,7 +177,6 @@ code {
 }
 
 /* END LEFT NAV BAR */
-
 
 .topic-container {
   display: flex;
@@ -189,14 +188,13 @@ code {
 } 
 
 
-
 .middle-bar {
   margin-right: 340px;
   position: relative;
   min-width: 350px;
   width: 100%;
-  padding-left: 40px;
-  background-color: blueviolet;
+  /* padding-left: 40px; */
+  /* background-color: blueviolet; */
   min-height: 150vh;
   z-index: 3;
 } 
@@ -217,4 +215,19 @@ code {
 
 #menu {
   z-index: 99;
+}
+
+#feed-container {
+  display: flex;
+  padding: 20px 40px;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.feed-card {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
 }
