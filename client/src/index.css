@@ -219,11 +219,10 @@ code {
 
 #feed-container {
   display: flex;
-  padding: 20px 40px;
+  padding: 5px 40px;
   width: 100%;
   flex-direction: column;
   justify-content: center;
-
 }
 
 .feed-card {
