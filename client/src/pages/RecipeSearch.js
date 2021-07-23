@@ -76,64 +76,64 @@ const RecipeSearch = () => {
   };
 
   return (
-    <div className="topic-container">Recipe Search</div>
-    // <div class='topic-container'>
-    //   <div className='searchPage'>
-    //     <div className='header'>
-    //     <h1>Search for Recipes!</h1>
-    //     </div>
-    //     <div className='searchForm'>
-    //     <Form onSubmit={handleFormSubmit} >
-    //         <Input
-    //           name="searchInput"
-    //           value={searchInput}
-    //           onChange={(e) => setSearchInput(e.target.value)}
-    //           type="text"
-    //           placeholder="Search for recipes... "
-    //         />
-    //         <Button compact circular basic icon='search' type="submit" variant="success"/>
+    // <div className="topic-container">Recipe Search</div>
+    <div class='topic-container'>
+      <div className='searchPage'>
+        <div className='header'>
+        <h1>Search for Recipes!</h1>
+        </div>
+        <div className='searchForm'>
+        <Form onSubmit={handleFormSubmit} >
+            <Input
+              name="searchInput"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              type="text"
+              placeholder="Search for recipes... "
+            />
+            <Button compact circular basic icon='search' type="submit" variant="success"/>
           
         
-    //     </Form>
-    //     </div>
-    //   </div>
+        </Form>
+        </div>
+      </div>
 
-    //   <Segment>
-    //     <h2 style={{ "text-align":"center" }}>
-    //       {searchedRecipes.length
-    //         ? `Viewing ${searchedRecipes.length} results:`
-    //         : `Search for a recipe to get cookin'!`}
-    //     </h2>
-    //     <Grid centered>
-    //     {searchedRecipes.map((recipeData) => {
-    //       return (
-    //         <Card key={recipeData.uri}>
-    //           <Card.Content>
-    //             <Card.Header>
-    //             <List horizontal>
-    //                 <List.Item key={recipeData.id}>
-    //                 {recipeData.label}
-    //                 </List.Item>
-    //                 {/* <List.Item>
-    //                 <Icon name="heart outline" />
-    //                 </List.Item> */}
-    //                 <List.Item>
-    //                 <Button primary compact  size='small'
-    //                 data-recipe={JSON.stringify(recipeData)} onClick={addRecipe}>Post</Button>
-    //                 </List.Item>
-    //               </List>
-    //             </Card.Header>
-    //             <Image
-    //               src={recipeData.image}
-    //               alt={`Image of ${recipeData.label} finished product`}
-    //             />
-    //           </Card.Content>
-    //         </Card>
-    //       );
-    //     })}
-    //     </Grid>
-    //   </Segment>
-    // </div>
+      <Segment>
+        <h2 style={{ "text-align":"center" }}>
+          {searchedRecipes.length
+            ? `Viewing ${searchedRecipes.length} results:`
+            : `Search for a recipe to get cookin'!`}
+        </h2>
+        <Grid centered>
+        {searchedRecipes.map((recipeData) => {
+          return (
+            <Card key={recipeData.uri}>
+              <Card.Content>
+                <Card.Header>
+                <List horizontal>
+                    <List.Item key={recipeData.id}>
+                    {recipeData.label}
+                    </List.Item>
+                    {/* <List.Item>
+                    <Icon name="heart outline" />
+                    </List.Item> */}
+                    <List.Item>
+                    <Button primary compact  size='small'
+                    data-recipe={JSON.stringify(recipeData)} onClick={addRecipe}>Post</Button>
+                    </List.Item>
+                  </List>
+                </Card.Header>
+                <Image
+                  src={recipeData.image}
+                  alt={`Image of ${recipeData.label} finished product`}
+                />
+              </Card.Content>
+            </Card>
+          );
+        })}
+        </Grid>
+      </Segment>
+    </div>
   );
 };
 

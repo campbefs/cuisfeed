@@ -120,7 +120,17 @@ function Nav() {
                 >
                   <Box padding={2}>
                     <Text weight="bold">
+                      About Cuisfeed
+                    </Text>
+                  </Box>
+                  <Box padding={2}>
+                    <Text weight="bold">
                       My Account
+                    </Text>
+                  </Box>
+                  <Box padding={2}>
+                    <Text weight="bold">
+                      Feedback
                     </Text>
                   </Box>
                   <Box padding={2}>

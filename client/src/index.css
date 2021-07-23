@@ -48,6 +48,9 @@ code {
   height: calc(100vh - 0px);
   width: 100%;
   justify-content: left;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: white;
 }
 
 #welcome-container-right {
