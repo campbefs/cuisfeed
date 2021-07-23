@@ -5,6 +5,7 @@ import { Heading, SearchField, Flex, IconButton, Layer, Popover, Box,
         FixedZIndex} from 'gestalt';
 import Auth from '../../utils/auth';
 import Badge from '@material-ui/core/Badge';
+import { withStyles } from '@material-ui/core/styles';
 
 
 function Nav() {
@@ -16,6 +17,15 @@ function Nav() {
   const anchorRef = React.useRef();
 
   const fixedZindex = new FixedZIndex(6);
+
+  // const StyledBadge = withStyles((theme) => ({
+  //   badge: {
+  //     right: 4,
+  //     top: 5,
+  //     border: `2px solid ${theme.palette.background.paper}`,
+  //     padding: '0 4px',
+  //   },
+  // }))(Badge);
 
   return ( 
     <header id='header'>
