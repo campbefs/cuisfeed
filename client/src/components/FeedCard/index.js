@@ -35,6 +35,9 @@ const useBasicProfileStyles = makeStyles(({ palette }) => ({
     fontWeight: 500,
     color: '#495869',
   },
+  white: {
+    backgroundColor: '#ffffff'
+  }
 }));
 
 const BasicProfile = props => {
@@ -95,6 +98,8 @@ const useStyles = makeStyles(() => ({
     '&:hover': {
       borderColor: '#5B9FED',
     },
+    backgroundColor: '#ffffff',
+    boxShadow: '2px 1px 5px gray'
   },
 }));
 
@@ -102,7 +107,8 @@ export const ShowcaseCardDemo = React.memo(function ShowcaseCard() {
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
   return (
-    <section className="feed-card">
+    
+    <section className='feed-card'>
       <Grid container spacing={4} justify={'center'}>
         <Grid item xs={12} sm={8} lg={7}>
           <Row className={styles.card} p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap}>
