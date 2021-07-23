@@ -41,7 +41,7 @@ function Nav() {
           />
         </Flex.Item>
 
-        <React.Fragment>
+        {/* <React.Fragment>
           <IconButton
             accessibilityLabel="Open the options menu"
             accessibilityControls="menu"
@@ -87,7 +87,7 @@ function Nav() {
               </Popover>
             </Layer>
           )}
-        </React.Fragment>
+        </React.Fragment> */}
 
         <React.Fragment>
           <IconButton

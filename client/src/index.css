@@ -170,6 +170,7 @@ code {
   padding-left: 230px;
   padding-top: 78px;
   margin-right: 10%;
+  min-height: 100vh;
 } 
 
 
