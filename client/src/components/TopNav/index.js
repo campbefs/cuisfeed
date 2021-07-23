@@ -4,6 +4,8 @@ import { Heading, SearchField, Flex, IconButton, Layer, Popover, Box,
         Text,
         FixedZIndex} from 'gestalt';
 import Auth from '../../utils/auth';
+import Badge from '@material-ui/core/Badge';
+
 
 function Nav() {
   const [value, setValue ] = React.useState('');
@@ -41,21 +43,26 @@ function Nav() {
           />
         </Flex.Item>
 
-        {/* <React.Fragment>
-          <IconButton
-            accessibilityLabel="Open the options menu"
-            accessibilityControls="menu"
-            accessibilityExpanded={selectedMenu}
-            accessibilityHaspopup
-            selected={selectedMenu}
-            icon="menu"
-            onClick={() => {
-              setSelectedMenu(!selectedMenu);
-            }}
-            ref={anchorRef}
-          />
+        <React.Fragment>
+          <Badge badgeContent={2} color="secondary">
+            <IconButton
+              accessibilityLabel="Open the options menu"
+              accessibilityControls="menu"
+              accessibilityExpanded={selectedMenu}
+              accessibilityHaspopup
+              selected={selectedMenu}
+              icon="bell"
+              // iconColor="red"
+              onClick={() => {
+                setSelectedMenu(!selectedMenu);
+              }}
+              ref={anchorRef}
+            />
+          </Badge>
           {selectedMenu && (
-            <Layer>
+            <Layer
+              zIndex={fixedZindex}
+            >
               <Popover
                 anchor={anchorRef.current}
                 idealDirection="down"
@@ -72,14 +79,14 @@ function Nav() {
                   <Box padding={2}>
                     <Link Home to='/home'>
                       <Text weight="bold">
-                        Home
+                        Notification1
                       </Text>
                     </Link>
                   </Box>
                   <Box padding={2}>
                     <Link to='/myprofile'>
                       <Text weight="bold">
-                        My Profile
+                        Notification2
                       </Text>
                     </Link>
                   </Box>
@@ -87,7 +94,7 @@ function Nav() {
               </Popover>
             </Layer>
           )}
-        </React.Fragment> */}
+        </React.Fragment>
 
         <React.Fragment>
           <IconButton
@@ -103,7 +110,7 @@ function Nav() {
           />
           {selectedAccount && (
             <Layer
-              zIndex={fixedZindex }
+              zIndex={fixedZindex}
             >
               <Popover
                 anchor={anchorRef.current}

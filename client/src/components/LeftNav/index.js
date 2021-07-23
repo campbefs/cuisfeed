@@ -33,7 +33,7 @@ export default function LeftNav(props) {
 
       <hr/>
 
-      <Link className="left-nav-item" to='/recipesearch'>
+      {/* <Link className="left-nav-item" to='/recipesearch'>
         <Flex gap={2}>
           <button 
             className={`left-nav-button ${currentPage === 'Search' && 'nav-active'}`}
@@ -44,7 +44,7 @@ export default function LeftNav(props) {
         </Flex>
       </Link>
       
-      <hr/>
+      <hr/> */}
 
       <div className="left-nav-item">
         <Flex gap={2}>
@@ -59,7 +59,7 @@ export default function LeftNav(props) {
 
       <hr/>
 
-      <div className="left-nav-item">
+      {/* <div className="left-nav-item">
         <Flex gap={2}>
           <button 
             className={`left-nav-button ${currentPage === 'Notifications' && 'nav-active'}`}
@@ -70,7 +70,7 @@ export default function LeftNav(props) {
         </Flex>
       </div>
 
-      <hr/>
+      <hr/> */}
 
       <div className="left-nav-item">
         <Flex gap={2}>
