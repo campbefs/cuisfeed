@@ -5,8 +5,13 @@ import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import Rating from '@material-ui/lab/Rating';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import CallMade from '@material-ui/icons/CallMade';
+import { Label } from 'semantic-ui-react';
+import { Text } from 'gestalt';
+
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
@@ -58,34 +63,64 @@ const useCardHeaderStyles = makeStyles(() => ({
   title: {
     fontSize: '1.25rem',
     color: '#122740',
+    marginBottom: '7px'
   },
   subheader: {
     fontSize: '0.875rem',
     color: '#495869',
   },
+
 }));
 
 const CardHeader = props => {
   const styles = useCardHeaderStyles();
   const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
+
+  const StyledRating = withStyles({
+    iconFilled: {
+      // color: '#ff6d75',
+      color: '#f33943'
+    },
+    iconHover: {
+      color: '#ff3d47',
+    },
+  })(Rating);
+
   return (
-    <Row {...props}>
-      <Item position={'middle'}>
-        <Typography className={styles.title}>
-          <b>Firebase</b>
-        </Typography>
-        <Typography className={styles.subheader}>
-          Similar to firebase theme
-        </Typography>
-      </Item>
-      <Item position={'right'} mr={-0.5}>
-        <StyledTooltip title={'See details'}>
-          <IconButton classes={iconBtnStyles}>
-            <CallMade />
-          </IconButton>
-        </StyledTooltip>
-      </Item>
-    </Row>
+    <>
+      <Row {...props}>
+        <Item position={'middle'}>
+          <Typography className={styles.title}>
+            <b>White-Bean Dip with Veggie Chips</b>
+            {/* <Text weight="bold" size='lg'>White-Bean Dip with Veggie Chips</Text> */}
+          </Typography>
+          {/* <hr/> */}
+          <div style={{display: "flex", alignItems: "flex-start"}}>
+            <StyledRating
+              defaultValue={4.5}
+              maxRating={5}
+              readOnly
+              icon={<FavoriteIcon fontSize="inherit"/>}
+              className={styles.title}
+              precision={0.5}
+            />
+            <span style={{marginLeft: "35px"}}><Label color='green' horizontal>Easy</Label></span>
+          </div>
+          <Typography className={styles.subheader}>
+           Martha Stewart<br/>
+           2h
+
+          </Typography>
+        </Item>
+        {/* <Item position={'right'} mr={-0.5}>
+          <StyledTooltip title={'See details'}>
+            <IconButton classes={iconBtnStyles}>
+              <CallMade />
+            </IconButton>
+          </StyledTooltip>
+        </Item> */}
+      </Row>
+    </>
   );
 };
 
@@ -101,6 +136,9 @@ const useStyles = makeStyles(() => ({
     backgroundColor: '#ffffff',
     boxShadow: '2px 1px 5px gray'
   },
+  outerCard: {
+    minWidth: '570px'
+  }
 }));
 
 export const ShowcaseCardDemo = React.memo(function ShowcaseCard() {
@@ -110,7 +148,7 @@ export const ShowcaseCardDemo = React.memo(function ShowcaseCard() {
     
     <section className='feed-card'>
       <Grid container spacing={4} justify={'center'}>
-        <Grid item xs={12} sm={8} lg={7}>
+        <Grid item xs={12} sm={8} lg={7} className={styles.outerCard}>
           <Row className={styles.card} p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap}>
             <Item grow>
               <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8}>
