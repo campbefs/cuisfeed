@@ -1,13 +1,19 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Tooltip from '@material-ui/core/Tooltip';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+
+import { Grid, Box, Tooltip, Avatar, Typography, IconButton } from '@material-ui/core';
+
 import Rating from '@material-ui/lab/Rating';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-// import IconButton from '@material-ui/core/IconButton';
+import { Favorite as FavoriteIcon, 
+    Share as ShareIcon, 
+    FavoriteBorderRounded as FavoriteBorderRoundedIcon,
+    FavoriteRounded as FavoriteRoundedIcon,
+    ChatBubbleOutline as ChatBubbleOutlineIcon,
+    PostAdd as PostAddIcon,
+    TurnedInNot as TurnedInNotIcon,
+    TurnedIn as TurnedInIcon,
+  } from '@material-ui/icons';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
 // import CallMade from '@material-ui/icons/CallMade';
 import { Label } from 'semantic-ui-react';
 // import { Text } from 'gestalt';
@@ -48,7 +54,7 @@ const useBasicProfileStyles = makeStyles(({ palette }) => ({
 const BasicProfile = props => {
   const styles = useBasicProfileStyles();
   return (
-    <Row {...props}>
+    <Row {...props} paddingBottom="5px">
       <Item><Avatar className={styles.avatar}>S</Avatar></Item>
       <Item position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
         <Typography className={styles.overline}>CHEF</Typography>
@@ -169,12 +175,15 @@ export const ShowcaseCardDemo = React.memo(function ShowcaseCard() {
               flexDirection="row" 
               justifyContent="space-between"
               alignItems="flex-start"
-              marginLeft="50px"
-              marginRight="50px"
-              paddingBottom="8px"
+              marginLeft="65px"
+              marginRight="65px"
+              paddingBottom="6px"
             >
-              <div>test1</div>
-              <div>test2</div>
+              <IconButton size='small'><FavoriteBorderRoundedIcon/></IconButton>
+              <IconButton size='small'><ChatBubbleOutlineIcon/></IconButton>
+              <IconButton size='small'><PostAddIcon/></IconButton>
+              <IconButton size='small'><ShareIcon/></IconButton>
+              <IconButton size='small'><TurnedInNotIcon/></IconButton>
             </Row>
           </Grid>
 
