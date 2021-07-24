@@ -1,105 +1,177 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Button, Form, Segment } from "semantic-ui-react";
-import '../Login/login.css'
-// import { createUser } from '../utils/API';
+import React, { useState } from "react";
+// import "../node_modules/gestalt/dist/gestalt.css"
+import { Text, Box, Button, CompositeZIndex, FixedZIndex, Flex, Layer, Modal, TextField } from "gestalt";
 import Auth from '../../utils/auth';
-import { ADD_USER } from '../../utils/mutations'
+import { validateEmail } from '../../utils/helpers';
 
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../../utils/mutations';
 
-const SignUp = () => {
+export default function SignUp(props) {
 
+  // const [validated] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
+  const [ errorMessage, setErrorMessage ] = useState('');
 
-  // set initial form state
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  
-  const[addUser] = useMutation(ADD_USER);
+  // const [ formState, setFormState ] = useState( {username: '', email: '', password: ''});
+  // const { username, email, password } = formState;
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
-  };
+  const [addUser, { error }] = useMutation(ADD_USER);
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-    
-        // use try/catch instead of promises to handle errors
-      try {
-        // execute addUser mutation and pass in variable data from form
-        const { data } = await addUser({
-          variables: { ...userFormData}
-        });
-        console.log(data);
+    // console.log(e.nativeEvent.target.username.value);
+    // console.log(e.nativeEvent.target.password.value);
+    // console.log(e.nativeEvent.target.username.id);
+    // console.log(e.nativeEvent.target.password.id);
 
-        Auth.login(data.addUser.token)
-  
-      } catch (e) {
-        console.error(e);
+    let usernameValue = e.nativeEvent.target.username.value;
+    let passwordValue = e.nativeEvent.target.password.value;
+    let emailValue = e.nativeEvent.target.email.value;
+
+    console.log('email', emailValue);
+
+    // add some validation
+    if ('1' === 'email') { // email validation is built into gestalt
+      const isValid = validateEmail(e.value);
+
+      if (!isValid) {
+        setErrorMessage('Your email is invalid.');
+        return;
       }
-    
+    } else if (!usernameValue) {
+        setErrorMessage(`Username is required`);
+        return;
+    } else if (!emailValue) {
+        setErrorMessage(`Email is required`);
+        return;
+    } else if (!passwordValue) { 
+      setErrorMessage(`Password is required`);
+      return;
+    } else {
+        setErrorMessage('');
+    }
 
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
+    if (!errorMessage) {
+      // setFormState( {...formState, username: e.nativeEvent.target.username.value });
+      // setFormState( {...formState, password: e.nativeEvent.target.password.value });
+
+      try {
+        const { data } = await addUser({
+          variables: { username: usernameValue, email: emailValue, password: passwordValue }
+        });
+        
+        Auth.login(data.addUser.token);
+      } catch (err) {
+        console.error(err);
+        setErrorMessage('Username/email already exists...');
+      }
+
+    }
+    
+  }
+
+
+  const ModalWithHeading = ({
+    onDismiss,
+  }) => {
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <Modal
+          accessibilityModalLabel="Sign Up Form"
+          heading="Sign Up"
+          onDismiss={onDismiss}
+          footer={
+            <>
+              {errorMessage && (
+                <div>
+                  {/* <p className="error-text">{errorMessage}</p> */}
+                  <div style={{marginLeft: "8px"}}><Text color="red" align="start">{errorMessage}</Text></div>
+                  
+                </div>
+              )}
+              <Flex alignItems="center" justifyContent="end">
+                <Button 
+                  inline color="red" text="Sign Up"
+                  type="submit"
+                />
+              </Flex>
+            </>
+
+          }
+          size="sm"
+        >
+          <Box paddingX={8}>
+            <Box marginBottom={5}>
+              <TextField
+                id="username"
+                // onChange={({ value }) => {
+                //   setValue(value);
+                // }}
+                onChange={({ value }) => null}
+                placeholder="Add Username"
+                label="Username"
+                // value={value}
+                type="text"
+                autoComplete="username"
+              />
+            </Box>
+          </Box>
+
+          <Box paddingX={8}>
+            <Box marginBottom={5}>
+              <TextField
+                id="email"
+                onChange={({ value }) => null}
+                placeholder='Email'
+                label="Email"
+                type="email"
+                // onBlur={handleChange}
+              />
+            </Box>
+          </Box>
+
+          <Box paddingX={8}>
+            <Box marginBottom={1}>
+              <TextField
+                id="password"
+                onChange={({ value }) => null}
+                placeholder='Password'
+                label="Password"
+                type="password"
+                // onBlur={handleChange}
+              />
+            </Box>
+          </Box>
+          
+
+        </Modal>
+      </form>
+    );
   };
+
+  const [shouldShow, setShouldShow] = React.useState(false);
+  const HEADER_ZINDEX = new FixedZIndex(10);
+  const modalZIndex = new CompositeZIndex([HEADER_ZINDEX]);
 
   return (
-    <div className='loginForm' >
-    <Segment compact padded>
-      
-    <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
-        <h1>Become a Cuisfeed member today!</h1>
-        <Form.Field>
-          <label>Username</label>
-          <input 
-          type='text'
-          placeholder='Your username'
-          name='username'
-          onChange={handleInputChange}
-          value={userFormData.username}
-          required
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Email</label>
-          <input 
-          type='email'
-          placeholder='Your email address'
-          name='email'
-          onChange={handleInputChange}
-          value={userFormData.email}
-          required
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <input 
-          type='password'
-          placeholder='Your password'
-          name='password'
-          onChange={handleInputChange}
-          value={userFormData.password}
-          required
-          />
-        </Form.Field>
+    <React.Fragment>
+      <Button
+        inline
+        className='signup-button' 
+        color="blue"
+        size="lg" 
+        text="Sign Up"
+        onClick={() => setShouldShow(true)}
+      />
+      {shouldShow && (
+        <Layer zIndex={modalZIndex}>
+          <ModalWithHeading onDismiss={() => setShouldShow(false)} />
+        </Layer>
+      )}
+    </React.Fragment>
 
-        <Button
-          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-        <Button>Already a member? Login here. </Button>
-      </Form>
-    </Segment>
-    </div>
   );
 }
-
-export default SignUp;

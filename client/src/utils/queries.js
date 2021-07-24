@@ -67,14 +67,16 @@ export const GET_SINGLE_USER_PROFILE = gql`
       postCount
       posts {
         _id
+        username
         recipe {
           _id
           label
+          image
         }
-        comments {
-          username
-          commentText
-        }
+        # comments {
+        #   username
+        #   commentText
+        # }
         createdAt
       }
     }

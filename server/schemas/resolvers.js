@@ -161,8 +161,11 @@ const resolvers = {
     },
 
     // Login
-    login: async(_parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async(_parent, { email, password, username }) => {
+      const user = await User.findOne({ $or: [ 
+        {email}, 
+        { username }
+      ]})
 
       if (!user) {
         throw new AuthenticationError('Incorrect Credentials');

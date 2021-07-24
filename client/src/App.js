@@ -1,95 +1,92 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './index.css';
-import Nav from './components/Nav';
-import Main from './components/Main';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
-import Home from './components/Home';
-import MyProfile from './components/MyProfile';
-import UserProfile from './components/UserProfile';
-// import LikedPost from './components/LikedPosts';
-import RecipeSearch from './components/RecipeSearch'
-import Post from './components/Post';
-
-import { ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import ApolloClient from 'apollo-boost';
+import Auth from './utils/auth';
 
-// const httpLink = createHttpLink({
-//   // uri: 'http://localhost:3001/graphql',
-//   uri: 'graphql',
+import Welcome from './pages/Welcome';
+import TopNav from './components/TopNav';
+import LeftNav from './components/LeftNav';
+import Home from './pages/Home';
 
-// });
+import MyProfile from './pages/MyProfile';
+import UserProfile from './pages/UserProfile';
+import RecipeSearch from './pages/RecipeSearch';
+import Post from './pages/Post';
 
-// const authLink = setContext((__, { headers}) => {
-//   const token = localStorage.getItem('id_token');
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : ``,
-//     },
-//   };
-// });
 
-// const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
-//   cache: new InMemoryCache(),
-// });
-
-// if (process.env.NODE_ENV === 'production') {
-//   let uri = '/graphql'
-// } else {
-//   let uri = 'http://localhost:3001/graphql'
-// }
-
-const client = new ApolloClient({
-
-  request: operation => {
-    const token = localStorage.getItem('id_token');
-
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    })
-  },
-  // uri: 'http://localhost:3001/graphql'
+const httpLink = createHttpLink({
   uri: process.env.NODE_ENV === 'production' ? '/graphql' : 'http://localhost:3001/graphql'
+  // uri: 'graphql',
 });
 
+const authLink = setContext((__, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ``,
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+})
+
+
 function App() {
-  const pages = {};
 
-  const path = window.location.pathname.split("/")[1].toLowerCase();
-  console.log(path);
+  const [pages] = useState([
+    'Home',
+    'Search',
+    'Discover',
+    'Notifications',
+    'Inbox',
+    'My Recipe Book',
+    'Profile',
+    'Create Post'
+  ])
 
-  let component = <Main />;
-  if (pages[path]) {
-    component = pages[path]
-  }
-
-  const [page, setPage] = useState(component);
-
+  const [currentPage, setCurrentPage] = useState(pages[0]);
+  
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className='App'>
-          {<Nav setPage={setPage} pages={pages} />}
+        <>
+          {!Auth.loggedIn() ? (
+          <Welcome/>
+           ) : (
+             <>
+              <TopNav/>
+              <div className="left-bar">
+                <LeftNav
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
+              <Switch>
+                <Route exact path='/' component={Welcome} />
+                <Route exact path='/home' component={Home} />
+                <Route exact path='/myprofile/' component={MyProfile}/>
+                <Route exact path='/profile/:username' component={UserProfile}/>
+                <Route exact path='/recipesearch' component={RecipeSearch} />
+                <Route exact path='/post/:postId' component={Post} />
+              </Switch>
+             </>
+           )}
+          
+          {/* <Nav/>
           <Switch>
-            <Route exact path="/" component={Main} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/myprofile" component={MyProfile} />
-            <Route exact path="/profile/:username" component={UserProfile} />
-            <Route exact path="/searchrecipes" component={RecipeSearch} />
-            <Route exact path="/post/:postId" component={Post} />
-
-          </Switch>
-
-        </div>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/home' component={Home} />
+          </Switch> */}
+        </>
       </Router>
+
+    {/* <Welcome/> */}
+
     </ApolloProvider>
   );
 }
