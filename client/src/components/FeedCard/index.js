@@ -7,10 +7,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import IconButton from '@material-ui/core/IconButton';
-import CallMade from '@material-ui/icons/CallMade';
+// import IconButton from '@material-ui/core/IconButton';
+// import CallMade from '@material-ui/icons/CallMade';
 import { Label } from 'semantic-ui-react';
-import { Text } from 'gestalt';
+// import { Text } from 'gestalt';
 
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
@@ -107,7 +107,7 @@ const CardHeader = props => {
             <span style={{marginLeft: "35px"}}><Label color='green' horizontal>Easy</Label></span>
           </div>
           <Typography className={styles.subheader}>
-           Martha Stewart<br/>
+           Source: Martha Stewart<br/>
            2h
 
           </Typography>
@@ -134,10 +134,13 @@ const useStyles = makeStyles(() => ({
       borderColor: '#5B9FED',
     },
     backgroundColor: '#ffffff',
-    boxShadow: '2px 1px 5px gray'
+    boxShadow: '2px 1px 5px gray',
   },
   outerCard: {
-    minWidth: '570px'
+    minWidth: '570px',
+  },
+  noBotPadding: {
+    padding: '8px 8px 0px 8px'
   }
 }));
 
@@ -149,17 +152,32 @@ export const ShowcaseCardDemo = React.memo(function ShowcaseCard() {
     <section className='feed-card'>
       <Grid container spacing={4} justify={'center'}>
         <Grid item xs={12} sm={8} lg={7} className={styles.outerCard}>
-          <Row className={styles.card} p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap}>
-            <Item grow>
-              <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8}>
-                <img alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
-              </Box>
-            </Item>
-            <Column>
-              <CardHeader />
-              <BasicProfile position={'bottom'} />
-            </Column>
-          </Row>
+          <Grid className={styles.card}>
+            <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
+              <Item grow>
+                <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8}>
+                  <img alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
+                </Box>
+              </Item>
+              <Column>
+                <CardHeader />
+                <BasicProfile position={'bottom'} />
+              </Column>
+            </Row>
+            <Row xs={12} 
+              display="flex" 
+              flexDirection="row" 
+              justifyContent="space-between"
+              alignItems="flex-start"
+              marginLeft="50px"
+              marginRight="50px"
+              paddingBottom="8px"
+            >
+              <div>test1</div>
+              <div>test2</div>
+            </Row>
+          </Grid>
+
         </Grid>
       </Grid>
     </section>
