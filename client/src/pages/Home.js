@@ -3,6 +3,7 @@
 // import { useLocation } from 'react-router-dom';
 // import Auth from '../utils/auth';
 import Feed from '../components/Feed';
+import FollowCard from '../components/FollowCard';
 
 export default function Home() {
 
@@ -16,72 +17,7 @@ export default function Home() {
         <Feed/>
       </div>
       <div className="right-bar">
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-        Follows<br/>
-
+        <FollowCard/>
       </div>
     </section>
   );

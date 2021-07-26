@@ -150,7 +150,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export const ShowcaseCardDemo = React.memo(function ShowcaseCard() {
+export const FeedCard = React.memo(function ShowcaseCard() {
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
   return (
@@ -192,7 +192,7 @@ export const ShowcaseCardDemo = React.memo(function ShowcaseCard() {
     </section>
   );
 });
-export default ShowcaseCardDemo
+export default FeedCard
 
 
 
