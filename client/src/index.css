@@ -22,11 +22,6 @@ body {
 }
 
 /* Updating the Scroll Bar */
-.right-bar:hover {
-  overflow-y: scroll;
-  /* width */
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -237,14 +232,20 @@ code {
 .right-bar {
   /* background-color: #ffffffd3; */
   position: fixed;
-  width: 340px;
+  /* min-width: 340px; */
   padding-left: 40px;
   right: 10%;
   height: 100vh;
   overflow: hidden;
-  min-width: 200px;
+  min-width: 340px;
+  width: 340px;
   z-index: 0;
 } 
+
+.right-bar:hover {
+  overflow-y: scroll;
+  /* width */
+}
 
 
 #menu {

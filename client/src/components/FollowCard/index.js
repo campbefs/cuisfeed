@@ -34,6 +34,11 @@ const useStyles = makeStyles(() => ({
     backgroundColor: '#ffffff',
     boxShadow: '2px 1px 5px gray',
   },
+  hover: {
+    "&:hover": {
+      maxWidth: "97%"
+    }
+  }
 }));
 
 const useBasicProfileStyles = makeStyles(({ palette }) => ({
@@ -54,7 +59,7 @@ const useBasicProfileStyles = makeStyles(({ palette }) => ({
   },
   white: {
     backgroundColor: '#ffffff'
-  }
+  },
 }));
 
 const BasicProfile = props => {
@@ -77,7 +82,6 @@ export default function FollowCard() {
 
   return (
     <>
-
       <Box
         className={styles.card}
         display="flex"
@@ -86,13 +90,14 @@ export default function FollowCard() {
         marginBottom={-3}
         marginTop={8}
         direction="column"
-        maxWidth="95%"
+        // maxWidth="95%"
         color="white"
         borderStyle="shadow"
         rounding={3}
         padding={2}
         justifyContent="left"
         alignItems="left"
+        width="280px"
       >
             
         <Box marginBottom={2}>
@@ -123,13 +128,14 @@ export default function FollowCard() {
         marginBottom={-3}
         marginTop={8}
         direction="column"
-        maxWidth="95%"
+        // maxWidth="95%"
         color="white"
         borderStyle="shadow"
         rounding={3}
         padding={2}
         justifyContent="left"
         alignItems="left"
+        width="280px"
       >
       
       <Box marginBottom={2}>

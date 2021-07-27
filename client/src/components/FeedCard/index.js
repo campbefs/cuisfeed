@@ -69,7 +69,7 @@ const useCardHeaderStyles = makeStyles(() => ({
   title: {
     fontSize: '1.25rem',
     color: '#122740',
-    marginBottom: '7px'
+    marginBottom: '7px',
   },
   subheader: {
     fontSize: '0.875rem',
