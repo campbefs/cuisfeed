@@ -2,6 +2,7 @@
   --home-height: calc(100vh - 78px);
   --gestalt-blue: #0074E8;
   --fb-light-gray: #F0F2F5;
+  --left-right-margin: 8%; /* adjust the entire page's margins automatically */
 }
 
 
@@ -52,7 +53,7 @@ code {
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 2px 10%;
+  padding: 2px var(--left-right-margin);
   position: fixed;
   background-color: white;
   z-index: 5; 
@@ -139,7 +140,7 @@ code {
   position: fixed;
   width: 230px;
   height: 100vh;
-  margin-left: 10%;
+  margin-left: var(--left-right-margin);
   margin-top: 78px;
   z-index: 4;
   background-color: var(--fb-light-gray);
@@ -211,7 +212,7 @@ code {
   margin-left: 10%;
   padding-left: 230px;
   padding-top: 78px;
-  margin-right: 10%;
+  margin-right: var(--left-right-margin);
   min-height: 100vh;
 } 
 
@@ -234,7 +235,7 @@ code {
   position: fixed;
   /* min-width: 340px; */
   padding-left: 40px;
-  right: 10%;
+  right: var(--left-right-margin);
   height: 100vh;
   overflow: hidden;
   min-width: 340px;
