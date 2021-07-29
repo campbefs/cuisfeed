@@ -162,7 +162,7 @@ export const FeedCard = React.memo(function ShowcaseCard() {
             <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
               <Item grow>
                 <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8}>
-                  <img style={{width: "250px", height: "250px"}}alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
+                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
                 </Box>
               </Item>
               <Column>
