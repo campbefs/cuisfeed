@@ -50,7 +50,7 @@ export default function LeftNav(props) {
 
       <hr/>
 
-      <Link className="left-nav-item" to='/recipesearch'>
+      <Link className="left-nav-item" to='/search'>
         <Flex gap={2}>
           <button 
             className={`left-nav-button ${currentPage === 'Search' && 'nav-active'}`}

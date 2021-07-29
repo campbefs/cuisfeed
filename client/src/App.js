@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import MyProfile from './pages/MyProfile';
 import UserProfile from './pages/UserProfile';
 import RecipeSearch from './pages/RecipeSearch';
+import Search from './pages/Search';
 import Post from './pages/Post';
 
 
@@ -71,7 +72,7 @@ function App() {
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/myprofile/' component={MyProfile}/>
                 <Route exact path='/profile/:username' component={UserProfile}/>
-                <Route exact path='/recipesearch' component={RecipeSearch} />
+                <Route exact path='/search' component={Search} />
                 <Route exact path='/post/:postId' component={Post} />
               </Switch>
              </>
