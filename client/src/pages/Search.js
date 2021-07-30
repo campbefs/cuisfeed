@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import RecipeCard from "../components/RecipeCard";
+import ProfileCard from "../components/ProfileCard";
 import { Flex } from "gestalt";
 // import HomeIcon from '@material-ui/icons/Home';
 import FaceIcon from '@material-ui/icons/Face';
@@ -59,7 +60,28 @@ export default function Search() {
               <RecipeCard />
               <RecipeCard />
             </div>
-          ) : ""
+          ) : (
+            <div className="search-container">
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+              <ProfileCard />
+
+            </div>
+          )
         }
 
       </div>
