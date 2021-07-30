@@ -63,12 +63,15 @@ const useCardHeaderStyles = makeStyles(() => ({
     fontSize: '0.875rem',
     color: '#495869',
   },
+  wide: {
+    minWidth: '260px'
+  }
 
 }));
 
-const CardHeader = props => {
+const CardFooter = props => {
   const styles = useCardHeaderStyles();
-  const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
+  // const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
 
   const StyledRating = withStyles({
     iconFilled: {
@@ -83,11 +86,7 @@ const CardHeader = props => {
   return (
     <>
       <Row {...props}>
-        <Item position={'middle'}>
-          <Typography className={styles.title}>
-            <b>White-Bean Dip with Veggie Chips</b>
-            {/* <Text weight="bold" size='lg'>White-Bean Dip with Veggie Chips</Text> */}
-          </Typography>
+        <Item position={'middle'} className={styles.wide}>
           {/* <hr/> */}
           <div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-between"}}>
             <StyledRating
@@ -130,7 +129,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: '2px 1px 5px gray',
   },
   outerCard: {
-    minWidth: '570px',
+    minWidth: '300px',
   },
   noBotPadding: {
     padding: '8px 8px 0px 8px'
@@ -139,6 +138,8 @@ const useStyles = makeStyles(() => ({
 
 export const RecipeCard = React.memo(function ShowcaseCard() {
   const styles = useStyles();
+  const cardHeaderStyles = useCardHeaderStyles();
+
   const gap = { xs: 1, sm: 1.5, lg: 2 }
 
   // Resources: https://material-ui.com/components/grid/
@@ -149,7 +150,28 @@ export const RecipeCard = React.memo(function ShowcaseCard() {
       <Grid container spacing={4} justify={'center'}>
         <Grid item xs={12} sm={8} lg={7} className={styles.outerCard}>
           <Grid className={styles.card}>
-            <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
+
+            <Row xs={12} 
+              display="flex" 
+              flexDirection="row" 
+              justifyContent="center"
+              alignItems="center"
+              textAlign="center"
+              marginLeft="5px"
+              marginRight="5px"
+              // paddingBottom="px"
+              paddingTop="4px"
+            >
+              <Typography className={cardHeaderStyles.title}>
+                <b>White-Bean Dip with Veggie Chips</b>
+              </Typography>
+            </Row>
+
+            <Row xs={12} gap={gap} className={styles.noBotPadding}>
+              <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
+            </Row>
+
+            {/* <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
               <Item grow>
                 <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8}>
                   <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
@@ -158,7 +180,13 @@ export const RecipeCard = React.memo(function ShowcaseCard() {
               <Column>
                 <CardHeader />
               </Column>
+            </Row> */}
+
+            <Row xs={12} gap={gap} className={styles.noBotPadding}>
+              <CardFooter />
             </Row>
+
+
             <Row xs={12} 
               display="flex" 
               flexDirection="row" 
