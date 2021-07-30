@@ -275,10 +275,11 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  /* width: 300px; */
 }
 
 .search-nav {
-  padding: 20px;
+  padding: 20px 25px 10px 25px;
 }
 
 .search-container {
@@ -286,5 +287,5 @@ code {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
+  width: 100%;
 }

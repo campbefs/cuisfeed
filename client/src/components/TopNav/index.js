@@ -48,7 +48,7 @@ function Nav() {
             accessibilityClearButtonLabel="Clear search field"
             id="top-search-bar"
             onChange={({value}) => setValue(value)}
-            placeholder="Search Recipes or Chefs"
+            placeholder="Search"
             value={value}
           />
         </Flex.Item>
