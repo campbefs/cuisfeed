@@ -16,7 +16,7 @@ export default function CardExample() {
         </Text>
         <Button
           accessibilityLabel="Follow Nicholas"
-          color="red"
+          color="blue"
           text="Follow"
         />
       </Card>
