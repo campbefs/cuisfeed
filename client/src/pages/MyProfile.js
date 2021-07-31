@@ -1,6 +1,8 @@
 import Feed from '../components/Feed';
 import FollowCard from '../components/FollowCard';
 import AboutMe from '../components/AboutMe';
+import Followers from '../components/Followers';
+
 
 import { Box, Card, Text, Link, Button, Heading } from "gestalt";
 import { makeStyles, StylesContext } from "@material-ui/styles";
@@ -61,7 +63,7 @@ export default function MyProfile() {
           <Box margin={2}>
             <Text align="center">I am a surprisingly good actor</Text>
           </Box>
-          <Text weight="bold" align="center">151 followers | 259 following</Text>
+          <Text weight="bold" align="center"> <Followers number={151} type="Followers"/> | <Followers number={259} type="Following"/></Text>
         </Box>
 
 
