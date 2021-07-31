@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import { Box, Heading } from 'gestalt';
-import { StylesContext } from "@material-ui/styles";
+import { makeStyles, StylesContext } from "@material-ui/styles";
 
 import { Avatar, Typography } from '@material-ui/core';
 import { Row, Item } from '@mui-treasury/components/flex';
@@ -82,44 +81,6 @@ export default function FollowCard() {
 
   return (
     <>
-      <Box
-        className={styles.card}
-        display="flex"
-        marginStart={-3}
-        marginEnd={-3}
-        marginBottom={-3}
-        marginTop={8}
-        direction="column"
-        // maxWidth="95%"
-        color="white"
-        borderStyle="shadow"
-        rounding={3}
-        padding={2}
-        justifyContent="left"
-        alignItems="left"
-        width="280px"
-      >
-            
-        <Box marginBottom={2}>
-          <Heading size="sm" align="center">
-            Find Cooks to Follow
-          </Heading>
-
-        </Box>
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"
-            marginTop={2}
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"
-            marginTop={2}
-          />
-      </Box>
-
       <div style={{marginBottom: "100px"}}>
         <Box
           className={styles.card}

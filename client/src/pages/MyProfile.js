@@ -1,134 +1,77 @@
-import React, { useEffect } from "react";
-import {
-  Icon,
-  Grid,
-  Image,
-  List,
-  Card,
-  Modal
-} from "semantic-ui-react";
-import "./misc.css";
-import { useQuery } from '@apollo/client'
-import { MY_PROFILE, GET_ME_PROFILE } from '../utils/queries';
-// import { Link } from 'react-router-dom';
+import Feed from '../components/Feed';
+import FollowCard from '../components/FollowCard';
+import AboutMe from '../components/AboutMe';
+
+import { Box, Card, Text, Link, Button, Heading } from "gestalt";
+import { makeStyles, StylesContext } from "@material-ui/styles";
+import { Avatar } from '@material-ui/core';
 
 
-function MyProfile() {
-  const [open, setOpen] = React.useState(false);
-  // QUERY FEED
+const useStyles = makeStyles((theme) => ({
+  card: {
+    backgroundColor: '#ffffff',
+  },
+  small: {
+    width: "100px",
+    height: "100px",
+  },
+  medium: {
+    width: "120px",
+    height: "120px",
+    fontSize: "50px",
+  },
+  large: {
+    height: "200px",
+    width: "200px",
+  },
+}));
+
+export default function MyProfile() {
+
   
-  const { loading: loading2, data: follow } = useQuery(GET_ME_PROFILE,
-     { fetchPolicy: "no-cache" }
-    );
-  const { loading: loading1, data: feed } = useQuery(MY_PROFILE,
-          { fetchPolicy: "no-cache" }
-    );
-  let feedData = feed?.myProfile || {};
-  let followData = follow?.me || {};
+  const styles = useStyles();
 
-  const following = followData.follows
-  console.log(following);
   
+  return(
+    // add padding for edges
+    <section 
+      class="topic-container"
+    > 
+      <div className="middle-bar">
+        {/* <div style={{height: "40px"}}/> */}
+        <br/>
 
-  // Loading - must come at bottom
-  if (loading1) {
-    return <div>Loading...</div>;
-  }
+        <Box display="flex" justifyContent="center" margin={2}>
+          <Avatar
+              // name="Nicholas"
+              alt="Nicholas"
+              // src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg"
+              className={styles.medium}
+              justifyContent="center"
+          >
+            N
+          </Avatar>
+        </Box>
 
-  if (loading2) {
-    return <div>Loading...</div>;
-  }
 
-  return (
-    <section class='topic-conatiner' style={{marginLeft: "10%", paddingLeft: "230px"}}>
-      <div className="home" id="myprofile-home">
-       
-        <Grid divided stackable columns={3}>
-        
-        <div className='posts'>
-       
-          <Grid.Row textAlign='center'>
-            <div className="homeHeader">
-              <h2><Icon name='user circle'/>{follow.me.username}'s favorite recipes</h2>
-              <Modal
-                  closeIcon
-                  open={open}
-                  trigger={<a className='follow-list'>Following</a>}
-                  onClose={() => setOpen(false)}
-                  onOpen={() => setOpen(true)}
-                  size="mini"
-                >
-                  <Modal.Content>
-                    <h3 style={{ textAlign: "center" }}>Following</h3>
-                    <List vertical="true">
-                      {followData.follows.map((follows) => {
-                        return (
-                          <List.Item key={follows.id}>
-                            <div
-                              className="hover-link"
-                              style={{
-                                marginBottom: "15px",
-                                cursor: "pointer",
-                                fontWeight: "bold",
-                              }}
-                              onClick={() => {
-                                window.location.href = `/profile/${follows.username}`;
-                              }}
-                            >
-                              <Icon name="user circle" />
-                              <a
-                                className="hover-link"
-                                style={{ marginLeft: "5px" }}
-                              >
-                                {follows.username}
-                              </a>
-                            </div>
-                          </List.Item>
-                        );
-                      })}
-                    </List>
-                  </Modal.Content>
-                </Modal>
-            </div>
-          </Grid.Row>
+        <Box marginBottom={10}>
+          <Heading size="lg" align="center">
+              Nicholas
+          </Heading>
+          <Box margin={2}>
+            <Text align="center">I am a surprisingly good actor</Text>
+          </Box>
+          <Text weight="bold" align="center">151 followers | 259 following</Text>
+        </Box>
 
-            <List horizontal>
-              {feedData.map((post) => {
-                return (
-                  <List.Item key={post.id}>
-                 <Card style={{marginBottom: "50px"}}>
-                 <div className='title'>
-                    <a className='click' className="hover-link" onClick={() => {window.location.href=`/post/${post._id}`}}>
-                     <h3 style={{marginBottom: "8px", 
-                          }}>
-                            {post.recipe.label}</h3>
-                    </a>
-                    <p>{post.createdAt}</p>
-                    
-                    <a
-                      className="hover-link"
-                      onClick={() => {window.location.href=`/post/${post._id}`}}
-                    >
-                      <Image
-                        className='img'
-                        src={post.recipe.image}
-                        style={{marginTop: "20px"}}
-                      />
-                    </a>
-                    </div>
-                  </Card>
-                  </List.Item>
-                  
-                );
-              })}
-              
-            </List>
-          
-          </div>
-        </Grid>
+
+        <Feed/>
+      </div>
+
+      <div className="right-bar">
+        <AboutMe />
+        <FollowCard/>
       </div>
     </section>
   );
-}
-
-export default MyProfile;
+};

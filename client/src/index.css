@@ -289,3 +289,8 @@ code {
   justify-content: center;
   width: 100%;
 }
+
+.avatar-div {
+  display: "flex";
+  justify-content: "center";
+}

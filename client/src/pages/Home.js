@@ -4,6 +4,7 @@
 // import Auth from '../utils/auth';
 import Feed from '../components/Feed';
 import FollowCard from '../components/FollowCard';
+import FindFollowers from '../components/FindFollowers';
 
 export default function Home() {
 
@@ -17,6 +18,7 @@ export default function Home() {
         <Feed/>
       </div>
       <div className="right-bar">
+        <FindFollowers/>
         <FollowCard/>
       </div>
     </section>
