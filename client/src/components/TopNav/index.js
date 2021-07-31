@@ -44,11 +44,11 @@ function Nav() {
 
         <Flex.Item flex="grow">
           <SearchField
-            accessibilityLabel="Search Recipes"
+            accessibilityLabel="Search Recipes or Chefs"
             accessibilityClearButtonLabel="Clear search field"
             id="top-search-bar"
             onChange={({value}) => setValue(value)}
-            placeholder="Search Recipes"
+            placeholder="Search"
             value={value}
           />
         </Flex.Item>
