@@ -14,6 +14,7 @@ import UserProfile from './pages/UserProfile';
 import RecipeSearch from './pages/RecipeSearch';
 import Search from './pages/Search';
 import Post from './pages/Post';
+import PostOld from './pages/PostOld';
 
 
 const httpLink = createHttpLink({
@@ -73,7 +74,8 @@ function App() {
                 <Route exact path='/myprofile/' component={MyProfile}/>
                 <Route exact path='/profile/:username' component={UserProfile}/>
                 <Route exact path='/search' component={Search} />
-                <Route exact path='/post/:postId' component={Post} />
+                <Route exact path='/post' component={Post} />
+                <Route exact path='/post/:postId' component={PostOld} />
               </Switch>
              </>
            )}
