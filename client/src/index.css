@@ -294,3 +294,7 @@ code {
   display: "flex";
   justify-content: "center";
 }
+
+.profile-nav {
+  padding: 20px 15px 10px 15px;
+}

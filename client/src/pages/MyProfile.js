@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Feed from '../components/Feed';
 import FollowCard from '../components/FollowCard';
 import AboutMe from '../components/AboutMe';
@@ -30,9 +31,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyProfile() {
 
+  const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
+  const [currentProfilePage, setCurrentProfilePage] = useState(profilePages[0]);
   
   const styles = useStyles();
-
   
   return(
     // add padding for edges
@@ -56,7 +58,7 @@ export default function MyProfile() {
         </Box>
 
 
-        <Box marginBottom={10}>
+        <Box marginBottom={2}>
           <Heading size="lg" align="center">
               Nicholas
           </Heading>
@@ -67,7 +69,50 @@ export default function MyProfile() {
         </Box>
 
 
-        <Feed/>
+        <div className="search-selection">
+
+          <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+          
+          <div className="profile-nav">
+            <button 
+              className={`left-nav-button ${currentProfilePage === 'Posts' && 'nav-active'}`}
+              onClick={() => setCurrentProfilePage('Posts')}
+            >
+              <Text fontSize="large"/>Posts
+            </button>
+          </div>
+
+          <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+
+          <div className="profile-nav">
+            <button 
+              className={`left-nav-button ${currentProfilePage === 'Favorites' && 'nav-active'}`}
+              onClick={() => setCurrentProfilePage('Favorites')}
+            >
+              <Text fontSize="large"/>Favorites
+            </button>
+          </div>
+
+          <div className="profile-nav">
+            <button 
+              className={`left-nav-button ${currentProfilePage === 'Comments' && 'nav-active'}`}
+              onClick={() => setCurrentProfilePage('Comments')}
+            >
+              <Text fontSize="large"/>Comments
+            </button>
+          </div>
+        </div>
+
+        {
+          currentProfilePage === 'Posts' ? <Feed/> : 
+          currentProfilePage === 'Favorites' ? <Feed /> : 
+          <div>Comments</div>
+        }
+
       </div>
 
       <div className="right-bar">
