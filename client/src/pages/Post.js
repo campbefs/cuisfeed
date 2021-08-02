@@ -3,18 +3,36 @@ import { Box, Text, Heading } from 'gestalt';
 
 export default function Post() {
   return (
-    <section className = 'topic-container'>
+    <section className = 'topic-container' style={{flexDirection: "column"}}>
       
-      <div style={{display: "flex", flexDirection: "row", width: "100%"}}>
-        <div style={{width: "40%", backgroundColor: "green", padding: "20px 30px"}}>
+      <div className="top-outer-post">
+        <div className="top-left-post">
           <Box marginBottom={5}>
             <Heading align="center">Pizza that's pretty good</Heading>
           </Box>
-          <Text marginTop={3}>A bunch of text</Text>
+          <Text marginTop={3}>
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
+          </Text>
         </div>
-        <div style={{width: "60%", paddingTop: "100px", backgroundColor: "purple", textAlign: "center"}}>
-          <img style={{width: "400px", height: "400px", borderRadius: "8px"}} alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
+        <div className="top-right-post">
+          <div className="top-right-pic">
+            <img style={{position: "-webkit-sticky", position: "sticky", width: "90%", borderRadius: "8px"}} alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
+          </div>
         </div>
+      </div>
+      <div style={{backgroundColor: "blue", width: "100%", minHeight: "1000px"}}>
+
       </div>
 
     </section>
