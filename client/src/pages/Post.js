@@ -80,11 +80,21 @@ const ItemActions = props => {
       marginTop="20px"
       paddingBottom="6px"
     >
-      <IconButton size='small'><FavoriteBorderRoundedIcon/></IconButton>
-      <IconButton size='small'><ChatBubbleOutlineIcon/></IconButton>
-      <IconButton size='small'><PostAddIcon/></IconButton>
-      <IconButton size='small'><ShareIcon/></IconButton>
-      <IconButton size='small'><TurnedInNotIcon/></IconButton>
+      <Tooltip title={'Like'}>
+        <IconButton size='small'><FavoriteBorderRoundedIcon/></IconButton>
+      </Tooltip>
+      <Tooltip title={'Comments'}>
+        <IconButton size='small'><ChatBubbleOutlineIcon/></IconButton>
+      </Tooltip>
+      <Tooltip title={'Quick Post'}>
+        <IconButton size='small'><PostAddIcon/></IconButton>
+      </Tooltip>
+      <Tooltip title={'Share'}>
+        <IconButton size='small'><ShareIcon/></IconButton>
+      </Tooltip>
+      <Tooltip title={'Save to Recipe Book'}>
+        <IconButton size='small'><TurnedInNotIcon/></IconButton>
+      </Tooltip>
     </Row>
   );
 };
