@@ -1,5 +1,8 @@
 import React from 'react';
-import { Box, Text, Heading } from 'gestalt';
+import Nutrients from '../components/Nutrients';
+import PostComments from '../components/PostComments';
+
+import { Box, Text, Heading, Divider, Link as GestaltLink } from 'gestalt';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Grid, Tooltip, Avatar, Typography, IconButton } from '@material-ui/core';
@@ -77,7 +80,7 @@ const ItemActions = props => {
       alignItems="flex-start"
       marginLeft="0px"
       marginRight="0px"
-      marginTop="20px"
+      marginTop="10px"
       paddingBottom="6px"
     >
       <Tooltip title={'Like'}>
@@ -121,25 +124,71 @@ export default function Post() {
       
       <div className="top-outer-post">
         <div className="top-left-post">
-          <Box marginBottom={5}>
+          <Box marginBottom={6}>
             <Heading align="center">Pizza that's pretty good</Heading>
           </Box>
 
-          <Text marginTop={3}>
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-            A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text A bunch of text
-          </Text>
+          <Divider/>
+
+          <Box marginTop={4} marginBottom={2}>
+            <Heading size="md">Ingredients</Heading>
+          </Box>
+
+          <Box marginBottom={2}>
+            <ul>
+              <li><Text>1 pack pizza base mix</Text></li>
+              <li><Text>3 tbsp tomato pizza sauce</Text></li>
+              <li><Text>2 small cooking chorizo, diced</Text></li>
+              <li><Text>1 tbsp capers, drained</Text></li>
+              <li><Text>handful cherry tomatoes, halved</Text></li>
+              <li><Text>handful rocket</Text></li>
+              <li><Text>olive oil, to drizzle</Text></li>
+            </ul>
+          </Box>
+
+          <Divider/>
+
+          <Box marginTop={4} marginBottom={2}>
+            <Heading size="md">Recipe Details</Heading>
+          </Box>
+
+          <div style={{textAlign: "left", marginTop: "5px", marginBottom: "15px", marginLeft: "15px", lineHeight: "1.5"}}>
+            <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>middle eastern</Text>
+            <Text><span style={{fontWeight: "bold"}}>Yield: </span>8</Text>
+            <Text><span style={{fontWeight: "bold"}}>Total Time: </span>20</Text>
+            <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>Low-Carb, Low-Sodium</Text>
+            <Text><span style={{fontWeight: "bold"}}>Cautions: </span>Sulfites</Text>
+          </div>
+
+          <Divider/>
+
+          <Box marginTop={5} marginBottom={4}>
+            <Heading size="md">Nutrients</Heading>
+          </Box>
+
+          <Box marginBottom={10}>
+            {/* <Divider/> */}
+            <Nutrients />
+            {/* <Divider/> */}
+          </Box>
+        
+          <Divider/>
+
+          <Box marginTop={5} marginBottom={2}>
+            <Heading size="md">Link</Heading>
+          </Box>
+
+          <Box marginBottom={2}>
+            <Text color="blue" weight="bold">
+              <GestaltLink href="https://www.marthastewart.com/1155033/lamb-sausages">
+                <Box padding={2}>For more details visit Martha Stewart</Box>
+              </GestaltLink>
+            </Text>
+          </Box>
+
+
         </div>
+
         <div className="top-right-post">
           <div className="top-right-pic">
             <img style={{position: "-webkit-sticky", position: "sticky", width: "90%", maxWidth: "400px", borderRadius: "8px"}} alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
@@ -156,13 +205,15 @@ export default function Post() {
                 />
                 <Text><span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span></Text>
               </div>
+              <Text>21 Ratings</Text>
 
               <div style={{textAlign: "left", marginTop: "15px", lineHeight: "1.5"}}>
                 <Text>Source: Martha Stewart</Text>
                 <Text>2h</Text>
-                <BasicProfile marginTop="15px" justifyContent="center"/>
+                {/* <Text align="center">Posted by:</Text> */}
+                <BasicProfile marginTop="10px" marginBottom="10px" justifyContent="center"/>
 
-
+                <Divider/>
                 <ItemActions/>
 
               </div>
@@ -174,7 +225,9 @@ export default function Post() {
       </div>
 
       <div className="bottom-post-box">
-        <Heading align="center">Comments</Heading>
+        <Heading align="center">Engage</Heading>
+
+        <PostComments/>
       </div>
 
     </section>
