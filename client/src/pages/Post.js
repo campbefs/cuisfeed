@@ -1,5 +1,6 @@
 import React from 'react';
 import Nutrients from '../components/Nutrients';
+import PostCommentsSelect from '../components/PostCommentsSelect';
 import PostComments from '../components/PostComments';
 import AddRecipeButton from '../components/AddRecipeButton';
 
@@ -192,7 +193,11 @@ export default function Post() {
           <div className="bottom-post-box the-white-box">
             <Heading align="center">Engage</Heading>
 
+            <PostCommentsSelect/>
+
             <PostComments/>
+
+
           </div>
 
         </div>
