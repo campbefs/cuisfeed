@@ -1,5 +1,8 @@
 import React from "react";
 import { Flex, Text, Box, Mask, Image, TapArea, Button, Layer, Popover, SearchField } from "gestalt";
+import pexel1 from "../../assets/images/welcome/pexels-photo-704569.jpeg"
+import pexel2 from "../../assets/images/welcome/pexels-photo-2097090.jpeg"
+
 
 export default function AddRecipeButton() {
   const [open, setOpen] = React.useState(false);
@@ -32,9 +35,9 @@ export default function AddRecipeButton() {
       </Text>
       <Flex direction="column" gap={4}>
         {[
-          ['https://i.ibb.co/s3PRJ8v/photo-1496747611176-843222e1e57c.webp', 'Plan to Cook', 'Thubnail image: a white dress with red flowers'],
+          [ pexel1, 'Plan to Cook', 'Thumbnail image: avacado and egg dish'],
           ['https://i.ibb.co/swC1qpp/IMG-0494.jpg', 'Cooked', 'Thubnail image: a paella with shrimp, green peas, red peppers and yellow rice'],
-          ['https://i.ibb.co/PFVF3JH/photo-1583847268964-b28dc8f51f92.webp', 'Inspiring', 'Thubnail image: a living room with a white couch, two paints in the wall and wooden furniture'],
+          [ pexel2, 'Inspiring', 'Thumbnail image: prepared dish'],
         ].map((data, index) => (
             <TapArea key={index} onTap={() => {
               setSelectedChapter(data[1]);

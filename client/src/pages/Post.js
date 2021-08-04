@@ -125,72 +125,79 @@ export default function Post() {
       
       <div className="top-outer-post">
         <div className="top-left-post">
-          <Box marginBottom={6}>
-            <Heading align="center">Pizza that's pretty good</Heading>
-          </Box>
+          <div className="upper-left-post the-white-box">
+            <Box marginBottom={6}>
+              <Heading align="center">Pizza that's pretty good</Heading>
+            </Box>
 
-          <Divider/>
+            <Divider/>
 
-          <Box marginTop={4} marginBottom={2}>
-            <Heading size="md">Ingredients</Heading>
-          </Box>
+            <Box marginTop={4} marginBottom={2}>
+              <Heading size="md">Ingredients</Heading>
+            </Box>
 
-          <Box marginBottom={2}>
-            <ul>
-              <li><Text>1 pack pizza base mix</Text></li>
-              <li><Text>3 tbsp tomato pizza sauce</Text></li>
-              <li><Text>2 small cooking chorizo, diced</Text></li>
-              <li><Text>1 tbsp capers, drained</Text></li>
-              <li><Text>handful cherry tomatoes, halved</Text></li>
-              <li><Text>handful rocket</Text></li>
-              <li><Text>olive oil, to drizzle</Text></li>
-            </ul>
-          </Box>
+            <Box marginBottom={2}>
+              <ul>
+                <li><Text>1 pack pizza base mix</Text></li>
+                <li><Text>3 tbsp tomato pizza sauce</Text></li>
+                <li><Text>2 small cooking chorizo, diced</Text></li>
+                <li><Text>1 tbsp capers, drained</Text></li>
+                <li><Text>handful cherry tomatoes, halved</Text></li>
+                <li><Text>handful rocket</Text></li>
+                <li><Text>olive oil, to drizzle</Text></li>
+              </ul>
+            </Box>
 
-          <Divider/>
+            <Divider/>
 
-          <Box marginTop={4} marginBottom={2}>
-            <Heading size="md">Recipe Details</Heading>
-          </Box>
+            <Box marginTop={4} marginBottom={2}>
+              <Heading size="md">Recipe Details</Heading>
+            </Box>
 
-          <div style={{textAlign: "left", marginTop: "5px", marginBottom: "15px", marginLeft: "15px", lineHeight: "1.5"}}>
-            <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>middle eastern</Text>
-            <Text><span style={{fontWeight: "bold"}}>Yield: </span>8</Text>
-            <Text><span style={{fontWeight: "bold"}}>Total Time: </span>20</Text>
-            <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>Low-Carb, Low-Sodium</Text>
-            <Text><span style={{fontWeight: "bold"}}>Cautions: </span>Sulfites</Text>
+            <div style={{textAlign: "left", marginTop: "5px", marginBottom: "15px", marginLeft: "15px", lineHeight: "1.5"}}>
+              <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>middle eastern</Text>
+              <Text><span style={{fontWeight: "bold"}}>Yield: </span>8</Text>
+              <Text><span style={{fontWeight: "bold"}}>Total Time: </span>20</Text>
+              <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>Low-Carb, Low-Sodium</Text>
+              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>Sulfites</Text>
+            </div>
+
+            <Divider/>
+
+            <Box marginTop={5} marginBottom={4}>
+              <Heading size="md">Nutrients</Heading>
+            </Box>
+
+            <Box marginBottom={10}>
+              {/* <Divider/> */}
+              <Nutrients />
+              {/* <Divider/> */}
+            </Box>
+          
+            <Divider/>
+
+            <Box marginTop={5} marginBottom={2}>
+              <Heading size="md">Link</Heading>
+            </Box>
+
+            <Box marginBottom={2}>
+              <Text color="blue" weight="bold">
+                <GestaltLink href="https://www.marthastewart.com/1155033/lamb-sausages">
+                  <Box padding={2}>For more details visit Martha Stewart</Box>
+                </GestaltLink>
+              </Text>
+            </Box>
           </div>
 
-          <Divider/>
+          <div className="bottom-post-box the-white-box">
+            <Heading align="center">Engage</Heading>
 
-          <Box marginTop={5} marginBottom={4}>
-            <Heading size="md">Nutrients</Heading>
-          </Box>
-
-          <Box marginBottom={10}>
-            {/* <Divider/> */}
-            <Nutrients />
-            {/* <Divider/> */}
-          </Box>
-        
-          <Divider/>
-
-          <Box marginTop={5} marginBottom={2}>
-            <Heading size="md">Link</Heading>
-          </Box>
-
-          <Box marginBottom={2}>
-            <Text color="blue" weight="bold">
-              <GestaltLink href="https://www.marthastewart.com/1155033/lamb-sausages">
-                <Box padding={2}>For more details visit Martha Stewart</Box>
-              </GestaltLink>
-            </Text>
-          </Box>
-
+            <PostComments/>
+          </div>
 
         </div>
 
-        <div className="top-right-post">
+        <div className="top-right-post the-white-box">
           <div className="top-right-section">
             <Box marginBottom={4}>
               <AddRecipeButton/>
@@ -244,11 +251,11 @@ export default function Post() {
         </div>
       </div>
 
-      <div className="bottom-post-box">
+      {/* <div className="bottom-post-box the-white-box">
         <Heading align="center">Engage</Heading>
 
         <PostComments/>
-      </div>
+      </div> */}
 
     </section>
   )
