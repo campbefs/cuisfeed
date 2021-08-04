@@ -9,10 +9,13 @@ const imgLink =
   "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
 
-export default function PostComments() {
+export default function PostComments(props) {
+
+  const { title } = props;
+
   return (
     <div style={{ padding: 14 }} className="App">
-      <Heading size="md">Comments</Heading>
+      <Heading size="md">{title}</Heading>
       {/* <Paper style={{ padding: "40px 20px" }}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
