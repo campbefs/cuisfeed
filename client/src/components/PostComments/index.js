@@ -78,7 +78,7 @@ export default function PostComments(props) {
               <Text weight="bold" color="darkGray">Michel Michel</Text>
             </div>
             <Text textAlign="left">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+              Shit ipsum dolor sit amet, consectetur adipiscing elit. Aenean
               luctus ut est sed faucibus. Duis bibendum ac ex vehicula laoreet.
               Suspendisse congue vulputate lobortis. Pellentesque at interdum
               tortor. Quisque arcu quam, malesuada vel mauris et, posuere

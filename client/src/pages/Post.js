@@ -195,7 +195,7 @@ export default function Post() {
 
             <PostCommentsSelect/>
 
-            <PostComments/>
+            {/* <PostComments/> */}
 
 
           </div>
