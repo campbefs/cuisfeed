@@ -127,17 +127,17 @@ export default function Post() {
       <div className="top-outer-post">
         <div className="top-left-post">
           <div className="upper-left-post the-white-box">
-            <Box marginBottom={6}>
+            <Box marginBottom={12}>
               <Heading align="center">Pizza that's pretty good</Heading>
             </Box>
 
-            <Divider/>
+            {/* <Divider/> */}
 
             <Box marginTop={4} marginBottom={2}>
               <Heading size="md">Ingredients</Heading>
             </Box>
 
-            <Box marginBottom={2}>
+            <Box marginBottom={6}>
               <ul>
                 <li><Text>1 pack pizza base mix</Text></li>
                 <li><Text>3 tbsp tomato pizza sauce</Text></li>
@@ -151,7 +151,7 @@ export default function Post() {
 
             <Divider/>
 
-            <Box marginTop={4} marginBottom={2}>
+            <Box marginTop={4} marginBottom={4}>
               <Heading size="md">Recipe Details</Heading>
             </Box>
 
