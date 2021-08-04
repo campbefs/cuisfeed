@@ -1,8 +1,9 @@
 import React from 'react';
 import Nutrients from '../components/Nutrients';
 import PostComments from '../components/PostComments';
+import AddRecipeButton from '../components/AddRecipeButton';
 
-import { Box, Text, Heading, Divider, Link as GestaltLink } from 'gestalt';
+import { Box, Text, Heading, Divider, Link as GestaltLink, Button } from 'gestalt';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Grid, Tooltip, Avatar, Typography, IconButton } from '@material-ui/core';
@@ -95,9 +96,9 @@ const ItemActions = props => {
       <Tooltip title={'Share'}>
         <IconButton size='small'><ShareIcon/></IconButton>
       </Tooltip>
-      <Tooltip title={'Save to Recipe Book'}>
+      {/* <Tooltip title={'Save to Recipe Book'}>
         <IconButton size='small'><TurnedInNotIcon/></IconButton>
-      </Tooltip>
+      </Tooltip> */}
     </Row>
   );
 };
@@ -190,33 +191,52 @@ export default function Post() {
         </div>
 
         <div className="top-right-post">
-          <div className="top-right-pic">
+          <div className="top-right-section">
+            <Box marginBottom={4}>
+              <AddRecipeButton/>
+            </Box>
             <img style={{position: "-webkit-sticky", position: "sticky", width: "90%", maxWidth: "400px", borderRadius: "8px"}} alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
 
             <div style={{marginTop: "30px", width: "85%", maxWidth: "400px", marginLeft: "50px", marginRight: "50px"}}>
-              <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                <StyledRating
-                  defaultValue={4.5}
-                  maxRating={5}
-                  // readOnly
-                  icon={<FavoriteIcon fontSize="inherit"/>}
-                  // className={styles.title}
-                  precision={0.5}
-                />
+              <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between",  flexWrap: "wrap"}}>
+                <div style={{display: "flex", flexDirection: "row", marginBottom: "10px", flexWrap: "wrap"}}>
+                  <StyledRating
+                    defaultValue={4.5}
+                    maxRating={5}
+                    // readOnly
+                    icon={<FavoriteIcon fontSize="inherit"/>}
+                    // className={styles.title}
+                    precision={0.5}
+                  />
+                  &nbsp;&nbsp;<span>&#8226;</span>&nbsp;&nbsp;<Text color="darkGray">21 Ratings</Text>                  
+                </div>
+
                 <Text><span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span></Text>
               </div>
-              <Text>21 Ratings</Text>
+              
 
-              <div style={{textAlign: "left", marginTop: "15px", lineHeight: "1.5"}}>
-                <Text>Source: Martha Stewart</Text>
-                <Text>2h</Text>
+              <div style={{display: "flex", flexDirection: "row", textAlign: "left", marginTop: "40px", marginBottom: "20px", justifyContent: "space-between", flexWrap: "wrap"}}>
+
                 {/* <Text align="center">Posted by:</Text> */}
-                <BasicProfile marginTop="10px" marginBottom="10px" justifyContent="center"/>
 
-                <Divider/>
-                <ItemActions/>
+                <BasicProfile/>
+                {/* <Flex gap={2}> */}
+                <div style={{display: "flex", alignItems: "center"}}>
+                  <Button color="gray" text="Follow"/>
+                </div>
+                {/* </Flex> */}
 
               </div>
+
+              <div style={{marginTop: "5px", marginBottom: "10px"}}>
+                <Text color="gray">12:28PM &#8226; Aug 3, 2021</Text>
+              </div>
+              <Divider/>
+              <div style={{marginTop: "10px", marginBottom: "10px"}}>
+                <Text color="darkGray">&nbsp;<span style={{fontWeight: "bold"}}>5</span> Likes</Text>
+              </div>
+              <Divider/>
+              <ItemActions/>
 
             </div>
 
