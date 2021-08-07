@@ -1,142 +1,139 @@
-import {
-  Segment,
-  Grid,
-  Image,
-  List,
-  Card,
-  Icon,
-  Button
-} from "semantic-ui-react";
-import avatar from '../assets/images/square-image.png'
-import "./misc.css"
-import { useQuery } from '@apollo/client'
-import { USER_PROFILE, GET_SINGLE_USER_PROFILE } from '../utils/queries';
-import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import Feed from '../components/Feed';
+import FollowCard from '../components/FollowCard';
+import AboutMe from '../components/AboutMe';
+import Followers from '../components/Followers';
 
 
-function UserProfile() {
-  // QUERY FEED
-  const { username } = useParams();
-  console.log('username', username);
-  // console.log('username', username);
+import { Box, Card, Text, Link, Button, Heading } from "gestalt";
+import { makeStyles, StylesContext } from "@material-ui/styles";
+import { Avatar } from '@material-ui/core';
+
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    backgroundColor: '#ffffff',
+  },
+  small: {
+    width: "100px",
+    height: "100px",
+  },
+  medium: {
+    width: "120px",
+    height: "120px",
+    fontSize: "50px",
+  },
+  large: {
+    height: "200px",
+    width: "200px",
+  },
+}));
+
+export default function MyProfile() {
+
+  const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
+  const [currentProfilePage, setCurrentProfilePage] = useState(profilePages[0]);
   
-  const { loading: loading1, data: follow } = useQuery(GET_SINGLE_USER_PROFILE,
-    { 
-      variables: {username: username},  // CHANGE THIS!!!
-      fetchPolicy: "no-cache" 
-    }
-  );
-   let followData = follow?.getSingleUser || {};
-    console.log(followData, follow)
-  const { loading: loading2, data: feed, refetch } = useQuery(USER_PROFILE,
-          { 
-            variables: {username: username},  // CHANGE THIS!!!
-            fetchPolicy: "no-cache" 
-          }
-    );
-  let feedData = feed?.userProfile || {};
-
+  const styles = useStyles();
   
+  return(
+    // add padding for edges
+    <section 
+      className="topic-container"
+    > 
+      <div className="middle-bar">
+        <br/>
 
-  // console.log('feedData', feedData);
-  console.log('follow data:', followData);
-  
+        <Box display="flex" justifyContent="center" margin={2}>
+          <Avatar
+              alt="Nicholas"
+              // src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg"
+              className={styles.medium}
+              justifyContent="center"
+          >
+            N
+          </Avatar>
+        </Box>
 
-  // Loading - must come at bottom
-  if (loading1) {
-    return <div>Loading...</div>;
-  }
+        <Box marginBottom={2}>
+          <Heading size="lg" align="center">
+              Nicholas
+          </Heading>
+          <Box margin={2}>
+            <Text align="center">I am a surprisingly good actor</Text>
+          </Box>
+          <Text weight="bold" align="center"> <Followers number={151} type="Followers"/> | <Followers number={259} type="Following"/></Text>
+        </Box>
 
-  if (loading2) {
-    return <div>Loading...</div>;
-  }
 
-  return (
-    <section class='topic-conatiner'>
-      <div className="home" style={{paddingLeft: "300px"}}>
-       
-        <Grid divided stackable>
+        <div className="search-selection">
+
+          <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+          
+          <div className="profile-nav">
+            <button 
+              className={`left-nav-button ${currentProfilePage === 'Posts' && 'nav-active'}`}
+              onClick={() => setCurrentProfilePage('Posts')}
+            >
+              <Text fontSize="large"/>Posts
+            </button>
+          </div>
+
+          <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+
+          <div className="profile-nav">
+            <button 
+              className={`left-nav-button ${currentProfilePage === 'Favorites' && 'nav-active'}`}
+              onClick={() => setCurrentProfilePage('Favorites')}
+            >
+              <Text fontSize="large"/>Favorites
+            </button>
+          </div>
+
+          <div className="profile-nav">
+            <button 
+              className={`left-nav-button ${currentProfilePage === 'Comments' && 'nav-active'}`}
+              onClick={() => setCurrentProfilePage('Comments')}
+            >
+              <Text fontSize="large"/>Comments
+            </button>
+          </div>
+        </div>
+
+        {
+          currentProfilePage === 'Posts' ? <Feed/> : 
+          currentProfilePage === 'Favorites' ? <Feed /> : 
+          <div>Comments</div>
+        }
+
+      </div>
+
+      <div className="right-bar">
         
-        <div className='posts'>
-       
-          <Grid.Row>
-            <div className="homeHeader">
-              <h2><Icon name='user circle'/>{username}'s Favorite Recipes</h2>
-              <p>Following || Followers</p>
-              <Button primary size='small' compact><Icon name='add'/> Follow</Button>
-            </div>
-          </Grid.Row>
-          <Grid.Row columns={3}>
-            <List horizontal>
-              {feedData.map((post) => {
-                return (
-                  <List.Item>
-                  <Card style={{marginBottom: "50px"}}>
-                    <div className='title'>
-                    <a className='click' className="hover-link" onClick={() => {window.location.href=`/post/${post._id}`}}>
-                     <h3 style={{marginBottom: "8px", 
-                          }}>
-                            {post.recipe.label}</h3>
-                    </a>
-                   
-                        <p>{post.createdAt}</p>
-                    
-                    <a
-                      className="hover-link"
-                      onClick={() => {window.location.href=`/post/${post._id}`}}
-                    >
-                      <Image
-                        className='img'
-                        src={post.recipe.image}
-                        style={{marginTop: "20px"}}
-                      />
-                    </a>
-                    </div>
-                  </Card>
-                  </List.Item>
-                );
-              })}
-            </List>
-          
-          </Grid.Row>
-         
-         
-          </div>
-          <div className='following'>
-            <Segment>
-          <Grid.Row>
-            <h3 style={{marginBottom: "20px"}}>{username}'s Follows</h3>
-            </Grid.Row>
-            <Grid.Row>
-              <List vertical>
-                {
-                  followData.follows.map((follows) => {
-                    return (
-                      <List.Item>
-                      <div 
-                        className="hover-link"
-                        style={{marginBottom: "15px", cursor: "pointer", fontWeight: "bold"}}
-                        onClick={() => {window.location.href=`/profile/${follows.username}`}}
-                      >
-                        <Image
-                          src={avatar}
-                          avatar
-                        />
-                        <a className="hover-link" style={{marginLeft: "5px"}}>{follows.username}</a>
-                      </div>
-                    </List.Item>
-                    )
-                  })
-                }
-              </List>
-          
-          </Grid.Row>
-          </Segment>
-          </div>
-        </Grid>
+        <Box
+          display="flex"
+          marginStart={-3}
+          marginEnd={-3}
+          marginTop={8}
+          direction="column"
+          rounding={3}
+          padding={2}
+          justifyContent="center"
+          alignItems="center"
+          // 280
+          width="280px"
+          // marginBottom doesn't work cause gestalt fucking sucks. use surrounding div
+        >
+          <Button color="blue" text="Follow" size="lg"/>
+        </Box>
+                
+        <AboutMe />
+        <FollowCard/>
       </div>
     </section>
   );
-}
-
-export default UserProfile;
+};

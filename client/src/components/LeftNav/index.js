@@ -22,7 +22,7 @@ export default function LeftNav(props) {
   return (
     <section id="left-nav-bar">
 
-      <Link className="left-nav-item">
+      <Link className="left-nav-item" to="/home">
         <Flex gap={2}>
           <button
             id="create-post"

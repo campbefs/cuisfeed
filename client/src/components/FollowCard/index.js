@@ -94,12 +94,9 @@ export default function FollowCard() {
           borderStyle="shadow"
           rounding={3}
           padding={2}
-          justifyContent="left"
-          alignItems="left"
           // 280
           width="280px"
           // marginBottom doesn't work cause gestalt fucking sucks 
-          marginBottom="100px"
         >
         
         <Box marginBottom={2}>

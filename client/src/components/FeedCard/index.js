@@ -104,7 +104,6 @@ const CardHeader = props => {
           <div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-between"}}>
             <StyledRating
               defaultValue={4.5}
-              maxRating={5}
               readOnly
               icon={<FavoriteIcon fontSize="inherit"/>}
               className={styles.title}
@@ -156,7 +155,7 @@ export const FeedCard = React.memo(function ShowcaseCard() {
   return (
     
     <section className='feed-card'>
-      <Grid container spacing={4} justify={'center'}>
+      <Grid container spacing={4} justifyContent={'center'}>
         <Grid item xs={12} sm={8} lg={7} className={styles.outerCard}>
           <Grid className={styles.card}>
             <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>

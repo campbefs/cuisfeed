@@ -82,8 +82,6 @@ export default function FollowCard() {
       borderStyle="shadow"
       rounding={3}
       padding={2}
-      justifyContent="left"
-      alignItems="left"
       width="280px"
     >
           

@@ -9,6 +9,8 @@ import { Box, Card, Text, Link, Button, Heading } from "gestalt";
 import { makeStyles, StylesContext } from "@material-ui/styles";
 import { Avatar } from '@material-ui/core';
 
+import { useQuery } from "@apollo/client";
+import { MY_PROFILE, GET_ME_PROFILE } from "../utils/queries";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -31,6 +33,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyProfile() {
 
+  const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
+    // fetchPolicy: "no-cache",
+  });
+  const { loading: loading_feed, data: feed } = useQuery(MY_PROFILE);
+
+  let feedData = feed?.myFeed || {};
+  let followData = follow?.me || {};
+
+
   const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
   const [currentProfilePage, setCurrentProfilePage] = useState(profilePages[0]);
   
@@ -39,7 +50,7 @@ export default function MyProfile() {
   return(
     // add padding for edges
     <section 
-      class="topic-container"
+      className="topic-container"
     > 
       <div className="middle-bar">
         {/* <div style={{height: "40px"}}/> */}
@@ -108,8 +119,15 @@ export default function MyProfile() {
         </div>
 
         {
-          currentProfilePage === 'Posts' ? <Feed/> : 
-          currentProfilePage === 'Favorites' ? <Feed /> : 
+          currentProfilePage === 'Posts' ? <Feed
+            feedData={feedData}
+            loading={loading_feed}
+          
+          /> : 
+          currentProfilePage === 'Favorites' ? <Feed 
+            feedData={feedData}
+            loading={loading_feed}
+          /> : 
           <div>Comments</div>
         }
 
