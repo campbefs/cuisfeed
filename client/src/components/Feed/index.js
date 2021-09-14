@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import FeedCard from '../FeedCard';
 
+// import { MY_PROFILE } from "../../utils/queries";
+
 
 export default function Feed({feedData, loading}) {
+
+  // const { loading: loading, data: feed } = useQuery(MY_PROFILE, 
+  //     { fetchPolicy: "no-cache"}
+  //   );
+  // let postData = post?.myProfile || {};
+
+  console.log('feedData', feedData);
 
   if (loading) {
     return <div>Loading...</div>
@@ -10,12 +19,21 @@ export default function Feed({feedData, loading}) {
   
   return (
     <section id="feed-container">
-      {/* <div className="feed-post-container">Feed</div> */}
-      {/* <FeedCard/> */}
+
+      {/* demo */}
+      {/* <FeedCard/>
+      <FeedCard/>
+      <FeedCard/>
+      <FeedCard/> */}
+
+      {
+        feedData.length === 0 ? 'no data' :
+        feedData.map((postData) => {
+          return <FeedCard post={postData}/>
+        })
+      }
       
-      {feedData.map((postData) => {
-        return <FeedCard post={postData}/>
-      })}
+      {}
 
     </section>
   )

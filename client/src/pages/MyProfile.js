@@ -33,19 +33,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyProfile() {
 
-  const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
-    // fetchPolicy: "no-cache",
-  });
+  // const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
+  //   // fetchPolicy: "no-cache",
+  // });
   const { loading: loading_feed, data: feed } = useQuery(MY_PROFILE);
 
-  let feedData = feed?.myFeed || {};
-  let followData = follow?.me || {};
+  let feedData = feed?.myProfile || {}; // my posts for feed
+  // let followData = follow?.me || {};
 
 
   const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
   const [currentProfilePage, setCurrentProfilePage] = useState(profilePages[0]);
   
   const styles = useStyles();
+
+  if (loading_feed) {
+    return <div>Loading...</div>
+  }
   
   return(
     // add padding for edges
@@ -122,7 +126,6 @@ export default function MyProfile() {
           currentProfilePage === 'Posts' ? <Feed
             feedData={feedData}
             loading={loading_feed}
-          
           /> : 
           currentProfilePage === 'Favorites' ? <Feed 
             feedData={feedData}
