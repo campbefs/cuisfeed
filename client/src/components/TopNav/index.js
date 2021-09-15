@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heading, SearchField, Flex, IconButton, Layer, Popover, Box,
         Text,
@@ -7,12 +7,14 @@ import Auth from '../../utils/auth';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 
+import { Form, Button } from "semantic-ui-react";
+
 
 function Nav() {
-  const [value, setValue ] = React.useState('');
+  const [searchInput, setSearchInput ] = useState('');
 
-  const [selectedMenu, setSelectedMenu] = React.useState(false);
-  const [selectedAccount, setSelectedAccount] = React.useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(false);
+  const [selectedAccount, setSelectedAccount] = useState(false);
 
   const anchorRef = React.useRef();
 
@@ -26,6 +28,23 @@ function Nav() {
   //     padding: '0 4px',
   //   },
   // }))(Badge);
+
+  useEffect(() => {
+    // let test = searchInput;
+    console.log('test', searchInput);
+  }, [searchInput])
+
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+
+    if (!searchInput) {
+      console.log('search input', e.target);
+      console.log('nada');
+      return false;
+    }
+
+    console.log('search text', searchInput);
+  }
 
   return ( 
     <header id='header'>
@@ -43,14 +62,16 @@ function Nav() {
         </Link>
 
         <Flex.Item flex="grow">
-          <SearchField
-            accessibilityLabel="Search Recipes or Chefs"
-            accessibilityClearButtonLabel="Clear search field"
-            id="top-search-bar"
-            onChange={({value}) => setValue(value)}
-            placeholder="Search"
-            value={value}
-          />
+          <form onSubmit={handleFormSubmit}>
+            <SearchField
+              accessibilityLabel="Search Recipes or Chefs"
+              accessibilityClearButtonLabel="Clear search field"
+              id="top-search-bar"
+              onChange={({ value }) => setSearchInput(value)} // this has to be 'value'
+              placeholder="Search"
+              value={searchInput}
+            />
+          </form>
         </Flex.Item>
 
         <React.Fragment>
