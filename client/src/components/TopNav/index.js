@@ -85,6 +85,7 @@ function Nav(props) {
               onChange={({ value }) => setSearchInput(value)} // this has to be 'value'
               placeholder="Search"
               value={searchInput}
+              onBlur={() => setSearchInput("")}
             />
           </form>
         </Flex.Item>
