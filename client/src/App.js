@@ -61,7 +61,10 @@ function App() {
           <Welcome/>
            ) : (
              <>
-              <TopNav/>
+              <TopNav
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+              />
               <div className="left-bar">
                 <LeftNav
                   currentPage={currentPage}
@@ -73,7 +76,9 @@ function App() {
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/myprofile/' component={MyProfile}/>
                 <Route exact path='/profile/:username' component={UserProfile}/>
-                <Route exact path='/search' component={Search} />
+                {/* <Route path='/search' component={Search} /> */}
+                <Route path="/search" render={(setCurrentPage) => <Search {...setCurrentPage} title={`Search Page`} />} />
+
                 <Route exact path='/post' component={Post} />
                 <Route exact path='/post/:postId' component={PostOld} />
               </Switch>

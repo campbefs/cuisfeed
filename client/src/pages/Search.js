@@ -6,7 +6,11 @@ import { Flex } from "gestalt";
 import FaceIcon from '@material-ui/icons/Face';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 
-export default function Search() {
+export default function Search(props) {
+
+  const { setCurrentPage } = props;
+  // setCurrentPage('search');
+  console.log(setCurrentPage);
 
   const [searchPages] = useState([
     'Recipes',

@@ -5,13 +5,22 @@ import { Heading, SearchField, Flex, IconButton, Layer, Popover, Box,
         FixedZIndex} from 'gestalt';
 import Auth from '../../utils/auth';
 import Badge from '@material-ui/core/Badge';
-import { withStyles } from '@material-ui/core/styles';
+import { Redirect } from 'react-router';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
-import { Form, Button } from "semantic-ui-react";
 
 
-function Nav() {
+function Nav(props) {
+
+  const {
+    currentPage,
+    setCurrentPage
+  } = props;
+
   const [searchInput, setSearchInput ] = useState('');
+
+  // linking out
+  const [toNext, setToNext] = useState(false);
 
   const [selectedMenu, setSelectedMenu] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState(false);
@@ -30,24 +39,30 @@ function Nav() {
   // }))(Badge);
 
   useEffect(() => {
-    // let test = searchInput;
-    console.log('test', searchInput);
-  }, [searchInput])
+    setToNext(false);
+  }, [toNext]); // Only re-run the effect if count changes
+
 
   async function handleFormSubmit(e) {
     e.preventDefault();
 
     if (!searchInput) {
-      console.log('search input', e.target);
-      console.log('nada');
+      alert("Please enter text to search");
       return false;
     }
 
     console.log('search text', searchInput);
+    setCurrentPage('Search');
+    // window.location.replace(`/search/${searchInput}`);
+
+    setToNext(true);
+    
   }
 
   return ( 
     <header id='header'>
+
+      {toNext ? <Redirect to="/search" /> : null}
 
       <Flex gap={4} alignItems="center" flex="grow">
         <Link id="home-link" to='/home'>
