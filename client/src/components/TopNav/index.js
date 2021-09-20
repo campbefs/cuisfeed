@@ -14,10 +14,12 @@ function Nav(props) {
 
   const {
     currentPage,
-    setCurrentPage
+    setCurrentPage,
+    searchSubmit,
+    setSearchSubmit
   } = props;
 
-  const [searchInput, setSearchInput ] = useState('');
+  const [ searchInput, setSearchInput ] = useState('');
 
   // linking out
   const [toNext, setToNext] = useState(false);
@@ -38,6 +40,7 @@ function Nav(props) {
   //   },
   // }))(Badge);
 
+  // if a person searches & redirects, this switches the indicator back to false
   useEffect(() => {
     setToNext(false);
   }, [toNext]); // Only re-run the effect if count changes
@@ -51,18 +54,20 @@ function Nav(props) {
       return false;
     }
 
-    console.log('search text', searchInput);
     setCurrentPage('Search');
     // window.location.replace(`/search/${searchInput}`);
 
+    setSearchSubmit(searchSubmit+1);
     setToNext(true);
     
   }
 
+  let url = `/search/?q=${searchInput}`
+
   return ( 
     <header id='header'>
 
-      {toNext ? <Redirect to="/search" /> : null}
+      {toNext ? <Redirect to={url} /> : null}
 
       <Flex gap={4} alignItems="center" flex="grow">
         <Link id="home-link" to='/home'>

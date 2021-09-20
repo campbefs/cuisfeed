@@ -52,6 +52,9 @@ function App() {
   ])
 
   const [currentPage, setCurrentPage] = useState(pages[0]);
+
+  const [searchSubmit, setSearchSubmit] = useState(0);
+
   
   return (
     <ApolloProvider client={client}>
@@ -64,6 +67,8 @@ function App() {
               <TopNav
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
+                  searchSubmit = {searchSubmit}
+                  setSearchSubmit={setSearchSubmit}
               />
               <div className="left-bar">
                 <LeftNav
@@ -76,11 +81,13 @@ function App() {
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/myprofile/' component={MyProfile}/>
                 <Route exact path='/profile/:username' component={UserProfile}/>
-                {/* <Route path='/search' component={Search} /> */}
-                <Route path="/search" render={(setCurrentPage) => <Search {...setCurrentPage} title={`Search Page`} />} />
+                <Route path='/search' component={Search} />
+                {/* <Route path="/none" render={(setCurrentPage) => <Search {...setCurrentPage, searchInput} title={`Search Page`} />} /> */}
 
                 <Route exact path='/post' component={Post} />
                 <Route exact path='/post/:postId' component={PostOld} />
+                {/* catch all route */}
+                <Route component={Search} />
               </Switch>
              </>
            )}
