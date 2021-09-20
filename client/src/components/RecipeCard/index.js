@@ -70,6 +70,9 @@ const useCardHeaderStyles = makeStyles(() => ({
 }));
 
 const CardFooter = props => {
+
+  const { recipeData } = props;
+
   const styles = useCardHeaderStyles();
   // const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
 
@@ -100,7 +103,7 @@ const CardFooter = props => {
             <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span>
           </div>
           <Typography className={styles.subheader}>
-           Source: Martha Stewart<br/>
+           Source: {recipeData.source}<br/>
 
           </Typography>
         </Item>
@@ -136,7 +139,15 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export const RecipeCard = React.memo(function ShowcaseCard() {
+// export const RecipeCard = React.memo(function ShowcaseCard() {
+
+function RecipeCard(props) {
+
+  const { recipeData } = props;
+
+  // console.log('recipeData', recipeData);
+
+
   const styles = useStyles();
   const cardHeaderStyles = useCardHeaderStyles();
 
@@ -163,12 +174,12 @@ export const RecipeCard = React.memo(function ShowcaseCard() {
               paddingTop="4px"
             >
               <Typography className={cardHeaderStyles.title}>
-                <b>White-Bean Dip with Veggie Chips</b>
+                <b>{recipeData.label}</b>
               </Typography>
             </Row>
 
             <Row xs={12} gap={gap} className={styles.noBotPadding}>
-              <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
+              <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={recipeData.image}/>
             </Row>
 
             {/* <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
@@ -183,7 +194,7 @@ export const RecipeCard = React.memo(function ShowcaseCard() {
             </Row> */}
 
             <Row xs={12} gap={gap} className={styles.noBotPadding}>
-              <CardFooter />
+              <CardFooter recipeData={recipeData}/>
             </Row>
 
 
@@ -206,6 +217,6 @@ export const RecipeCard = React.memo(function ShowcaseCard() {
       </Grid>
     </section>
   );
-});
+};
 
 export default RecipeCard;

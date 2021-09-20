@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import RecipeCard from "../components/RecipeCard";
+// import RecipeCard from "../components/RecipeCard";
 import ProfileCard from "../components/ProfileCard";
+import SearchRecipes from "../components/SearchRecipes";
 import { Flex } from "gestalt";
 // import HomeIcon from '@material-ui/icons/Home';
 import FaceIcon from '@material-ui/icons/Face';
@@ -57,7 +58,8 @@ export default function Search(props) {
         let image = hits[i].recipe.image;
         let label = hits[i].recipe.label;
         let ingredientLines = hits[i].recipe.ingredientLines;
-        recipeData.push({uri, image, label, ingredientLines});
+        let source = hits[i].recipe.source;
+        recipeData.push({uri, image, label, ingredientLines, source});
       };
   
       setSearchedRecipes(recipeData);
@@ -137,17 +139,9 @@ export default function Search(props) {
         {
           currentSearchPage === 'Recipes' ? (
             <div className="search-container">
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
+
+              <SearchRecipes searchedRecipes={searchedRecipes}/>
+              
             </div>
           ) : (
             <div className="search-container">
