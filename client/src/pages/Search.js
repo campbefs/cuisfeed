@@ -23,7 +23,7 @@ export default function Search(props) {
     'People',
   ]);
 
-  const [ searchInput, setSearchInput ] = useState('');
+  const [ searchInput, setSearchInput ] = useState('pizza');
 
   const [currentSearchPage, setCurrentSearchPage] = useState(searchPages[0]);
 
@@ -36,7 +36,7 @@ export default function Search(props) {
   // console.log('params', query);
 
   // Update search input state if its new
-  if (searchInput !== query) {
+  if (searchInput !== query && query !== null) {
     setSearchInput(query);
   }
 
@@ -69,13 +69,16 @@ export default function Search(props) {
 
   // fire API when searchInput changes
   useEffect(() => {
-
-    apiSearch(searchInput);
+    if (searchInput.length > 0) {
+      apiSearch(searchInput);
+    }
   }, [searchInput])
 
   // print search results once received
   useEffect(() => {
-    console.log('searched recipes new', searchedRecipes);
+    if (searchedRecipes.length > 0) {
+      console.log('searched recipes new', searchedRecipes);
+    }
   }, [searchedRecipes])
 
   // useEffect(() => {
