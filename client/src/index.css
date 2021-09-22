@@ -268,7 +268,7 @@ code {
 .feed-card {
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 16px 8px;
 }
 
 .search-selection {

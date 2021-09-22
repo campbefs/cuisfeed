@@ -170,8 +170,9 @@ function RecipeCard(props) {
               textAlign="center"
               marginLeft="5px"
               marginRight="5px"
-              // paddingBottom="px"
               paddingTop="4px"
+              minHeight="65px"
+              maxWidth="260px"
             >
               <Typography className={cardHeaderStyles.title}>
                 <b>{recipeData.label}</b>

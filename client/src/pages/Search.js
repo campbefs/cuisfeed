@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import RecipeCard from "../components/RecipeCard";
 import ProfileCard from "../components/ProfileCard";
 import SearchRecipes from "../components/SearchRecipes";
-import { Flex } from "gestalt";
+import { Spinner } from "gestalt";
 // import HomeIcon from '@material-ui/icons/Home';
 import FaceIcon from '@material-ui/icons/Face';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
