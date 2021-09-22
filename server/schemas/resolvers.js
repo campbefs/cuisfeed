@@ -227,7 +227,7 @@ const resolvers = {
       // check if recipe already exists in DB. if so, grab RecipeId
       let recipe = await Recipe.findOne({ uri: input.uri });
   
-      // if not create recipe
+      // if not, create recipe
       if (!recipe) {
         recipe = await Recipe.create(input);
       }

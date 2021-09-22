@@ -63,8 +63,8 @@ export const CREATE_POST = gql`
   }
 `;
 
-// ingredientLines, image, url
-
+// checks if recipe already exists in DB. if so, grabs RecipeId
+// if not, it creates recipe
 export const ADD_RECIPE_AND_POST = gql`
   mutation addRecipeAndPost($uri:String!, $label:String!, 
           $image:String, $ingredientLines:[String], $url: String) {
