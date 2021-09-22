@@ -73,11 +73,24 @@ export const ADD_RECIPE_AND_POST = gql`
     {
       username
       recipe {
-        _id
-        uri
-        url
-        label
-      }
+          _id
+          uri
+          label
+          image
+          source
+          url
+          shareAs
+          yield
+          calories
+          dietLabels
+          ingredientLines
+          cuisineType
+          mealType
+          dishType
+          ratings
+          ratingUsers
+          updated
+        }
       createdAt
     }
   }

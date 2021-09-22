@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 // import RecipeCard from "../components/RecipeCard";
 import ProfileCard from "../components/ProfileCard";
 import SearchRecipes from "../components/SearchRecipes";
-import { Spinner } from "gestalt";
 // import HomeIcon from '@material-ui/icons/Home';
 import FaceIcon from '@material-ui/icons/Face';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
@@ -59,7 +58,8 @@ export default function Search(props) {
         let label = hits[i].recipe.label;
         let ingredientLines = hits[i].recipe.ingredientLines;
         let source = hits[i].recipe.source;
-        recipeData.push({uri, image, label, ingredientLines, source});
+        let url = hits[i].recipe.url;
+        recipeData.push({uri, image, label, ingredientLines, source, url});
       };
   
       setSearchedRecipes(recipeData);

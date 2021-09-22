@@ -156,9 +156,24 @@ function RecipeCard(props) {
 
   const [addRecipeAndPost] = useMutation(ADD_RECIPE_AND_POST);
 
-  // const handleAddPost = async () => {
-  //   try {}
-  // }
+  const handleAddPost = async () => {
+    try {
+      await addRecipeAndPost({
+        variables: {
+            uri: recipeData.uri,
+            label: recipeData.label,
+            image: recipeData.image,
+            ingredientLines: recipeData.ingredientLines,
+            url: recipeData.url
+          }
+      });
+      alert('Post created!');
+      // refetch();
+    } catch (e) {
+      console.error(e);
+    }
+    
+  }
 
   // Resources: https://material-ui.com/components/grid/
   
@@ -215,7 +230,10 @@ function RecipeCard(props) {
               marginRight="65px"
               paddingBottom="6px"
             >
-              <IconButton size='small'><PostAddIcon/></IconButton>
+              <IconButton 
+                size='small'
+                onClick={handleAddPost}
+              ><PostAddIcon/></IconButton>
               <IconButton size='small'><ShareIcon/></IconButton>
               {/* <IconButton size='small'><TurnedInNotIcon/></IconButton> */}
             </Row>
