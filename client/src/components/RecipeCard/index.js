@@ -10,17 +10,18 @@ import { Favorite as FavoriteIcon,
     // FavoriteRounded as FavoriteRoundedIcon,
     // ChatBubbleOutline as ChatBubbleOutlineIcon,
     PostAdd as PostAddIcon,
-    TurnedInNot as TurnedInNotIcon,
-    TurnedIn as TurnedInIcon,
+    // TurnedInNot as TurnedInNotIcon,
+    // TurnedIn as TurnedInIcon,
   } from '@material-ui/icons';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // import CallMade from '@material-ui/icons/CallMade';
 import { Label } from 'semantic-ui-react';
 // import { Text } from 'gestalt';
 
-
 import { Row, Column, Item } from '@mui-treasury/components/flex';
-import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
+// import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
+import { useMutation } from '@apollo/client';
+import { ADD_RECIPE_AND_POST } from '../../utils/mutations';
 
 const StyledTooltip = withStyles({
   tooltip: {
@@ -152,6 +153,12 @@ function RecipeCard(props) {
   const cardHeaderStyles = useCardHeaderStyles();
 
   const gap = { xs: 1, sm: 1.5, lg: 2 }
+
+  const [addRecipeAndPost] = useMutation(ADD_RECIPE_AND_POST);
+
+  // const handleAddPost = async () => {
+  //   try {}
+  // }
 
   // Resources: https://material-ui.com/components/grid/
   
