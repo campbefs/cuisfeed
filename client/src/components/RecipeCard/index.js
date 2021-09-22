@@ -170,7 +170,7 @@ function RecipeCard(props) {
               textAlign="center"
               marginLeft="5px"
               marginRight="5px"
-              paddingTop="4px"
+              paddingTop="6px"
               minHeight="65px"
               maxWidth="260px"
             >
