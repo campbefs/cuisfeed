@@ -5,7 +5,7 @@ import AboutMe from '../components/AboutMe';
 import Followers from '../components/Followers';
 
 
-import { Box, Card, Text, Link, Button, Heading } from "gestalt";
+import { Box, Card, Text, Link, Button, Heading, Spinner } from "gestalt";
 import { makeStyles, StylesContext } from "@material-ui/styles";
 import { Avatar } from '@material-ui/core';
 
@@ -36,10 +36,13 @@ export default function MyProfile() {
   // const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
   //   // fetchPolicy: "no-cache",
   // });
-  const { loading: loading_feed, data: feed } = useQuery(MY_PROFILE);
+  const { loading: loading_feed, data: feed } = useQuery(MY_PROFILE,
+    { fetchPolicy: "no-cache" }
+    );
 
   let feedData = feed?.myProfile || {}; // my posts for feed
   // let followData = follow?.me || {};
+  console.log('feedData', feedData);
 
 
   const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
@@ -48,7 +51,11 @@ export default function MyProfile() {
   const styles = useStyles();
 
   if (loading_feed) {
-    return <div>Loading...</div>
+    return (
+      <div style={{marginTop: "80px"}}>
+        <Spinner show={true} accessibilityLabel="loading"/>
+      </div>
+    )
   }
   
   return(

@@ -159,6 +159,9 @@ export const MY_PROFILE = gql`
       recipe {
         label
         image
+        # source
+        uri
+        url
       }
     }
   }

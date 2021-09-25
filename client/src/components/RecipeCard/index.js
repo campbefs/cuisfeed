@@ -16,7 +16,8 @@ import { Favorite as FavoriteIcon,
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // import CallMade from '@material-ui/icons/CallMade';
 import { Label } from 'semantic-ui-react';
-// import { Text } from 'gestalt';
+import { Button } from 'gestalt';
+
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 // import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
@@ -224,17 +225,25 @@ function RecipeCard(props) {
             <Row xs={12} 
               display="flex" 
               flexDirection="row" 
-              justifyContent="space-between"
+              // justifyContent="space-between"
+              justifyContent="center"
               alignItems="flex-start"
               marginLeft="65px"
               marginRight="65px"
-              paddingBottom="6px"
+              paddingBottom="12px"
             >
-              <IconButton 
+              {/* <IconButton 
                 size='small'
                 onClick={handleAddPost}
-              ><PostAddIcon/></IconButton>
-              <IconButton size='small'><ShareIcon/></IconButton>
+              ><PostAddIcon/></IconButton> */}
+              <Button
+                accessibilityLabel="Follow Nicholas"
+                color="red"
+                text="Post"
+                onClick={handleAddPost}
+                // size="sm"
+              />
+              {/* <IconButton size='small'><ShareIcon/></IconButton> */}
               {/* <IconButton size='small'><TurnedInNotIcon/></IconButton> */}
             </Row>
           </Grid>

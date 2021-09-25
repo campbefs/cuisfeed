@@ -52,13 +52,16 @@ const useBasicProfileStyles = makeStyles(({ palette }) => ({
 }));
 
 const BasicProfile = props => {
+
+  const {username} = props;
+
   const styles = useBasicProfileStyles();
   return (
     <Row {...props} paddingBottom="5px">
-      <Item><Avatar className={styles.avatar}>S</Avatar></Item>
+      <Item><Avatar className={styles.avatar}>{username.charAt(0).toUpperCase()}</Avatar></Item>
       <Item position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
         <Typography className={styles.overline}>CHEF</Typography>
-        <Typography className={styles.name}>siriwatknp</Typography>
+        <Typography className={styles.name}>{username}</Typography>
       </Item>
     </Row>
   );
@@ -82,6 +85,8 @@ const CardHeader = props => {
   const styles = useCardHeaderStyles();
   const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
 
+  const { postData } = props;
+
   const StyledRating = withStyles({
     iconFilled: {
       // color: '#ff6d75',
@@ -95,9 +100,9 @@ const CardHeader = props => {
   return (
     <>
       <Row {...props}>
-        <Item position={'middle'}>
+        <Item position={'middle'} minWidth={'250px'}>
           <Typography className={styles.title}>
-            <b>White-Bean Dip with Veggie Chips</b>
+            <b>{postData.recipe.label}</b>
             {/* <Text weight="bold" size='lg'>White-Bean Dip with Veggie Chips</Text> */}
           </Typography>
           {/* <hr/> */}
@@ -149,7 +154,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export const FeedCard = React.memo(function ShowcaseCard() {
+export default function FeedCard(props) {
+
+  const { postData } = props;
+
+  console.log('postData', postData);
+
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
   return (
@@ -159,14 +169,14 @@ export const FeedCard = React.memo(function ShowcaseCard() {
         <Grid item xs={12} sm={8} lg={7} className={styles.outerCard}>
           <Grid className={styles.card}>
             <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
-              <Item grow>
-                <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8}>
-                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
+              <Item>
+                <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
+                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postData.recipe.image}/>
                 </Box>
               </Item>
               <Column>
-                <CardHeader />
-                <BasicProfile position={'bottom'} />
+                <CardHeader postData={postData}/>
+                <BasicProfile username={postData.username} position={'bottom'} />
               </Column>
             </Row>
             <Row xs={12} 
@@ -198,9 +208,7 @@ export const FeedCard = React.memo(function ShowcaseCard() {
       </Grid>
     </section>
   );
-});
-export default FeedCard
-
+};
 
 
 // import React from 'react';
