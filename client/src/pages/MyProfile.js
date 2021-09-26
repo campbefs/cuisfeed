@@ -52,13 +52,17 @@ export default function MyProfile(props) {
   
   const styles = useStyles();
 
-  // if (loading_feed) {
-  //   return (
-  //     <div style={{marginTop: "80px"}}>
-  //       <Spinner show={true} accessibilityLabel="loading"/>
-  //     </div>
-  //   )
-  // }  
+
+  
+  if (loading_feed) {
+    return (
+      <section className="topic-container">
+        <div style={{marginTop: "80px"}}>
+          <Spinner show={true} accessibilityLabel="loading"/>
+        </div>
+      </section>
+    )
+  }  
 
   return (
     <section
