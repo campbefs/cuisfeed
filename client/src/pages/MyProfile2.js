@@ -31,9 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-export default function MyProfile(props) {
+export default function MyProfile() {
 
   // const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
   //   // fetchPolicy: "no-cache",
@@ -52,20 +50,20 @@ export default function MyProfile(props) {
   
   const styles = useStyles();
 
-  // if (loading_feed) {
-  //   return (
-  //     <div style={{marginTop: "80px"}}>
-  //       <Spinner show={true} accessibilityLabel="loading"/>
-  //     </div>
-  //   )
-  // }  
-
-  return (
+  if (loading_feed) {
+    return (
+      <div style={{marginTop: "80px"}}>
+        <Spinner show={true} accessibilityLabel="loading"/>
+      </div>
+    )
+  }
+  
+  return(
+    // add padding for edges
     <section
       className="topic-container"
     >
-
-<div className="middle-bar">
+      <div className="middle-bar">
         {/* <div style={{height: "40px"}}/> */}
         <br/>
 
@@ -149,7 +147,6 @@ export default function MyProfile(props) {
         <AboutMe />
         <FollowCard/>
       </div>
-
     </section>
-  )
-}
+  );
+};
