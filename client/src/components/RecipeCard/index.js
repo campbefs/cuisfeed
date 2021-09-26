@@ -159,13 +159,17 @@ function RecipeCard(props) {
 
   const handleAddPost = async () => {
     try {
+      console.log('source', recipeData.source);
       await addRecipeAndPost({
         variables: {
             uri: recipeData.uri,
             label: recipeData.label,
             image: recipeData.image,
             ingredientLines: recipeData.ingredientLines,
-            url: recipeData.url
+            url: recipeData.url,
+            source: recipeData.source,
+            // yield: recipeData.yield,
+            
           }
       });
       alert('Post created!');

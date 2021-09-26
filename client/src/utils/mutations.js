@@ -67,9 +67,38 @@ export const CREATE_POST = gql`
 // if not, it creates recipe
 export const ADD_RECIPE_AND_POST = gql`
   mutation addRecipeAndPost($uri:String!, $label:String!, 
-          $image:String, $ingredientLines:[String], $url: String) {
+          $image:String, $ingredientLines:[String], $url: String,
+          $source: String,
+
+          # $yield: Int,
+          # $dietLabels: [String],
+          # $cuisineType: [String],
+          # $calories: Float,
+          # $mealType: [String],
+          # $dishType: [String],
+          # $healthLabels: String,
+          # $cautions: String,
+          # $totalTime: String,
+          # $totalNutrients: String,
+          # $totalDaily: String
+          ) {
+
     addRecipeAndPost( input:{ uri: $uri, label:$label, 
-          image:$image, ingredientLines:$ingredientLines, url:$url})
+          image:$image, ingredientLines:$ingredientLines, url:$url, 
+          source:$source,
+          # yield: $yield,
+          # dietLabels: $dietLabels,
+          # cuisineType: $cuisineType,
+          # calories: $calories,
+          # mealType: $mealType,
+          # dishType: $dishType,
+
+          # healthLabels: $healthLabels,
+          # cautions: $cautions,
+          # totalTime: $totalTime,
+          # totalNutrients: $totalNutrients,
+          # totalDaily: $totalDaily
+          })
     {
       username
       recipe {
@@ -79,17 +108,18 @@ export const ADD_RECIPE_AND_POST = gql`
           image
           source
           url
-          shareAs
-          yield
-          calories
-          dietLabels
-          ingredientLines
-          cuisineType
-          mealType
-          dishType
-          ratings
-          ratingUsers
-          updated
+
+          # shareAs
+          # yield
+          # calories
+          # dietLabels
+          # ingredientLines
+          # cuisineType
+          # mealType
+          # dishType
+          # ratings
+          # ratingUsers
+          # updated
         }
       createdAt
     }

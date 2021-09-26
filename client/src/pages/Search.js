@@ -51,15 +51,43 @@ export default function Search(props) {
   
       const { hits } = await response.json();
         
+      console.log('hits', hits);
+      
       const recipeData = []
       for (let i=0; i<hits.length; i++) {
         let uri = hits[i].recipe.uri;
         let image = hits[i].recipe.image;
         let label = hits[i].recipe.label;
         let ingredientLines = hits[i].recipe.ingredientLines;
-        let source = hits[i].recipe.source;
         let url = hits[i].recipe.url;
-        recipeData.push({uri, image, label, ingredientLines, source, url});
+        let source = hits[i].recipe.source;
+
+        // let yield = hits[i].recipe.yield;
+        // let dietLabels = hits[i].recipe.dietLabels;
+        // let healthLabels = hits[i].recipe.healthLabels;
+        // let cautions = hits[i].recipe.cautions;
+        // let cuisineType = hits[i].recipe.cuisineType;
+        // let calories = hits[i].recipe.calories;
+        // let totalTime = hits[i].recipe.totalTime;
+        // let mealType = hits[i].recipe.mealType;
+        // let dishType = hits[i].recipe.dishType;
+        // let totalNutrients = hits[i].recipe.totalNutrients;
+        // let totalDaily = hits[i].recipe.totalDaily;
+
+        recipeData.push({uri, image, label, ingredientLines, url, source,
+
+        // yield,
+        // dietLabels,
+        // healthLabels,
+        // cautions,
+        // cuisineType,
+        // calories,
+        // totalTime,
+        // mealType,
+        // dishType,
+        // totalNutrients,
+        // totalDaily
+        });
       };
   
       setSearchedRecipes(recipeData);
