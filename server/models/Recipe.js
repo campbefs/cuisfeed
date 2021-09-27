@@ -67,18 +67,29 @@ const recipeSchema = new Schema({
   ratingUsers: {
     type: [String]  // username
   },
+  totalTime: {
+    type: Number
+  },
+  // healthLabels: {
+  //   type: [String]
+  // },
+  // cautions: {
+  //   type: [String]
+  // },
   updated: {
     type: Date,
     default: Date.now,
     get: createdAtVal => dateFormat(createdAtVal)
   },
+
   // SHOULD WE INCLUDE A BLOG SECTION HERE?
   // OR comments for the recipe itself?
 },
 {
   toJSON: {
     virtuals: true,
-  }
+  },
+  strict: false
 }
 );
 

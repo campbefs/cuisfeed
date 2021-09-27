@@ -29,6 +29,9 @@ const typeDefs = gql`
     updated: String
     avgRating: Float
     ratingCount: Int
+    totalTime: Int
+    healthLabels: [String]
+    cautions: [String]
   }
  
   type Post {
@@ -72,6 +75,9 @@ const typeDefs = gql`
     mealType: [String]
     dishType: [String]
     ratings: [Float]
+    totalTime: Int
+    healthLabels: [String]
+    cautions: [String]
   }
 
 

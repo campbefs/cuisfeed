@@ -18,8 +18,6 @@ export default function SearchRecipes(props) {
     )
   }
 
-  // console.log('searchedRecipes', searchedRecipes[0].uri);
-
   return (
     <>
       {

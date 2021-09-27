@@ -32,27 +32,6 @@ const StyledTooltip = withStyles({
   },
 })(Tooltip);
 
-const useBasicProfileStyles = makeStyles(({ palette }) => ({
-  avatar: {
-    borderRadius: 8,
-    backgroundColor: '#495869',
-  },
-  overline: {
-    fontSize: 10,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    color: '#8D9CAD',
-  },
-  name: {
-    fontSize: 14,
-    fontWeight: 500,
-    color: '#495869',
-  },
-  white: {
-    backgroundColor: '#ffffff'
-  }
-}));
-
 
 const useCardHeaderStyles = makeStyles(() => ({
   root: { paddingBottom: 0 },
@@ -147,9 +126,6 @@ function RecipeCard(props) {
 
   const { recipeData } = props;
 
-  // console.log('recipeData', recipeData);
-
-
   const styles = useStyles();
   const cardHeaderStyles = useCardHeaderStyles();
 
@@ -157,9 +133,11 @@ function RecipeCard(props) {
 
   const [addRecipeAndPost] = useMutation(ADD_RECIPE_AND_POST);
 
+  console.log('recipeData', recipeData);
+
   const handleAddPost = async () => {
     try {
-      console.log('source', recipeData.source);
+
       await addRecipeAndPost({
         variables: {
             uri: recipeData.uri,
@@ -168,11 +146,22 @@ function RecipeCard(props) {
             ingredientLines: recipeData.ingredientLines,
             url: recipeData.url,
             source: recipeData.source,
-            // yield: recipeData.yield,
+            yield: recipeData.yield,
+
+            dietLabels: recipeData.dietLabels,
+            mealType: recipeData.mealType,
+            dishType: recipeData.dishType,
+            cuisineType: recipeData.cuisineType,
+            calories: recipeData.calories,
+
+            totalTime: recipeData.totalTime,
+            healthLabels: recipeData.healthLabels,
+            cautions: recipeData.cautions,
             
           }
       });
       alert('Post created!');
+
       // refetch();
     } catch (e) {
       console.error(e);

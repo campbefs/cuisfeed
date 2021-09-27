@@ -68,34 +68,34 @@ export const CREATE_POST = gql`
 export const ADD_RECIPE_AND_POST = gql`
   mutation addRecipeAndPost($uri:String!, $label:String!, 
           $image:String, $ingredientLines:[String], $url: String,
-          $source: String,
+          $source: String, $yield: Int,
+          $dietLabels: [String],
+          $mealType: [String],
+          $dishType: [String],
+          $cuisineType: [String],
+          $calories: Float,
 
-          # $yield: Int,
-          # $dietLabels: [String],
-          # $cuisineType: [String],
-          # $calories: Float,
-          # $mealType: [String],
-          # $dishType: [String],
-          # $healthLabels: String,
-          # $cautions: String,
-          # $totalTime: String,
+          $totalTime: Int,
+          $healthLabels: [String],
+          $cautions: [String],
+
           # $totalNutrients: String,
           # $totalDaily: String
           ) {
 
     addRecipeAndPost( input:{ uri: $uri, label:$label, 
           image:$image, ingredientLines:$ingredientLines, url:$url, 
-          source:$source,
-          # yield: $yield,
-          # dietLabels: $dietLabels,
-          # cuisineType: $cuisineType,
-          # calories: $calories,
-          # mealType: $mealType,
-          # dishType: $dishType,
+          source:$source, yield:$yield,
+          dietLabels: $dietLabels,
+          mealType: $mealType,
+          dishType: $dishType,
+          cuisineType: $cuisineType,
+          calories: $calories,
 
-          # healthLabels: $healthLabels,
-          # cautions: $cautions,
-          # totalTime: $totalTime,
+          totalTime: $totalTime,
+          healthLabels: $healthLabels,
+          cautions: $cautions,
+
           # totalNutrients: $totalNutrients,
           # totalDaily: $totalDaily
           })
@@ -106,8 +106,18 @@ export const ADD_RECIPE_AND_POST = gql`
           uri
           label
           image
-          source
           url
+          source
+          yield
+          dietLabels
+          mealType
+          dishType
+          cuisineType
+          calories
+
+          totalTime
+          healthLabels
+          cautions
 
           # shareAs
           # yield

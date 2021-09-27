@@ -14,7 +14,6 @@ export default function Search(props) {
 
   // couldn't get it to log
   // const { searchSubmit } = props;
-  // console.log('searchInput', searchInput)
 
   // const [ newSearch, setNewSearch ] = useState('');
 
@@ -32,8 +31,6 @@ export default function Search(props) {
   // Get Params
   const search = useLocation().search;
   const query = new URLSearchParams(search).get('q');
-
-  // console.log('params', query);
 
   // Update search input state if its new
   if (searchInput !== query && query !== null) {
@@ -59,35 +56,38 @@ export default function Search(props) {
         let ingredientLines = hits[i].recipe.ingredientLines;
         let url = hits[i].recipe.url;
         let source = hits[i].recipe.source;
+        let yield1 = hits[i].recipe.yield;
 
-        // let yield = hits[i].recipe.yield;
-        // let dietLabels = hits[i].recipe.dietLabels;
-        // let healthLabels = hits[i].recipe.healthLabels;
-        // let cautions = hits[i].recipe.cautions;
-        // let cuisineType = hits[i].recipe.cuisineType;
-        // let calories = hits[i].recipe.calories;
-        // let totalTime = hits[i].recipe.totalTime;
-        // let mealType = hits[i].recipe.mealType;
-        // let dishType = hits[i].recipe.dishType;
+        let dietLabels = hits[i].recipe.dietLabels;
+        let mealType = hits[i].recipe.mealType;
+        let dishType = hits[i].recipe.dishType;
+        let cuisineType = hits[i].recipe.cuisineType;
+        let calories = hits[i].recipe.calories;
+
+        let totalTime = hits[i].recipe.totalTime;
+        let healthLabels = hits[i].recipe.healthLabels;
+        let cautions = hits[i].recipe.cautions;
         // let totalNutrients = hits[i].recipe.totalNutrients;
         // let totalDaily = hits[i].recipe.totalDaily;
 
-        recipeData.push({uri, image, label, ingredientLines, url, source,
-
-        // yield,
-        // dietLabels,
-        // healthLabels,
-        // cautions,
-        // cuisineType,
-        // calories,
-        // totalTime,
-        // mealType,
-        // dishType,
+        recipeData.push({uri, image, label, ingredientLines, url, source, 
+          yield: yield1,
+          dietLabels,
+          mealType,
+          dishType,
+          cuisineType,
+          calories,
+  
+          totalTime,
+          healthLabels,
+          cautions,
         // totalNutrients,
         // totalDaily
+
         });
       };
   
+      // this is tracking if search results change to update page
       setSearchedRecipes(recipeData);
     } catch (err) {
       console.log(err);
@@ -109,29 +109,12 @@ export default function Search(props) {
   //   }
   // }, [searchedRecipes])
 
-  
-  // useEffect(() => {
-  //   apiSearch();   
-  //   console.log('search recipes', searchedRecipes);
-  // }, [])
-
-  // apiSearch();   
-  // console.log('search recipes', searchedRecipes); 
-
-
-
-  // setNewSearch(query);
-  // console.log('new search', newSearch);
-
 
   // if there's no change in state to the search term, don't change the search
   // run the query when the page first loads, i.e. do that trick the guy taught you with use Effect on a react module
 
   // if user clicks on search there will be no params. so don't run the search. only run it if params are not null
   // and if the params changed since the last search
-
-
-
 
   return (
     <section
