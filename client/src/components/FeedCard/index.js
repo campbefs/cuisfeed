@@ -158,10 +158,11 @@ export default function FeedCard(props) {
 
   const { postData } = props;
 
-  console.log('postData', postData);
+  // console.log('postData', postData);
 
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
+
   return (
     
     <section className='feed-card'>

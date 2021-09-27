@@ -50,9 +50,7 @@ export default function Search(props) {
       }
   
       const { hits } = await response.json();
-        
-      console.log('hits', hits);
-      
+              
       const recipeData = []
       for (let i=0; i<hits.length; i++) {
         let uri = hits[i].recipe.uri;
@@ -105,12 +103,13 @@ export default function Search(props) {
   }, [searchInput])
 
   // print search results once received
-  useEffect(() => {
-    if (searchedRecipes.length > 0) {
-      console.log('searched recipes new', searchedRecipes);
-    }
-  }, [searchedRecipes])
+  // useEffect(() => {
+  //   if (searchedRecipes.length > 0) {
+  //     console.log('searched recipes new', searchedRecipes);
+  //   }
+  // }, [searchedRecipes])
 
+  
   // useEffect(() => {
   //   apiSearch();   
   //   console.log('search recipes', searchedRecipes);

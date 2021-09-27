@@ -18,12 +18,14 @@ export default function SearchRecipes(props) {
     )
   }
 
+  // console.log('searchedRecipes', searchedRecipes[0].uri);
+
   return (
     <>
       {
         searchedRecipes.map((recipeData) => {
           return (
-            <RecipeCard recipeData={recipeData} />
+            <RecipeCard recipeData={recipeData} key={recipeData.uri} />
           )
         })
       }

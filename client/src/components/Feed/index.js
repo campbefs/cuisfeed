@@ -21,7 +21,7 @@ export default function Feed({feedData, loading}) {
       {
         feedData.length === 0 ? 'no data' :
         feedData.map((postData) => {
-          return <FeedCard postData={postData}/>
+          return <FeedCard postData={postData} key={postData._id} />
         })
       }
       

@@ -139,13 +139,13 @@ export default function Post() {
 
             <Box marginBottom={6}>
               <ul>
-                <li><Text>1 pack pizza base mix</Text></li>
-                <li><Text>3 tbsp tomato pizza sauce</Text></li>
-                <li><Text>2 small cooking chorizo, diced</Text></li>
-                <li><Text>1 tbsp capers, drained</Text></li>
-                <li><Text>handful cherry tomatoes, halved</Text></li>
-                <li><Text>handful rocket</Text></li>
-                <li><Text>olive oil, to drizzle</Text></li>
+                <li key="1" ><Text>1 pack pizza base mix</Text></li>
+                <li key="2"><Text>3 tbsp tomato pizza sauce</Text></li>
+                <li key="3"><Text>2 small cooking chorizo, diced</Text></li>
+                <li key="4"><Text>1 tbsp capers, drained</Text></li>
+                <li key="5"><Text>handful cherry tomatoes, halved</Text></li>
+                <li key="6"><Text>handful rocket</Text></li>
+                <li key="7"><Text>olive oil, to drizzle</Text></li>
               </ul>
             </Box>
 
