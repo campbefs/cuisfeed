@@ -105,6 +105,32 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
+    // Search User Profiles
+    searchUsers: async (_parent, { username }, context) => {
+      if (context.user) {
+
+        // { username: { $regex: username } }
+        const userData = await User.find({ username: { $regex: username } })
+          .select('-__v -password')
+            .populate('recipe')
+            // .sort([['createdAt', -1]])
+            .limit(100);
+          // .populate({path:'follows', 
+          //         populate: { path: 'posts',
+          //             populate: {path: 'recipe'}
+          //         }})
+          // .populate({path:'posts', populate: { path: 'recipe'}}) // populate subpath
+
+        if (!userData) {
+          throw new UserInputError('No Users Found');
+        }
+      
+      return userData;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
 
     // getSinglePost 
     getSinglePost: async (_parent, { postId }, context) => {
@@ -231,12 +257,11 @@ const resolvers = {
       if (!recipe) {
         recipe = await Recipe.create(input);
       }
-      // console.log('recipeId: ', recipe._id);
 
       // Create the Post
       const postData = await Post.create( {
                           recipe: recipe._id,
-                          username: context.user.username 
+                          username: context.user.username
                         })
       // post = await Post.findOneAndUpdate(
       //   {_id: post._id},

@@ -7,8 +7,8 @@ import FaceIcon from '@material-ui/icons/Face';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 
 import { searchRecipes } from '../utils/API';
-
 import { useLocation } from 'react-router-dom';
+import { SEARCH_USERS } from '../utils/queries';
 
 export default function Search(props) {
 
@@ -97,7 +97,7 @@ export default function Search(props) {
 
   // fire API when searchInput changes
   useEffect(() => {
-    if (searchInput.length > 0) {
+    if (searchInput.length > 0 && currentSearchPage === 'Recipes') {
       apiSearch(searchInput);
     }
   }, [searchInput])
@@ -108,13 +108,6 @@ export default function Search(props) {
   //     console.log('searched recipes new', searchedRecipes);
   //   }
   // }, [searchedRecipes])
-
-
-  // if there's no change in state to the search term, don't change the search
-  // run the query when the page first loads, i.e. do that trick the guy taught you with use Effect on a react module
-
-  // if user clicks on search there will be no params. so don't run the search. only run it if params are not null
-  // and if the params changed since the last search
 
   return (
     <section
@@ -128,7 +121,7 @@ export default function Search(props) {
           </div> */}
 
           <div className="search-nav">
-            <button 
+            <button
               className={`left-nav-button ${currentSearchPage === 'Recipes' && 'nav-active'}`}
               onClick={() => setCurrentSearchPage('Recipes')}
             >

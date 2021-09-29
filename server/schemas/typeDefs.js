@@ -86,6 +86,8 @@ const typeDefs = gql`
 
     getSingleUser(username: String!): User # OK
 
+    searchUsers(username: String!): [User]
+
     getSinglePost(postId: ID!): Post # OK
 
     getSingleRecipe(recipeId: ID, uri: String): Recipe # OK

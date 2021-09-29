@@ -83,6 +83,16 @@ export const GET_SINGLE_USER_PROFILE = gql`
   }
 `;
 
+export const SEARCH_USERS = gql`
+  query searchUsers($username:String!) {
+    searchUsers(username:$username) {
+      _id
+      username
+  #    image or profile picture will go here
+    }
+  }
+`;
+
 export const GET_SINGLE_POST = gql`
   query getSinglePost($postId:ID!) {
     getSinglePost(postId:$postId) {

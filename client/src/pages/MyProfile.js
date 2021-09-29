@@ -62,7 +62,7 @@ export default function MyProfile(props) {
         </div>
       </section>
     )
-  }  
+  }
 
   return (
     <section

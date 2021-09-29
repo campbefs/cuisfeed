@@ -17,11 +17,11 @@ export default function Home() {
   let feedData = feed?.myFeed || {};
   let followData = follow?.me || {};
 
-  // pass loading down to the components - follow (feed spinner in the Feed component)
+  // pass loading down to the components - follow (feed spinner is in the Feed component)
   if (loading1) {
     return (
       <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
-        <Spinner show={true} accessibilityLabel="loading"/>
+        <Spinner show={true} accessibilityLabel="loading home"/>
       </div>
       )
   }
