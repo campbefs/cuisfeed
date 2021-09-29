@@ -80,6 +80,7 @@ function App() {
                 <Route exact path='/' component={Welcome} />
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/myprofile/' component={MyProfile}/>
+
                 <Route exact path='/profile/:username' component={UserProfile}/>
                 <Route path='/search' component={Search} />
                 {/* <Route path="/none" render={(setCurrentPage) => <Search {...setCurrentPage, searchInput} title={`Search Page`} />} /> */}

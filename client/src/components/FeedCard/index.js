@@ -10,8 +10,8 @@ import { Favorite as FavoriteIcon,
     FavoriteRounded as FavoriteRoundedIcon,
     ChatBubbleOutline as ChatBubbleOutlineIcon,
     PostAdd as PostAddIcon,
-    TurnedInNot as TurnedInNotIcon,
-    TurnedIn as TurnedInIcon,
+    // TurnedInNot as TurnedInNotIcon,
+    // TurnedIn as TurnedInIcon,
   } from '@material-ui/icons';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // import CallMade from '@material-ui/icons/CallMade';

@@ -5,8 +5,8 @@ import AboutMe from '../components/AboutMe';
 import Followers from '../components/Followers';
 
 
-import { Box, Card, Text, Link, Button, Heading, Spinner } from "gestalt";
-import { makeStyles, StylesContext } from "@material-ui/styles";
+import { Box, Text, Heading, Spinner } from "gestalt";
+import { makeStyles } from "@material-ui/styles";
 import { Avatar } from '@material-ui/core';
 
 import { useQuery } from "@apollo/client";
@@ -79,7 +79,7 @@ export default function MyProfile(props) {
               alt="Nicholas"
               // src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg"
               className={styles.medium}
-              justifyContent="center"
+              // justifyContent="center"
           >
             N
           </Avatar>
