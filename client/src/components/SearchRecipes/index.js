@@ -11,9 +11,9 @@ export default function SearchRecipes(props) {
     // return <div>Loading...</div>
     return (
       <>
-      <div style={{marginTop: "80px"}}>
-        <Spinner show={true} accessibilityLabel="loading"/>
-      </div>
+        <div style={{marginTop: "80px"}}>
+          <Spinner show={true} accessibilityLabel="loading"/>
+        </div>
       </>
     )
   }

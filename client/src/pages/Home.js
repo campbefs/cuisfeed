@@ -6,6 +6,7 @@ import FindFollowers from '../components/FindFollowers';
 
 import { useQuery } from "@apollo/client";
 import { MY_FEED, GET_ME_PROFILE } from "../utils/queries";
+import { Spinner } from "gestalt";
 
 export default function Home() {
 
@@ -16,10 +17,14 @@ export default function Home() {
   let feedData = feed?.myFeed || {};
   let followData = follow?.me || {};
 
-  // pass loading down to the components
-  // if (loading1 || loading2) {
-  //   return <div>Loading...</div>
-  // }
+  // pass loading down to the components - follow (feed spinner in the Feed component)
+  if (loading1) {
+    return (
+      <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
+        <Spinner show={true} accessibilityLabel="loading"/>
+      </div>
+      )
+  }
 
   return(
     // add padding for edges

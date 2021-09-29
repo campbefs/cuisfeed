@@ -1,13 +1,18 @@
 // import React, { useEffect, useState } from "react";
+import { LocalDiningTwoTone } from '@material-ui/icons';
 import FeedCard from '../FeedCard';
-
+import { Spinner } from "gestalt";
 
 
 export default function Feed({feedData, loading}) {
 
   if (loading) {
-    return <div>Loading...</div>
-  }
+    return (
+        <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
+          <Spinner show={true} accessibilityLabel="loading"/>
+        </div>
+    )
+  }  
   
   return (
     <section id="feed-container">

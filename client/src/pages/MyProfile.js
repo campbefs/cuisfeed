@@ -57,7 +57,7 @@ export default function MyProfile(props) {
   if (loading_feed) {
     return (
       <section className="topic-container">
-        <div style={{marginTop: "80px"}}>
+        <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
           <Spinner show={true} accessibilityLabel="loading"/>
         </div>
       </section>
@@ -79,7 +79,7 @@ export default function MyProfile(props) {
               alt="Nicholas"
               // src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg"
               className={styles.medium}
-              // justifyContent="center"
+              // justifyContent="center" // throwing error 
           >
             N
           </Avatar>
