@@ -48,7 +48,7 @@ export default function Search(props) {
   
       const { hits } = await response.json();
               
-      const recipeData = []
+      const recipedata = []
       for (let i=0; i<hits.length; i++) {
         let uri = hits[i].recipe.uri;
         let image = hits[i].recipe.image;
@@ -70,7 +70,7 @@ export default function Search(props) {
         // let totalNutrients = hits[i].recipe.totalNutrients;
         // let totalDaily = hits[i].recipe.totalDaily;
 
-        recipeData.push({uri, image, label, ingredientLines, url, source, 
+        recipedata.push({uri, image, label, ingredientLines, url, source, 
           yield: yield1,
           dietLabels,
           mealType,
@@ -88,7 +88,7 @@ export default function Search(props) {
       };
   
       // this is tracking if search results change to update page
-      setSearchedRecipes(recipeData);
+      setSearchedRecipes(recipedata);
     } catch (err) {
       console.log(err);
     }

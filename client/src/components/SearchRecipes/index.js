@@ -21,15 +21,15 @@ export default function SearchRecipes(props) {
   return (
     <>
       {
-        searchedRecipes.map((recipeData) => {
+        searchedRecipes.map((recipedata) => {
           return (
-            <RecipeCard recipeData={recipeData} key={recipeData.uri} />
+            <RecipeCard recipedata={recipedata} key={recipedata.uri} />
           )
         })
       }
 
-      {/* <RecipeCard recipeData={searchedRecipes[0]}/>
-      <RecipeCard recipeData={searchedRecipes[1]}/> */}
+      {/* <RecipeCard recipedata={searchedRecipes[0]}/>
+      <RecipeCard recipedata={searchedRecipes[1]}/> */}
 
       {/* <RecipeCard />
       <RecipeCard />

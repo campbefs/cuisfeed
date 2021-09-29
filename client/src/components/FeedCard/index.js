@@ -85,7 +85,7 @@ const CardHeader = props => {
   const styles = useCardHeaderStyles();
   const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
 
-  const { postData } = props;
+  const { postdata } = props;
 
   const StyledRating = withStyles({
     iconFilled: {
@@ -102,7 +102,7 @@ const CardHeader = props => {
       <Row {...props}>
         <Item position={'middle'} minWidth={'250px'}>
           <Typography className={styles.title}>
-            <b>{postData.recipe.label}</b>
+            <b>{postdata.recipe.label}</b>
             {/* <Text weight="bold" size='lg'>White-Bean Dip with Veggie Chips</Text> */}
           </Typography>
           {/* <hr/> */}
@@ -156,9 +156,9 @@ const useStyles = makeStyles(() => ({
 
 export default function FeedCard(props) {
 
-  const { postData } = props;
+  const { postdata } = props;
 
-  // console.log('postData', postData);
+  // console.log('postdata', postdata);
 
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
@@ -172,12 +172,12 @@ export default function FeedCard(props) {
             <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
               <Item>
                 <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
-                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postData.recipe.image}/>
+                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postdata.recipe.image}/>
                 </Box>
               </Item>
               <Column>
-                <CardHeader postData={postData}/>
-                <BasicProfile username={postData.username} position={'bottom'} />
+                <CardHeader postdata={postdata}/>
+                <BasicProfile username={postdata.username} position={'bottom'} />
               </Column>
             </Row>
             <Row xs={12} 

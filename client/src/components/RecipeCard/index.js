@@ -52,7 +52,7 @@ const useCardHeaderStyles = makeStyles(() => ({
 
 const CardFooter = props => {
 
-  const { recipeData } = props;
+  const { recipedata } = props;
 
   const styles = useCardHeaderStyles();
   // const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
@@ -75,7 +75,7 @@ const CardFooter = props => {
           <div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-between"}}>
             <StyledRating
               defaultValue={4.5}
-              maxRating={5}
+              // maxRating={5}
               readOnly
               icon={<FavoriteIcon fontSize="inherit"/>}
               className={styles.title}
@@ -84,7 +84,7 @@ const CardFooter = props => {
             <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span>
           </div>
           <Typography className={styles.subheader}>
-           Source: {recipeData.source}<br/>
+           Source: {recipedata.source}<br/>
 
           </Typography>
         </Item>
@@ -124,7 +124,7 @@ const useStyles = makeStyles(() => ({
 
 function RecipeCard(props) {
 
-  const { recipeData } = props;
+  const { recipedata } = props;
 
   const styles = useStyles();
   const cardHeaderStyles = useCardHeaderStyles();
@@ -133,30 +133,28 @@ function RecipeCard(props) {
 
   const [addRecipeAndPost] = useMutation(ADD_RECIPE_AND_POST);
 
-  console.log('recipeData', recipeData);
-
   const handleAddPost = async () => {
     try {
 
       await addRecipeAndPost({
         variables: {
-            uri: recipeData.uri,
-            label: recipeData.label,
-            image: recipeData.image,
-            ingredientLines: recipeData.ingredientLines,
-            url: recipeData.url,
-            source: recipeData.source,
-            yield: recipeData.yield,
+            uri: recipedata.uri,
+            label: recipedata.label,
+            image: recipedata.image,
+            ingredientLines: recipedata.ingredientLines,
+            url: recipedata.url,
+            source: recipedata.source,
+            yield: recipedata.yield,
 
-            dietLabels: recipeData.dietLabels,
-            mealType: recipeData.mealType,
-            dishType: recipeData.dishType,
-            cuisineType: recipeData.cuisineType,
-            calories: recipeData.calories,
+            dietLabels: recipedata.dietLabels,
+            mealType: recipedata.mealType,
+            dishType: recipedata.dishType,
+            cuisineType: recipedata.cuisineType,
+            calories: recipedata.calories,
 
-            totalTime: recipeData.totalTime,
-            healthLabels: recipeData.healthLabels,
-            cautions: recipeData.cautions,
+            totalTime: recipedata.totalTime,
+            healthLabels: recipedata.healthLabels,
+            cautions: recipedata.cautions,
             
           }
       });
@@ -174,7 +172,7 @@ function RecipeCard(props) {
   return (
     
     <section className='feed-card'>
-      <Grid container spacing={4} justify={'center'}>
+      <Grid container spacing={4} justifyContent={'center'}>
         <Grid item xs={12} sm={8} lg={7} className={styles.outerCard}>
           <Grid className={styles.card}>
 
@@ -191,12 +189,12 @@ function RecipeCard(props) {
               maxWidth="260px"
             >
               <Typography className={cardHeaderStyles.title}>
-                <b>{recipeData.label}</b>
+                <b>{recipedata.label}</b>
               </Typography>
             </Row>
 
             <Row xs={12} gap={gap} className={styles.noBotPadding}>
-              <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={recipeData.image}/>
+              <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={recipedata.image}/>
             </Row>
 
             {/* <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
@@ -211,7 +209,7 @@ function RecipeCard(props) {
             </Row> */}
 
             <Row xs={12} gap={gap} className={styles.noBotPadding}>
-              <CardFooter recipeData={recipeData}/>
+              <CardFooter recipedata={recipedata}/>
             </Row>
 
 
