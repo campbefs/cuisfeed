@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 // import RecipeCard from "../components/RecipeCard";
-import ProfileCard from "../components/ProfileCard";
+// import ProfileCard from "../components/ProfileCard";
 import SearchRecipes from "../components/SearchRecipes";
+import SearchProfiles from "../components/SearchProfiles";
 // import HomeIcon from '@material-ui/icons/Home';
 import FaceIcon from '@material-ui/icons/Face';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 
 import { searchRecipes } from '../utils/API';
 import { useLocation } from 'react-router-dom';
-import { SEARCH_USERS } from '../utils/queries';
 
 export default function Search(props) {
 
@@ -97,7 +97,7 @@ export default function Search(props) {
 
   // fire API when searchInput changes
   useEffect(() => {
-    if (searchInput.length > 0 && currentSearchPage === 'Recipes') {
+    if (searchInput.length > 0) {
       apiSearch(searchInput);
     }
   }, [searchInput])
@@ -148,23 +148,11 @@ export default function Search(props) {
             </div>
           ) : (
             <div className="search-container">
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
-              <ProfileCard />
+
+              <SearchProfiles 
+                currentSearchPage={currentSearchPage}
+                searchInput={searchInput}
+              />
 
             </div>
           )

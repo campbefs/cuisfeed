@@ -289,11 +289,15 @@ const resolvers = {
     addFollow: async (_parent, { followId }, context) => {
       if (context.user) {
         
+        // add to 'follows' 
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { follows: followId }}, // addToSet will prevent duplicates
           { new: true }
         )
+
+        // add to 'followers'
+        
 
         // return user.populate();
         return User.findOne({_id: context.user._id})
