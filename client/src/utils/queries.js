@@ -25,6 +25,16 @@ export const GET_ME = gql`
   }
 `;
 
+export const GET_FOLLOWS = gql`
+  query {
+    getFollows{
+      follows {
+        _id
+      }
+    }
+  }
+`;
+
 export const GET_ME_PROFILE = gql`
 query {
     me{

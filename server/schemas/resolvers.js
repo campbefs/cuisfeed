@@ -17,10 +17,23 @@ const resolvers = {
                   }})
           .populate({path:'posts', populate: { path: 'recipe'}}) // populate subpath
 
-        // console.log('userdata', userData);
         return userData;
       }
 
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+    // get follows
+    getFollows: async (_parent, _args, context) => {
+      if (context.user) {
+        // console.log('hit', context.user);
+        const userData = await User.findOne({ _id: context.user._id})
+          .select('follows')
+          .populate('follows')
+
+        return userData;
+      }
 
       throw new AuthenticationError('Not logged in');
     },
@@ -170,7 +183,6 @@ const resolvers = {
 
     }
 
-
     // getFriendsPosts
     // get single user => populate follows => populate posts (how to double populate...?)
 
@@ -289,7 +301,7 @@ const resolvers = {
     addFollow: async (_parent, { followId }, context) => {
       if (context.user) {
         
-        // add to 'follows' 
+        // add to 'follows'  (following)
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { follows: followId }}, // addToSet will prevent duplicates
@@ -297,7 +309,7 @@ const resolvers = {
         )
 
         // add to 'followers'
-        
+
 
         // return user.populate();
         return User.findOne({_id: context.user._id})

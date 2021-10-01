@@ -52,6 +52,7 @@ const typeDefs = gql`
     follows: [User]
     posts: [Post]
     postCount: Int
+    following: [User]
   }
 
   type Auth {
@@ -83,6 +84,8 @@ const typeDefs = gql`
 
   type Query {
     me: User # OK
+
+    getFollows: User # OK
 
     getSingleUser(username: String!): User # OK
 

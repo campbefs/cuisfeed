@@ -1,19 +1,91 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { Box, Card, Text, Link, Avatar, Button } from "gestalt";
+import { Box, Card, Text, Link, Button, Avatar as AvatarG } from "gestalt";
+import { Avatar } from '@material-ui/core';
+import { makeStyles } from "@material-ui/styles";
+import { useMutation } from '@apollo/client';
+import { ADD_FOLLOW } from '../../utils/mutations';
+
+const useStyles = makeStyles((theme) => ({
+  medium: {
+    width: "220px",
+    height: "220px",
+    fontSize: "100px",
+  },
+  gray: {
+    color: "blue"
+  }
+}));
 
 
 export default function CardExample(props) {
 
-  const { id, username } = props;
+  const { id, username, follow_data, loading1, refetch } = props;
+
+  const [addFollow] = useMutation(ADD_FOLLOW);
 
   let profileLink = `/profile/${username}`
+  const styles = useStyles();
+  let following = true;
+
+  let followArr = [];
+  // useEffect( () => {
+    // console.log('user data', user_data);
+    // console.log('follow_data', follow_data);
+  for (let i=0; i < follow_data.length; i++ ) {
+    followArr.push(follow_data[i]._id);
+  }
+      // console.log('followArr', followArr);
+
+  // }, [follow_data]);
+
+  const followUser = async () => {
+    try {
+      await addFollow({
+        variables: {followId: id}
+      });
+      alert('Follow added!')
+      refetch();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Is user already being followed?
+
+  // if (followArr.includes(id)) {
+  //   // console.log('id matches', id);
+  //   // console.log('follow_arr', followArr);
+  //   following = true;
+  // } else {
+  //   // console.log('id doesnt match', id);
+  //   following = false;
+  // }
+
+      // console.log('id matches', id);
+    // console.log('follow_arr', followArr);
+  
+  console.log('id', id);
+  console.log('follow_arr', followArr);
+  console.log('following', followArr.includes(id));
+
+  // Nick pic: src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg"
+
+  if (loading1) {
+    return <div>Still loading</div>
+  }
 
   return (
     <Box maxWidth={236} padding={2} column={12} margin={8}>
       <Card image={
             <Link href={profileLink}>
-              <Avatar name={username} src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg" />
+              <Avatar 
+                alt={username}
+                className={styles.medium}
+              > 
+                {username.charAt(0).toUpperCase()}
+              </Avatar>
+              {/* <AvatarG name={username} outline="true"> {username.charAt(0).toUpperCase()}</AvatarG> */}
             </Link>}>
         <Text align="center" weight="bold">
           <Link href={profileLink}>
@@ -22,11 +94,24 @@ export default function CardExample(props) {
             </Box>
           </Link>
         </Text>
-        <Button
-          accessibilityLabel="Follow Nicholas"
-          color="blue"
-          text="Follow"
-        />
+        { !followArr.includes(id) ? (
+          <Button
+            accessibilityLabel="Follow user"
+            color="blue"
+            text="Follow"
+            onClick={followUser}
+          />
+        ) : (
+          <Button
+            accessibilityLabel="Following confirmation button"
+            color="blue"
+            text="Following"
+            selected
+            disabled
+            onClick={followUser}
+          />
+        )
+      }
       </Card>
     </Box>
   );

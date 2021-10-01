@@ -228,7 +228,7 @@ function RecipeCard(props) {
                 onClick={handleAddPost}
               ><PostAddIcon/></IconButton> */}
               <Button
-                accessibilityLabel="Follow Nicholas"
+                accessibilityLabel="Post Recipe"
                 color="red"
                 text="Post"
                 onClick={handleAddPost}
