@@ -49,10 +49,12 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    follows: [User]
-    posts: [Post]
-    postCount: Int
     following: [User]
+    posts: [Post]
+    followers: [User]
+    postCount: Int
+    followingCount: Int
+    followersCount: Int
   }
 
   type Auth {
@@ -85,7 +87,7 @@ const typeDefs = gql`
   type Query {
     me: User # OK
 
-    getFollows: User # OK
+    getFollowing: User # OK
 
     getSingleUser(username: String!): User # OK
 

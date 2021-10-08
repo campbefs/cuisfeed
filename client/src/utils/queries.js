@@ -6,7 +6,7 @@ export const GET_ME = gql`
       _id
       username
       email
-      follows {
+      following {
         username
         email
       }
@@ -25,11 +25,12 @@ export const GET_ME = gql`
   }
 `;
 
-export const GET_FOLLOWS = gql`
+export const GET_FOLLOWING = gql`
   query {
-    getFollows{
-      follows {
+    getFollowing{
+      following {
         _id
+        username
       }
     }
   }
@@ -41,7 +42,7 @@ query {
       _id
       username
       email
-      follows {
+      following {
         _id
         username
       }
@@ -70,7 +71,7 @@ export const GET_SINGLE_USER_PROFILE = gql`
       _id
       username
       email
-      follows {
+      following {
         _id
         username
       }

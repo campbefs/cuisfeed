@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CardExample(props) {
 
-  const { id, username, follow_data, loading1, refetch } = props;
+  const { id, username, following_data, loading1, refetch } = props;
 
   const [addFollow] = useMutation(ADD_FOLLOW);
 
@@ -31,16 +31,17 @@ export default function CardExample(props) {
   let followArr = [];
   // useEffect( () => {
     // console.log('user data', user_data);
-    // console.log('follow_data', follow_data);
-  for (let i=0; i < follow_data.length; i++ ) {
-    followArr.push(follow_data[i]._id);
+    // console.log('following_data', following_data);
+  for (let i=0; i < following_data.length; i++ ) {
+    followArr.push(following_data[i]._id);
   }
       // console.log('followArr', followArr);
 
-  // }, [follow_data]);
+  // }, [following_data]);
 
   const followUser = async () => {
     try {
+      console.log('id', id);
       await addFollow({
         variables: {followId: id}
       });

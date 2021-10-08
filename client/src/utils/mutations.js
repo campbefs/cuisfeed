@@ -141,7 +141,7 @@ export const ADD_FOLLOW = gql`
     addFollow(followId:$followId){
       username
       email
-      follows {
+      following {
         _id
         username
         email

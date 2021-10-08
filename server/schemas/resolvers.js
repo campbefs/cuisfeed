@@ -11,7 +11,7 @@ const resolvers = {
         // console.log('hit', context.user);
         const userData = await User.findOne({ _id: context.user._id})
           .select('-__v -password')
-          .populate({path:'follows', 
+          .populate({path:'following', 
                   populate: { path: 'posts',
                       populate: {path: 'recipe'}
                   }})
@@ -24,13 +24,13 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
-    // get follows
-    getFollows: async (_parent, _args, context) => {
+    // get following
+    getFollowing: async (_parent, _args, context) => {
       if (context.user) {
         // console.log('hit', context.user);
         const userData = await User.findOne({ _id: context.user._id})
-          .select('follows')
-          .populate('follows')
+          .select('following')
+          .populate('following')
 
         return userData;
       }
@@ -43,12 +43,12 @@ const resolvers = {
 
         // find your friend's usernames
         const userData = await User.findOne({ _id: context.user._id})
-          .select('follows')
-          .populate('follows');
+          .select('following')
+          .populate('following');
 
         let followArr = [];
-        for (i=0; i<userData.follows.length;i++) {
-          followArr.push(userData.follows[i].username);
+        for (i=0; i<userData.following.length;i++) {
+          followArr.push(userData.following[i].username);
         }
 
         // Grab your friend's posts
@@ -101,7 +101,7 @@ const resolvers = {
 
         const userData = await User.findOne({ username: username })
           .select('-__v -password')
-          .populate({path:'follows', 
+          .populate({path:'following', 
                   populate: { path: 'posts',
                       populate: {path: 'recipe'}
                   }})
@@ -128,7 +128,7 @@ const resolvers = {
             .populate('recipe')
             // .sort([['createdAt', -1]])
             .limit(100);
-          // .populate({path:'follows', 
+          // .populate({path:'following', 
           //         populate: { path: 'posts',
           //             populate: {path: 'recipe'}
           //         }})
@@ -184,7 +184,7 @@ const resolvers = {
     }
 
     // getFriendsPosts
-    // get single user => populate follows => populate posts (how to double populate...?)
+    // get single user => populate following => populate posts (how to double populate...?)
 
   },
 
@@ -301,19 +301,24 @@ const resolvers = {
     addFollow: async (_parent, { followId }, context) => {
       if (context.user) {
         
-        // add to 'follows'  (following)
+        // add to 'following'  (following)
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { follows: followId }}, // addToSet will prevent duplicates
+          { $addToSet: { following: followId }}, // addToSet will prevent duplicates
           { new: true }
         )
 
         // add to 'followers'
+        await User.findOneAndUpdate(
+          { _id: followId },
+          { $addToSet: { followers: context.user._id }}, // addToSet will prevent duplicates
+          { new: true }
+        )
 
 
         // return user.populate();
         return User.findOne({_id: context.user._id})
-          .populate({path:'follows', populate: { path: 'posts'}}); // populate subpath
+          .populate({path:'following', populate: { path: 'posts'}}); // populate subpath
       }
       throw new AuthenticationError('You need to be logged in!');
     },
