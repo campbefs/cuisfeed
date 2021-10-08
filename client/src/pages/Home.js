@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Feed from '../components/Feed';
 import FollowCard from '../components/FollowCard';
@@ -10,10 +10,13 @@ import { Spinner } from "gestalt";
 
 export default function Home() {
 
-  const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
+  const { loading: loading1, data: follow  } = useQuery(GET_ME_PROFILE, {
     // fetchPolicy: "no-cache",
   });
-  const { loading: loading_feed, data: feed } = useQuery(MY_FEED);
+  const { loading: loading_feed, data: feed } = useQuery(MY_FEED, {
+    fetchPolicy: "no-cache"
+  });
+
   let feedData = feed?.myFeed || {};
   let followData = follow?.me || {};
 
