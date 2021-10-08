@@ -122,8 +122,18 @@ const resolvers = {
     searchUsers: async (_parent, { username }, context) => {
       if (context.user) {
 
+        console.log('context user', context.user.username);
+
+
         // { username: { $regex: username } }
-        const userData = await User.find({ username: { $regex: username } })
+        const userData = await User.find({
+              $and: [
+                { username: { $regex: username } },
+                // does not include user making the requests
+                { username: { $nin: [context.user.username] } }
+              ]
+          }
+          )
           .select('-__v -password')
             .populate('recipe')
             // .sort([['createdAt', -1]])

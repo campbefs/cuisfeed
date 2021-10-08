@@ -66,9 +66,9 @@ export default function CardExample(props) {
       // console.log('id matches', id);
     // console.log('follow_arr', followArr);
   
-  console.log('id', id);
-  console.log('follow_arr', followArr);
-  console.log('following', followArr.includes(id));
+  // console.log('id', id);
+  // console.log('follow_arr', followArr);
+  // console.log('following', followArr.includes(id));
 
   // Nick pic: src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg"
 

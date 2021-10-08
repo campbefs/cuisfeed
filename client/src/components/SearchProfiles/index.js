@@ -18,18 +18,9 @@ export default function SearchProfiles(props) {
   let user_data = data?.searchUsers;
   let following_data = data1?.getFollowing.following;
 
-  // useEffect( () => {
-  //   // console.log('user data', user_data);
-  //   console.log('following', following_data);
-  // }, [data]);
-
-  // if (following_data.length > 0) {
-    
-  //   for (let i=0; i < following_data.length; i++ ) {
-  //     followArr.push(following_data[i]._id);
-  //    }
-  //    console.log('followArr', followArr);
-  // }
+  console.log('user_data', data);
+  console.log('data1', data1);
+  
 
 
   if (loading || loading1) {
@@ -59,23 +50,6 @@ export default function SearchProfiles(props) {
           )
         })
     }
-      {/* <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard /> */}
     </>
   )
 }
