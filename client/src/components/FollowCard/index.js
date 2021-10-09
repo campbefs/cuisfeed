@@ -114,7 +114,7 @@ export default function FollowCard(props) {
           // marginBottom doesn't work cause gestalt fucking sucks 
         >
         
-        <Box marginBottom={2}>
+        <Box marginBottom={3}>
           <Heading size="sm" align="center">
             Following
           </Heading>
@@ -126,7 +126,7 @@ export default function FollowCard(props) {
                 <BasicProfile 
                   marginBottom="20px"
                   paddingLeft="20px"
-                  marginTop={2}
+                  marginTop={1}
                   username={followInfo.username}
                 />
               )
