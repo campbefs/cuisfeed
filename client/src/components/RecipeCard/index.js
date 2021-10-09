@@ -264,8 +264,8 @@ function RecipeCard(props) {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         open={open}
         onClose={handleClose}
-        message="I love snacks"
-        key={'top' + 'right'}
+        message="Recipe Posted!"
+        key={'bottom' + 'right'}
         action={
           <React.Fragment>
             <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>

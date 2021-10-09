@@ -11,14 +11,15 @@ import { Spinner } from "gestalt";
 export default function Home() {
 
   const { loading: loading1, data: follow  } = useQuery(GET_ME_PROFILE, {
-    // fetchPolicy: "no-cache",
+    fetchPolicy: "no-cache",
   });
   const { loading: loading_feed, data: feed } = useQuery(MY_FEED, {
     fetchPolicy: "no-cache"
   });
 
   let feedData = feed?.myFeed || {};
-  let followData = follow?.me || {};
+  let followData = follow?.me.following || {};
+  console.log('followData', followData);
 
   // pass loading down to the components - follow (feed spinner is in the Feed component)
   if (loading1) {
@@ -42,7 +43,8 @@ export default function Home() {
       </div>
       <div className="right-bar">
         <FindFollowers/>
-        <FollowCard/>
+        <FollowCard followdata={followData}/>
+        
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 
-import { Box, Heading } from 'gestalt';
+import { Box, Heading, Link } from 'gestalt';
 import { makeStyles, StylesContext } from "@material-ui/styles";
 
 import { Avatar, Typography } from '@material-ui/core';
@@ -36,8 +36,11 @@ const useStyles = makeStyles(() => ({
   hover: {
     "&:hover": {
       maxWidth: "97%"
-    }
+    },
+  left: {
+    marginLeft: '30px'
   }
+  },
 }));
 
 const useBasicProfileStyles = makeStyles(({ palette }) => ({
@@ -59,23 +62,35 @@ const useBasicProfileStyles = makeStyles(({ palette }) => ({
   white: {
     backgroundColor: '#ffffff'
   },
+  left: {
+    marginLeft: '10px'
+  }
 }));
 
+
 const BasicProfile = props => {
+  const { username } = props;
+
+  let profileLink = `/profile/${username}`
+
   const styles = useBasicProfileStyles();
   return (
-    <Row {...props} paddingBottom="5px">
-      <Item><Avatar className={styles.avatar}>S</Avatar></Item>
-      <Item position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
-        <Typography className={styles.overline}>CHEF</Typography>
-        <Typography className={styles.name}>siriwatknp</Typography>
-      </Item>
-    </Row>
+    <Link href={profileLink}>
+      <Row {...props} paddingBottom="5px">
+        <Item><Avatar className={styles.avatar}>{username.charAt(0).toUpperCase()}</Avatar></Item>
+        <Item className={styles.left} position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
+          <Typography className={styles.overline}>CHEF</Typography>
+          <Typography className={styles.name}>{username}</Typography>
+        </Item>
+      </Row>
+    </Link>
   );
 };
 
 
-export default function FollowCard() {
+export default function FollowCard(props) {
+
+  const { followdata: followData } = props;
 
   const styles = useStyles();
 
@@ -105,12 +120,21 @@ export default function FollowCard() {
           </Heading>
         </Box>
 
+        {
+            followData.map((followInfo) => {
+              return (
+                <BasicProfile 
+                  marginBottom="20px"
+                  paddingLeft="20px"
+                  marginTop={2}
+                  username={followInfo.username}
+                />
+              )
+            })          
+        }
+{/* 
 
-        <BasicProfile 
-          marginBottom="20px"
-          paddingLeft="20px"
-          marginTop={2}
-        />
+
           
         <BasicProfile 
           marginBottom="20px"
@@ -190,7 +214,7 @@ export default function FollowCard() {
         <BasicProfile 
           marginBottom="20px"
           paddingLeft="20px"  
-        />
+        /> */}
 
         </Box>
       </div>

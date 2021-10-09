@@ -29,15 +29,10 @@ export default function CardExample(props) {
   let following = true;
 
   let followArr = [];
-  // useEffect( () => {
-    // console.log('user data', user_data);
-    // console.log('following_data', following_data);
+
   for (let i=0; i < following_data.length; i++ ) {
     followArr.push(following_data[i]._id);
   }
-      // console.log('followArr', followArr);
-
-  // }, [following_data]);
 
   const followUser = async () => {
     try {

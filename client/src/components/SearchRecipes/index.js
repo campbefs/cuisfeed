@@ -27,19 +27,6 @@ export default function SearchRecipes(props) {
           )
         })
       }
-
-      {/* <RecipeCard recipedata={searchedRecipes[0]}/>
-      <RecipeCard recipedata={searchedRecipes[1]}/> */}
-
-      {/* <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard />
-      <RecipeCard /> */}
     </>
   )
 }
