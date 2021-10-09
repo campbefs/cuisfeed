@@ -45,7 +45,7 @@ export default function CardExample(props) {
       await addFollow({
         variables: {followId: id}
       });
-      alert('Follow added!')
+      // alert('Follow added!')
       refetch();
     } catch (e) {
       console.error(e);

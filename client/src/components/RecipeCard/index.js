@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import { Grid, Box, Tooltip, Typography, IconButton } from '@material-ui/core';
@@ -17,7 +17,8 @@ import { Favorite as FavoriteIcon,
 // import CallMade from '@material-ui/icons/CallMade';
 import { Label } from 'semantic-ui-react';
 import { Button } from 'gestalt';
-
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 // import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
@@ -126,6 +127,18 @@ function RecipeCard(props) {
 
   const { recipedata } = props;
 
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center'
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClose = () => {
+    setState({ ...state, open: false});
+  }
+
   const styles = useStyles();
   const cardHeaderStyles = useCardHeaderStyles();
 
@@ -158,7 +171,10 @@ function RecipeCard(props) {
             
           }
       });
-      alert('Post created!');
+      // alert('Post created!');
+      
+      // snackbar
+      setState({ ...state, open: true});
 
       // refetch();
     } catch (e) {
@@ -167,9 +183,11 @@ function RecipeCard(props) {
     
   }
 
+
   // Resources: https://material-ui.com/components/grid/
   
   return (
+
     
     <section className='feed-card'>
       <Grid container spacing={4} justifyContent={'center'}>
@@ -241,6 +259,22 @@ function RecipeCard(props) {
 
         </Grid>
       </Grid>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={open}
+        onClose={handleClose}
+        message="I love snacks"
+        key={'top' + 'right'}
+        action={
+          <React.Fragment>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
+
     </section>
   );
 };
