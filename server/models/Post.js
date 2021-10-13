@@ -25,6 +25,10 @@ const postSchema = new Schema({
       type: Date,
       default: Date.now,
       get: createdAtVal => dateFormat(createdAtVal)
+    },
+    createdAtTS: {
+      type: Date,
+      default: Date.now
     }
 },
 {

@@ -55,7 +55,7 @@ const resolvers = {
         const post = await Post.find({'username': { $in: followArr }})
               .populate('recipe')
               .sort([['createdAt', -1]])
-              .limit(10);
+              .limit(10); // update this when you build infinite scroll
 
         // console.log('post: ', post);
         return post;

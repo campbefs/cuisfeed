@@ -163,13 +163,20 @@ export const MY_FEED = gql`
       _id
       username
       createdAt
-      recipe{
+      createdAtTS
+      likes
+      likeCount
+      commentCount
+      recipe {
+        uri
         label
         image
+        source
       }
     }
   }
 `;
+
 
 export const MY_PROFILE = gql`
   query {

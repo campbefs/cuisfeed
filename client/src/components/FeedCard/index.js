@@ -97,6 +97,41 @@ const CardHeader = props => {
     },
   })(Rating);
 
+  let date = Date.now();
+  let postTime = postdata.createdAtTS;
+
+  // utils to transform date
+  console.log('createdAt', (postdata.createdAtTS));
+  console.log('date', date);
+
+  let diffTime = (date - postTime)/1000;
+
+  const timeFormatter = (diffTime, createdAt) => {
+
+    if (diffTime/60 < 1) {
+      return Math.round(diffTime) + 's'
+    }
+
+    if (diffTime/60 >= 1 && diffTime/60 < 60) {
+      return Math.floor(diffTime/60) + 'm'
+    }
+
+    if (diffTime/60/60 >= 1 && diffTime/60/60 < 24 ) {
+      return Math.floor(diffTime/60/60) + 'h'
+    }
+
+    if (diffTime/60/60/24 >= 1 && diffTime/60/60/24 < 7 ) {
+      return Math.floor(diffTime/60/60/24) + 'd'
+    }
+
+    if (diffTime/60/60/24 > 7 ) {
+      return createdAt;
+    }
+
+  }
+
+  console.log('time difference', timeFormatter(diffTime, postdata.createdAt));
+
   return (
     <>
       <Row {...props}>
@@ -117,8 +152,8 @@ const CardHeader = props => {
             <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span>
           </div>
           <Typography className={styles.subheader}>
-           Source: Martha Stewart<br/>
-           2h
+           Source: {postdata.recipe.source}<br/>
+           {timeFormatter(diffTime, postdata.createdAt)}
 
           </Typography>
         </Item>
@@ -157,8 +192,6 @@ const useStyles = makeStyles(() => ({
 export default function FeedCard(props) {
 
   const { postdata } = props;
-
-  // console.log('postdata', postdata);
 
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
