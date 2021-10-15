@@ -427,6 +427,10 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
+      // if postdata likes includes your username
+      // remove from set
+
+      // else
       const post = await Post.findOneAndUpdate(
         {_id: postId },
         { $addToSet: {likes: context.user.username}},

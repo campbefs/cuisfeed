@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { timeFormatter } from '../../utils/helpers';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { Grid, Box, Tooltip, Avatar, Typography, IconButton } from '@material-ui/core';
 
@@ -18,6 +20,8 @@ import { Favorite as FavoriteIcon,
 import { Label } from 'semantic-ui-react';
 // import { Text } from 'gestalt';
 
+import { LIKE_POST } from '../../utils/mutations';
+import { GET_SINGLE_POST_LIKES } from '../../utils/queries';
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
@@ -85,7 +89,7 @@ const CardHeader = props => {
   const styles = useCardHeaderStyles();
   const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
 
-  const { postdata } = props;
+  const { postData, me } = props;
 
   const StyledRating = withStyles({
     iconFilled: {
@@ -98,46 +102,22 @@ const CardHeader = props => {
   })(Rating);
 
   let date = Date.now();
-  let postTime = postdata.createdAtTS;
+  let postTime = postData.createdAtTS;
 
   // utils to transform date
-  console.log('createdAt', (postdata.createdAtTS));
-  console.log('date', date);
+  // console.log('createdAt', (postData.createdAtTS));
+  // console.log('date', date);
 
   let diffTime = (date - postTime)/1000;
 
-  const timeFormatter = (diffTime, createdAt) => {
-
-    if (diffTime/60 < 1) {
-      return Math.round(diffTime) + 's'
-    }
-
-    if (diffTime/60 >= 1 && diffTime/60 < 60) {
-      return Math.floor(diffTime/60) + 'm'
-    }
-
-    if (diffTime/60/60 >= 1 && diffTime/60/60 < 24 ) {
-      return Math.floor(diffTime/60/60) + 'h'
-    }
-
-    if (diffTime/60/60/24 >= 1 && diffTime/60/60/24 < 7 ) {
-      return Math.floor(diffTime/60/60/24) + 'd'
-    }
-
-    if (diffTime/60/60/24 > 7 ) {
-      return createdAt;
-    }
-
-  }
-
-  console.log('time difference', timeFormatter(diffTime, postdata.createdAt));
+  // console.log('time difference', timeFormatter(diffTime, postData.createdAt));
 
   return (
     <>
       <Row {...props}>
         <Item position={'middle'} minWidth={'250px'}>
           <Typography className={styles.title}>
-            <b>{postdata.recipe.label}</b>
+            <b>{postData.recipe.label}</b>
             {/* <Text weight="bold" size='lg'>White-Bean Dip with Veggie Chips</Text> */}
           </Typography>
           {/* <hr/> */}
@@ -152,8 +132,8 @@ const CardHeader = props => {
             <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span>
           </div>
           <Typography className={styles.subheader}>
-           Source: {postdata.recipe.source}<br/>
-           {timeFormatter(diffTime, postdata.createdAt)}
+           Source: {postData.recipe.source}<br/>
+           {timeFormatter(diffTime, postData.createdAt)}
 
           </Typography>
         </Item>
@@ -191,10 +171,50 @@ const useStyles = makeStyles(() => ({
 
 export default function FeedCard(props) {
 
-  const { postdata } = props;
+  const { postdata: postData, me } = props;
+
+  const [likePost] = useMutation(LIKE_POST);
+
+  let postId = postData._id
+
+  const { loading, data, refetch } = useQuery(GET_SINGLE_POST_LIKES,
+      { 
+        variables: {postId},
+        fetchPolicy: "no-cache"
+      })
+  const postLikes = data?.getSinglePost || {};
+
+  console.log('me', me.username);
+  console.log('postLikes', postLikes.likes);
+  console.log('postId', postId);
+
 
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
+
+  // refetch if like count changes
+  useEffect( () => {
+    refetch();
+  }, [postLikes.likeCount])
+  
+
+  // Handle post likes
+  const handleLikePost = async () => {
+    try {
+      await likePost({
+        variables: {postId}
+      });
+      refetch();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
+
+  if (loading) {
+    return(<div>Loading</div>)
+  }
 
   return (
     
@@ -205,12 +225,12 @@ export default function FeedCard(props) {
             <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
               <Item>
                 <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
-                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postdata.recipe.image}/>
+                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postData.recipe.image}/>
                 </Box>
               </Item>
               <Column>
-                <CardHeader postdata={postdata}/>
-                <BasicProfile username={postdata.username} position={'bottom'} />
+                <CardHeader postData={postData}/>
+                <BasicProfile username={postData.username} position={'bottom'} />
               </Column>
             </Row>
             <Row xs={12} 
@@ -222,8 +242,17 @@ export default function FeedCard(props) {
               marginRight="65px"
               paddingBottom="6px"
             >
+              {/* Heart Icon */}
               <Tooltip title={'Like'}>
-                <IconButton size='small'><FavoriteBorderRoundedIcon/></IconButton>
+                <IconButton 
+                  size='small'
+                  onClick={handleLikePost}
+                >
+                  {postLikes.likes.includes(`${me.username}`) ? <FavoriteRoundedIcon/> : <FavoriteBorderRoundedIcon/>}
+                  {/* <FavoriteRoundedIcon/> */}
+                  {/* <FavoriteBorderRoundedIcon/> */}
+                </IconButton>
+
               </Tooltip>
               <Tooltip title={'Comments'}>
                 <IconButton size='small'><ChatBubbleOutlineIcon/></IconButton>
@@ -243,169 +272,3 @@ export default function FeedCard(props) {
     </section>
   );
 };
-
-
-// import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import clsx from 'clsx';
-// import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
-// import Avatar from '@material-ui/core/Avatar';
-// import IconButton from '@material-ui/core/IconButton';
-// import Typography from '@material-ui/core/Typography';
-// import { red } from '@material-ui/core/colors';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import ShareIcon from '@material-ui/icons/Share';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
-
-// // set up diff Font by changing theme
-// import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-// // import { ThemeProvider } from 'styled-components';
-
-
-// const theme = createTheme({
-//   typography: {
-//     fontFamily: [
-//       '-apple-system',
-//       'BlinkMacSystemFont',
-//       'Segoe UI',
-//       'Roboto',
-//       'Oxygen-Sans',
-//       'Ubuntu',
-//       'Cantarell',
-//       'Fira Sans',
-//       'Droid Sans',
-//       'Helvetica Neue',
-//       'Helvetica',
-//       'ヒラギノ角ゴ Pro W3',
-//       'Hiragino Kaku Gothic Pro',
-//       'メイリオ',
-//       'Meiryo',
-//       'ＭＳ Ｐゴシック',
-//       'Arial',
-//       'sans-serif',
-//       'Apple Color Emoji',
-//       'Segoe UI Emoji',
-//       'Segoe UI Symbol'
-//     ].join(','),
-//   },
-// });
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     maxWidth: 345,
-//   },
-//   media: {
-//     height: 0,
-//     paddingTop: '56.25%', // 16:9
-//   },
-//   expand: {
-//     transform: 'rotate(0deg)',
-//     marginLeft: 'auto',
-//     transition: theme.transitions.create('transform', {
-//       duration: theme.transitions.duration.shortest,
-//     }),
-//   },
-//   expandOpen: {
-//     transform: 'rotate(180deg)',
-//   },
-//   avatar: {
-//     backgroundColor: red[500],
-//   },
-// }));
-
-// export default function FeedCard() {
-//   const classes = useStyles();
-//   const [expanded, setExpanded] = React.useState(false);
-
-//   const handleExpandClick = () => {
-//     setExpanded(!expanded);
-//   };
-
-//   return (
-//     <section className="feed-card">
-//       <ThemeProvider theme={theme}>
-//         <Typography>
-//           <Card className={classes.root}>
-//             <CardHeader
-//               avatar={
-//                 <Avatar aria-label="recipe" className={classes.avatar}>
-//                   R
-//                 </Avatar>
-//               }
-//               action={
-//                 <IconButton aria-label="settings">
-//                   <MoreVertIcon />
-//                 </IconButton>
-//               }
-//               title="Shrimp and Chorizo Paella"
-//               subheader="September 14, 2016"
-//             />
-//             <CardMedia
-//               className={classes.media}
-//               // image="/static/images/cards/paella.jpg"
-//               image="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"
-//               title="Paella dish"
-//             />
-//             <CardContent>
-//               <Typography variant="body2" color="textSecondary" component="p">
-//                 This impressive paella is a perfect party dish and a fun meal to cook together with your
-//                 guests. Add 1 cup of frozen peas along with the mussels, if you like.
-//               </Typography>
-//             </CardContent>
-//             <CardActions disableSpacing>
-//               <IconButton aria-label="add to favorites">
-//                 <FavoriteIcon />
-//               </IconButton>
-//               <IconButton aria-label="share">
-//                 <ShareIcon />
-//               </IconButton>
-//               <IconButton
-//                 className={clsx(classes.expand, {
-//                   [classes.expandOpen]: expanded,
-//                 })}
-//                 onClick={handleExpandClick}
-//                 aria-expanded={expanded}
-//                 aria-label="show more"
-//               >
-//                 <ExpandMoreIcon />
-//               </IconButton>
-//             </CardActions>
-//             <Collapse in={expanded} timeout="auto" unmountOnExit>
-//               <CardContent>
-//                 <Typography paragraph>Method:</Typography>
-//                 <Typography paragraph>
-//                   Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-//                   minutes.
-//                 </Typography>
-//                 <Typography paragraph>
-//                   Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-//                   heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-//                   browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-//                   and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-//                   pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-//                   saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-//                 </Typography>
-//                 <Typography paragraph>
-//                   Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-//                   without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-//                   medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-//                   again without stirring, until mussels have opened and rice is just tender, 5 to 7
-//                   minutes more. (Discard any mussels that don’t open.)
-//                 </Typography>
-//                 <Typography>
-//                   Set aside off of the heat to let rest for 10 minutes, and then serve.
-//                 </Typography>
-//               </CardContent>
-//             </Collapse>
-//           </Card>
-//         </Typography>
-//       </ThemeProvider>
-//     </section>
-//   );
-// }

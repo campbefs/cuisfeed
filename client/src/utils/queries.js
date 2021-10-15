@@ -131,6 +131,15 @@ export const GET_SINGLE_POST = gql`
   }
 `;
 
+export const GET_SINGLE_POST_LIKES = gql`
+  query getSinglePost($postId:ID!) {
+    getSinglePost(postId:$postId) {
+      likes
+      likeCount
+    }
+  }
+`;
+
 export const GET_SINGLE_RECIPE = gql`
   query getSingleRecipe($recipeId:ID) {
     getSingleRecipe(recipeId:$recipeId){
