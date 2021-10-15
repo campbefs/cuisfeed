@@ -196,7 +196,7 @@ export default function FeedCard(props) {
   useEffect( () => {
     refetch();
   }, [postLikes.likeCount])
-  
+
 
   // Handle post likes
   const handleLikePost = async () => {
@@ -248,7 +248,9 @@ export default function FeedCard(props) {
                   size='small'
                   onClick={handleLikePost}
                 >
-                  {postLikes.likes.includes(`${me.username}`) ? <FavoriteRoundedIcon/> : <FavoriteBorderRoundedIcon/>}
+                  {postLikes.likes.includes(`${me.username}`) ? 
+                    <FavoriteRoundedIcon color='secondary'/>
+                    : <FavoriteBorderRoundedIcon/>}
                   {/* <FavoriteRoundedIcon/> */}
                   {/* <FavoriteBorderRoundedIcon/> */}
                 </IconButton>
