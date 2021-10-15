@@ -101,6 +101,7 @@ const CardHeader = props => {
     },
   })(Rating);
 
+
   let date = Date.now();
   let postTime = postData.createdAtTS;
 
@@ -166,6 +167,9 @@ const useStyles = makeStyles(() => ({
   },
   noBotPadding: {
     padding: '8px 8px 0px 8px'
+  },
+  coloredHeart: {
+    color: '#f33944',
   }
 }));
 
@@ -210,7 +214,12 @@ export default function FeedCard(props) {
     }
   }
 
-
+  // const StyledHeart = withStyles({
+  //   iconFilled: {
+  //     // color: '#ff6d75',
+  //     color: '#f33943'
+  //   },
+  // })(FavoriteRoundedIcon);
 
   if (loading) {
     return(<div>Loading</div>)
@@ -249,7 +258,8 @@ export default function FeedCard(props) {
                   onClick={handleLikePost}
                 >
                   {postLikes.likes.includes(`${me.username}`) ? 
-                    <FavoriteRoundedIcon color='secondary'/>
+                    // <FavoriteRoundedIcon color='secondary'/>
+                      <FavoriteRoundedIcon className={styles.coloredHeart}/>
                     : <FavoriteBorderRoundedIcon/>}
                   {/* <FavoriteRoundedIcon/> */}
                   {/* <FavoriteBorderRoundedIcon/> */}
