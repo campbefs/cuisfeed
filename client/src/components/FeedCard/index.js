@@ -21,8 +21,8 @@ import { Favorite as FavoriteIcon,
 import { Label } from 'semantic-ui-react';
 // import { Text } from 'gestalt';
 
-import { LIKE_POST } from '../../utils/mutations';
-import { GET_SINGLE_POST_LIKES,  } from '../../utils/queries';
+import { LIKE_POST, CREATE_POST } from '../../utils/mutations';
+import { GET_SINGLE_POST_LIKES } from '../../utils/queries';
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
@@ -102,17 +102,10 @@ const CardHeader = props => {
     },
   })(Rating);
 
-
+  // Calc post age
   let date = Date.now();
   let postTime = postData.createdAtTS;
-
-  // utils to transform date
-  // console.log('createdAt', (postData.createdAtTS));
-  // console.log('date', date);
-
   let diffTime = (date - postTime)/1000;
-
-  // console.log('time difference', timeFormatter(diffTime, postData.createdAt));
 
   return (
     <>
@@ -179,6 +172,7 @@ export default function FeedCard(props) {
   const { postdata: postData, me } = props;
 
   const [likePost] = useMutation(LIKE_POST);
+  const [createPost] = useMutation(CREATE_POST);
 
   let postId = postData._id
 
@@ -207,12 +201,17 @@ export default function FeedCard(props) {
     }
   }
 
-  // const StyledHeart = withStyles({
-  //   iconFilled: {
-  //     // color: '#ff6d75',
-  //     color: '#f33943'
-  //   },
-  // })(FavoriteRoundedIcon);
+  // Handle Create Post
+  const handleCreatePost = async() => {
+    try {
+      await createPost({
+        variables: {recipeId: postData.recipe._id}
+      });
+      alert('post created!');
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   if (loading) {
     return(
@@ -256,8 +255,15 @@ export default function FeedCard(props) {
                 >
                   {postLikes.likesUser.includes(`${me._id}`) ? 
                     // <FavoriteRoundedIcon color='secondary'/>
-                      <FavoriteRoundedIcon className={styles.coloredHeart}/>
-                    : <FavoriteBorderRoundedIcon/>}
+                      <>
+                        <FavoriteRoundedIcon className={styles.coloredHeart}/>
+                        <div style={{paddingLeft: "5px", fontSize: "14px", marginBottom: "2px"}}>{postLikes.likeCount}</div>
+                      </>
+                    : <>
+                        <FavoriteBorderRoundedIcon/>
+                        <div style={{paddingLeft: "5px", fontSize: "14px", marginBottom: "2px"}}>{postLikes.likeCount}</div>
+                      </>
+                  }
                   {/* <FavoriteRoundedIcon/> */}
                   {/* <FavoriteBorderRoundedIcon/> */}
                 </IconButton>
