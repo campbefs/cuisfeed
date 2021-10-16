@@ -268,7 +268,7 @@ code {
 .feed-card {
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 16px 8px;
 }
 
 .search-selection {
@@ -288,4 +288,100 @@ code {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+}
+
+.avatar-div {
+  display: "flex";
+  justify-content: "center";
+}
+
+.profile-nav {
+  padding: 20px 15px 10px 15px;
+}
+
+.top-outer-post {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 700px;
+  /* border-radius: 30px; */
+}
+
+.the-white-box {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 2px 1px 5px grey;
+  border: 2px solid;
+  border-color: #E7EDF3;
+}
+
+.top-left-post {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 5px;
+  /* background-color: green; */
+  /* padding: 20px 30px; */
+  /* border-radius: 16px; */
+
+
+  /* the white box */
+  /* background-color: white;
+  border-radius: 16px;
+  box-shadow: 2px 1px 5px grey;
+  border: 2px solid;
+  border-color: #E7EDF3; */
+}
+
+.upper-left-post {
+  padding: 20px 30px;
+}
+
+.top-right-post {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 5px;
+  margin-bottom: 20px;
+  /* padding-top: 100px; */
+  /* background-color: purple; */
+  text-align: center;
+  position: -webkit-sticky;
+  position: sticky;
+  /* border-radius: 16px; */
+
+
+  /* the white box */
+  /* background-color: white;
+  border-radius: 16px;
+  box-shadow: 2px 1px 5px grey;
+  border: 2px solid;
+  border-color: #E7EDF3; */
+}
+
+.top-right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 130px;
+  /* margin-bottom: 40px; */
+  /* margin-top: 100px; */
+}
+
+.bottom-post-box {
+  /* background-color: #00FFFF; */
+  width: 100%;
+  min-height: 1000px;
+  padding: 20px 30px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+
+  /* the white box */
+  /* background-color: white;
+  border-radius: 16px;
+  box-shadow: 2px 1px 5px grey;
+  border: 2px solid;
+  border-color: #E7EDF3; */
 }

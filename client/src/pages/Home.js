@@ -1,23 +1,52 @@
-// import { exact } from "prop-types";
-// import React, { useEffect } from "react";
-// import { useLocation } from 'react-router-dom';
-// import Auth from '../utils/auth';
+import React, { useEffect } from "react";
+
 import Feed from '../components/Feed';
 import FollowCard from '../components/FollowCard';
+import FindFollowers from '../components/FindFollowers';
+
+import { useQuery } from "@apollo/client";
+import { MY_FEED, GET_ME_PROFILE } from "../utils/queries";
+import { Spinner } from "gestalt";
 
 export default function Home() {
 
-  
+  const { loading: loading1, data: follow  } = useQuery(GET_ME_PROFILE, {
+    fetchPolicy: "no-cache",
+  });
+  const { loading: loading_feed, data: feed } = useQuery(MY_FEED, {
+    fetchPolicy: "no-cache"
+  });
+
+  let feedData = feed?.myFeed || {};
+  let followData = follow?.me.following || {};
+
+  // console.log('followData', followData);
+  console.log('feedData', feedData);
+
+  // pass loading down to the components - follow (feed spinner is in the Feed component)
+  if (loading1) {
+    return (
+      <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
+        <Spinner show={true} accessibilityLabel="loading home"/>
+      </div>
+      )
+  }
+
   return(
     // add padding for edges
-    <section 
-      class="topic-container"
-    > 
+    <section
+      className="topic-container"
+    >
       <div className="middle-bar">
-        <Feed/>
+        <Feed
+          feedData={feedData}
+          loading={loading_feed}
+        />
       </div>
       <div className="right-bar">
-        <FollowCard/>
+        <FindFollowers/>
+        <FollowCard followdata={followData}/>
+        
       </div>
     </section>
   );

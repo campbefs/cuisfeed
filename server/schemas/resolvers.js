@@ -11,16 +11,29 @@ const resolvers = {
         // console.log('hit', context.user);
         const userData = await User.findOne({ _id: context.user._id})
           .select('-__v -password')
-          .populate({path:'follows', 
+          .populate({path:'following', 
                   populate: { path: 'posts',
                       populate: {path: 'recipe'}
                   }})
           .populate({path:'posts', populate: { path: 'recipe'}}) // populate subpath
 
-        // console.log('userdata', userData);
         return userData;
       }
 
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+    // get following
+    getFollowing: async (_parent, _args, context) => {
+      if (context.user) {
+        // console.log('hit', context.user);
+        const userData = await User.findOne({ _id: context.user._id})
+          .select('following')
+          .populate('following')
+
+        return userData;
+      }
 
       throw new AuthenticationError('Not logged in');
     },
@@ -30,19 +43,19 @@ const resolvers = {
 
         // find your friend's usernames
         const userData = await User.findOne({ _id: context.user._id})
-          .select('follows')
-          .populate('follows');
+          .select('following')
+          .populate('following');
 
         let followArr = [];
-        for (i=0; i<userData.follows.length;i++) {
-          followArr.push(userData.follows[i].username);
+        for (i=0; i<userData.following.length;i++) {
+          followArr.push(userData.following[i].username);
         }
 
         // Grab your friend's posts
         const post = await Post.find({'username': { $in: followArr }})
               .populate('recipe')
               .sort([['createdAt', -1]])
-              .limit(10);
+              .limit(10); // update this when you build infinite scroll
 
         // console.log('post: ', post);
         return post;
@@ -88,7 +101,7 @@ const resolvers = {
 
         const userData = await User.findOne({ username: username })
           .select('-__v -password')
-          .populate({path:'follows', 
+          .populate({path:'following', 
                   populate: { path: 'posts',
                       populate: {path: 'recipe'}
                   }})
@@ -97,6 +110,42 @@ const resolvers = {
 
         if (!userData) {
           throw new UserInputError('No User Found');
+        }
+      
+      return userData;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+    // Search User Profiles
+    searchUsers: async (_parent, { username }, context) => {
+      if (context.user) {
+
+        console.log('context user', context.user.username);
+
+
+        // { username: { $regex: username } }
+        const userData = await User.find({
+              $and: [
+                { username: { $regex: username } },
+                // does not include user making the requests
+                { username: { $nin: [context.user.username] } }
+              ]
+          }
+          )
+          .select('-__v -password')
+            .populate('recipe')
+            // .sort([['createdAt', -1]])
+            .limit(100);
+          // .populate({path:'following', 
+          //         populate: { path: 'posts',
+          //             populate: {path: 'recipe'}
+          //         }})
+          // .populate({path:'posts', populate: { path: 'recipe'}}) // populate subpath
+
+        if (!userData) {
+          throw new UserInputError('No Users Found');
         }
       
       return userData;
@@ -144,9 +193,8 @@ const resolvers = {
 
     }
 
-
     // getFriendsPosts
-    // get single user => populate follows => populate posts (how to double populate...?)
+    // get single user => populate following => populate posts (how to double populate...?)
 
   },
 
@@ -227,16 +275,15 @@ const resolvers = {
       // check if recipe already exists in DB. if so, grab RecipeId
       let recipe = await Recipe.findOne({ uri: input.uri });
   
-      // if not create recipe
+      // if not, create recipe
       if (!recipe) {
         recipe = await Recipe.create(input);
       }
-      // console.log('recipeId: ', recipe._id);
 
       // Create the Post
       const postData = await Post.create( {
                           recipe: recipe._id,
-                          username: context.user.username 
+                          username: context.user.username
                         })
       // post = await Post.findOneAndUpdate(
       //   {_id: post._id},
@@ -264,15 +311,24 @@ const resolvers = {
     addFollow: async (_parent, { followId }, context) => {
       if (context.user) {
         
+        // add to 'following'  (following)
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { follows: followId }}, // addToSet will prevent duplicates
+          { $addToSet: { following: followId }}, // addToSet will prevent duplicates
           { new: true }
         )
 
+        // add to 'followers'
+        await User.findOneAndUpdate(
+          { _id: followId },
+          { $addToSet: { followers: context.user._id }}, // addToSet will prevent duplicates
+          { new: true }
+        )
+
+
         // return user.populate();
         return User.findOne({_id: context.user._id})
-          .populate({path:'follows', populate: { path: 'posts'}}); // populate subpath
+          .populate({path:'following', populate: { path: 'posts'}}); // populate subpath
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -371,17 +427,61 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
-      const post = await Post.findOneAndUpdate(
-        {_id: postId },
-        { $addToSet: {likes: context.user.username}},
-        { new: true }
-      )
+      // if postdata likes includes your user id
+      const userLikePost = await Post.findOne(
+        { _id: postId, likesUser: context.user._id },
+      );
 
-      if (!post) {
-        throw new UserInputError('No Post Found');
-      }
+      // check if user already rated recipe
+      if (!userLikePost) {
 
-      return post;
+        // likesUser
+        const post = await Post.findOneAndUpdate(
+          {_id: postId },
+          { $addToSet: {likesUser: context.user._id}},
+          { new: true }
+        )
+
+        // add post to favorites in User model
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id },
+          { $addToSet: { favorites: postId }},
+          { new: true }
+        )
+
+        console.log('user', user);
+
+
+        if (!post) {
+          throw new UserInputError('No Post Found');
+        }
+
+        return post;
+
+      } else {
+        //  likes USER
+        const post = await Post.findOneAndUpdate(
+          {_id: postId },
+          { $pull: {likesUser: context.user._id}},
+          { new: true }
+        )
+
+        // remove post from 'favorites' in User model
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id },
+          { $pull: { favorites: postId }},
+          { new: true }
+        )
+
+        console.log('user', user);
+
+        if (!post) {
+          throw new UserInputError('No Post Found');
+        }
+
+        return post;
+
+      } 
     },
 
     

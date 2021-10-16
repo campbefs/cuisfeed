@@ -29,6 +29,9 @@ const typeDefs = gql`
     updated: String
     avgRating: Float
     ratingCount: Int
+    totalTime: Int
+    healthLabels: [String]
+    cautions: [String]
   }
  
   type Post {
@@ -37,18 +40,23 @@ const typeDefs = gql`
     recipe: Recipe    # ref Recipe model
     comments: [Comment]
     likes: [String]
+    likesUser: [ID]
     createdAt: String
     commentCount: Int
     likeCount: Int
+    createdAtTS: Float
   }
 
   type User {
     _id: ID
     username: String
     email: String
-    follows: [User]
+    following: [User]
     posts: [Post]
+    followers: [User]
     postCount: Int
+    followingCount: Int
+    followersCount: Int
   }
 
   type Auth {
@@ -72,13 +80,20 @@ const typeDefs = gql`
     mealType: [String]
     dishType: [String]
     ratings: [Float]
+    totalTime: Int
+    healthLabels: [String]
+    cautions: [String]
   }
 
 
   type Query {
     me: User # OK
 
+    getFollowing: User # OK
+
     getSingleUser(username: String!): User # OK
+
+    searchUsers(username: String!): [User]
 
     getSinglePost(postId: ID!): Post # OK
 

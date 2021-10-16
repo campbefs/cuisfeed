@@ -77,7 +77,7 @@ const RecipeSearch = () => {
 
   return (
     // <div className="topic-container">Recipe Search</div>
-    <div class='topic-container'>
+    <div className='topic-container'>
       <div className='searchPage'>
         <div className='header'>
         <h1>Search for Recipes!</h1>

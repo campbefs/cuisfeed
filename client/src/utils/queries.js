@@ -6,7 +6,7 @@ export const GET_ME = gql`
       _id
       username
       email
-      follows {
+      following {
         username
         email
       }
@@ -25,13 +25,24 @@ export const GET_ME = gql`
   }
 `;
 
+export const GET_FOLLOWING = gql`
+  query {
+    getFollowing{
+      following {
+        _id
+        username
+      }
+    }
+  }
+`;
+
 export const GET_ME_PROFILE = gql`
 query {
     me{
       _id
       username
       email
-      follows {
+      following {
         _id
         username
       }
@@ -60,7 +71,7 @@ export const GET_SINGLE_USER_PROFILE = gql`
       _id
       username
       email
-      follows {
+      following {
         _id
         username
       }
@@ -79,6 +90,16 @@ export const GET_SINGLE_USER_PROFILE = gql`
         # }
         createdAt
       }
+    }
+  }
+`;
+
+export const SEARCH_USERS = gql`
+  query searchUsers($username:String!) {
+    searchUsers(username:$username) {
+      _id
+      username
+  #    image or profile picture will go here
     }
   }
 `;
@@ -106,6 +127,16 @@ export const GET_SINGLE_POST = gql`
       likes
       likeCount
       createdAt
+    }
+  }
+`;
+
+export const GET_SINGLE_POST_LIKES = gql`
+  query getSinglePost($postId:ID!) {
+    getSinglePost(postId:$postId) {
+      likes
+      likesUser
+      likeCount
     }
   }
 `;
@@ -142,13 +173,20 @@ export const MY_FEED = gql`
       _id
       username
       createdAt
-      recipe{
+      createdAtTS
+      likes
+      likeCount
+      commentCount
+      recipe {
+        uri
         label
         image
+        source
       }
     }
   }
 `;
+
 
 export const MY_PROFILE = gql`
   query {
@@ -159,6 +197,9 @@ export const MY_PROFILE = gql`
       recipe {
         label
         image
+        # source
+        uri
+        url
       }
     }
   }
