@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { timeFormatter } from '../../utils/helpers';
 import { useQuery, useMutation } from '@apollo/client';
@@ -26,6 +26,10 @@ import { GET_SINGLE_POST_LIKES } from '../../utils/queries';
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
+
+// SnackBar
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
 
 const StyledTooltip = withStyles({
   tooltip: {
@@ -186,6 +190,21 @@ export default function FeedCard(props) {
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
 
+  // Snackbar state
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center'
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  // close snackbar
+  const handleClose = () => {
+    setState({ ...state, open: false});
+  }
+
+
 
   // Handle post likes
   const handleLikePost = async () => {
@@ -208,7 +227,10 @@ export default function FeedCard(props) {
       await createPost({
         variables: {recipeId: postData.recipe._id}
       });
-      alert('post created!');
+      // alert('post created!');
+
+      // snackbar
+      setState({ ...state, open: true});
     } catch (e) {
       console.log(e);
     }
@@ -293,6 +315,25 @@ export default function FeedCard(props) {
 
         </Grid>
       </Grid>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={open}
+        onClose={handleClose}
+        message="Recipe Posted!"
+        key={'bottom' + 'right'}
+        action={
+          <React.Fragment>
+            <IconButton 
+              size="small" 
+              aria-label="close" 
+              color="inherit" 
+              onClick={handleClose}>
+                <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
     </section>
   );
 };
