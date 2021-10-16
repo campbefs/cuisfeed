@@ -449,9 +449,6 @@ const resolvers = {
           { new: true }
         )
 
-        console.log('user', user);
-
-
         if (!post) {
           throw new UserInputError('No Post Found');
         }
@@ -472,8 +469,6 @@ const resolvers = {
           { $pull: { favorites: postId }},
           { new: true }
         )
-
-        console.log('user', user);
 
         if (!post) {
           throw new UserInputError('No Post Found');

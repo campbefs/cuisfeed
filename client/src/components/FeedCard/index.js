@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { timeFormatter } from '../../utils/helpers';
 import { useQuery, useMutation } from '@apollo/client';
+import { Spinner } from 'gestalt';
 
 import { Grid, Box, Tooltip, Avatar, Typography, IconButton } from '@material-ui/core';
 
 import Rating from '@material-ui/lab/Rating';
 import { Favorite as FavoriteIcon, 
-    Share as ShareIcon, 
+    Share as ShareIcon,
     FavoriteBorderRounded as FavoriteBorderRoundedIcon,
     FavoriteRounded as FavoriteRoundedIcon,
     ChatBubbleOutline as ChatBubbleOutlineIcon,
@@ -21,7 +22,7 @@ import { Label } from 'semantic-ui-react';
 // import { Text } from 'gestalt';
 
 import { LIKE_POST } from '../../utils/mutations';
-import { GET_SINGLE_POST_LIKES } from '../../utils/queries';
+import { GET_SINGLE_POST_LIKES,  } from '../../utils/queries';
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
@@ -214,7 +215,11 @@ export default function FeedCard(props) {
   // })(FavoriteRoundedIcon);
 
   if (loading) {
-    return(<div>Loading</div>)
+    return(
+      <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
+        <Spinner show={true} accessibilityLabel="loading home"/>
+      </div>
+      )
   }
 
   return (
