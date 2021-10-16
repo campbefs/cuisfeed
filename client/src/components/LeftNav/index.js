@@ -22,7 +22,7 @@ export default function LeftNav(props) {
   return (
     <section id="left-nav-bar">
 
-      <Link className="left-nav-item">
+      <Link className="left-nav-item" to="/home">
         <Flex gap={2}>
           <button
             id="create-post"
@@ -50,7 +50,7 @@ export default function LeftNav(props) {
 
       <hr/>
 
-      <Link className="left-nav-item" to='/recipesearch'>
+      <Link className="left-nav-item" to='/search'>
         <Flex gap={2}>
           <button 
             className={`left-nav-button ${currentPage === 'Search' && 'nav-active'}`}

@@ -2,6 +2,7 @@
   --home-height: calc(100vh - 78px);
   --gestalt-blue: #0074E8;
   --fb-light-gray: #F0F2F5;
+  --left-right-margin: 8%; /* adjust the entire page's margins automatically */
 }
 
 
@@ -21,6 +22,28 @@ body {
   background-color: var(--fb-light-gray);
 }
 
+/* Updating the Scroll Bar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+/* Scroll Bar End */
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -30,7 +53,7 @@ code {
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 2px 10%;
+  padding: 2px var(--left-right-margin);
   position: fixed;
   background-color: white;
   z-index: 5; 
@@ -94,7 +117,7 @@ code {
   border-radius: 24px;
   color: #111111;
   text-align: center;
-  align-items: flex-start;
+  align-items: center;
   font-weight: 700;
   /* font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,ヒラギノ角ゴ Pro W3,Hiragino Kaku Gothic Pro,メイリオ,Meiryo,ＭＳ Ｐゴシック,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol; */
   font-family: sans-serif;
@@ -102,11 +125,12 @@ code {
   font-size: 16px;
   display: flex;
   justify-content: center;
-  align-items: center;
+
 }
 
 .copy-button:hover {
   background-color: #e2e2e2;
+
 } 
 
 
@@ -117,7 +141,7 @@ code {
   position: fixed;
   width: 230px;
   height: 100vh;
-  margin-left: 10%;
+  margin-left: var(--left-right-margin);
   margin-top: 78px;
   z-index: 4;
   background-color: var(--fb-light-gray);
@@ -148,8 +172,8 @@ code {
   color: #111111;
   text-align: center;
   align-items: flex-start;
-  font-weight: 700;
-  /* font-weight: bold; */
+  font-weight: 400; /* had this at 700 but too big */
+  font-weight: bold;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,ヒラギノ角ゴ Pro W3,Hiragino Kaku Gothic Pro,メイリオ,Meiryo,ＭＳ Ｐゴシック,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   /* font-family: sans-serif; */
   box-sizing: inherit;
@@ -158,6 +182,7 @@ code {
   justify-content: center;
   align-items: center;
   padding: 1px 16px;
+  transition: .3s;
 }
 
 .left-nav-button:hover {
@@ -179,18 +204,19 @@ code {
 }
 
 #create-post:hover {
-  background-color: #0073d1;
+  background-color: #006dc7;
 }
 
 /* END LEFT NAV BAR */
 
 .topic-container {
   display: flex;
-  margin-left: 10%;
+  margin-left: var(--left-right-margin);
   padding-left: 230px;
   padding-top: 78px;
-  margin-right: 10%;
+  margin-right: var(--left-right-margin);
   min-height: 100vh;
+  background-color: var(--fb-light-gray);
 } 
 
 
@@ -208,16 +234,24 @@ code {
 
 
 .right-bar {
-  background-color: blue;
+  /* background-color: #ffffffd3; */
   position: fixed;
-  width: 340px;
+  /* min-width: 340px; */
   padding-left: 40px;
-  right: 10%;
+  right: var(--left-right-margin);
   height: 100vh;
-  overflow: scroll;
-  min-width: 200px;
+  overflow: hidden;
+  min-width: 340px;
+  width: 340px;
   z-index: 0;
+  margin-bottom: 40px;
 } 
+
+.right-bar:hover {
+  overflow-y: scroll;
+  /* width */
+}
+
 
 #menu {
   z-index: 99;
@@ -234,5 +268,120 @@ code {
 .feed-card {
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 16px 8px;
+}
+
+.search-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* width: 300px; */
+}
+
+.search-nav {
+  padding: 20px 25px 10px 25px;
+}
+
+.search-container {
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.avatar-div {
+  display: "flex";
+  justify-content: "center";
+}
+
+.profile-nav {
+  padding: 20px 15px 10px 15px;
+}
+
+.top-outer-post {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 700px;
+  /* border-radius: 30px; */
+}
+
+.the-white-box {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 2px 1px 5px grey;
+  border: 2px solid;
+  border-color: #E7EDF3;
+}
+
+.top-left-post {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 5px;
+  /* background-color: green; */
+  /* padding: 20px 30px; */
+  /* border-radius: 16px; */
+
+
+  /* the white box */
+  /* background-color: white;
+  border-radius: 16px;
+  box-shadow: 2px 1px 5px grey;
+  border: 2px solid;
+  border-color: #E7EDF3; */
+}
+
+.upper-left-post {
+  padding: 20px 30px;
+}
+
+.top-right-post {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 5px;
+  margin-bottom: 20px;
+  /* padding-top: 100px; */
+  /* background-color: purple; */
+  text-align: center;
+  position: -webkit-sticky;
+  position: sticky;
+  /* border-radius: 16px; */
+
+
+  /* the white box */
+  /* background-color: white;
+  border-radius: 16px;
+  box-shadow: 2px 1px 5px grey;
+  border: 2px solid;
+  border-color: #E7EDF3; */
+}
+
+.top-right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 130px;
+  /* margin-bottom: 40px; */
+  /* margin-top: 100px; */
+}
+
+.bottom-post-box {
+  /* background-color: #00FFFF; */
+  width: 100%;
+  min-height: 1000px;
+  padding: 20px 30px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+
+  /* the white box */
+  /* background-color: white;
+  border-radius: 16px;
+  box-shadow: 2px 1px 5px grey;
+  border: 2px solid;
+  border-color: #E7EDF3; */
 }

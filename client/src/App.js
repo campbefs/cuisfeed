@@ -12,7 +12,9 @@ import Home from './pages/Home';
 import MyProfile from './pages/MyProfile';
 import UserProfile from './pages/UserProfile';
 import RecipeSearch from './pages/RecipeSearch';
+import Search from './pages/Search';
 import Post from './pages/Post';
+import PostOld from './pages/PostOld';
 
 
 const httpLink = createHttpLink({
@@ -50,6 +52,9 @@ function App() {
   ])
 
   const [currentPage, setCurrentPage] = useState(pages[0]);
+
+  const [searchSubmit, setSearchSubmit] = useState(0);
+
   
   return (
     <ApolloProvider client={client}>
@@ -59,7 +64,12 @@ function App() {
           <Welcome/>
            ) : (
              <>
-              <TopNav/>
+              <TopNav
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  searchSubmit = {searchSubmit}
+                  setSearchSubmit={setSearchSubmit}
+              />
               <div className="left-bar">
                 <LeftNav
                   currentPage={currentPage}
@@ -70,9 +80,15 @@ function App() {
                 <Route exact path='/' component={Welcome} />
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/myprofile/' component={MyProfile}/>
+
                 <Route exact path='/profile/:username' component={UserProfile}/>
-                <Route exact path='/recipesearch' component={RecipeSearch} />
-                <Route exact path='/post/:postId' component={Post} />
+                <Route path='/search' component={Search} />
+                {/* <Route path="/none" render={(setCurrentPage) => <Search {...setCurrentPage, searchInput} title={`Search Page`} />} /> */}
+
+                <Route exact path='/post' component={Post} />
+                <Route exact path='/post/:postId' component={PostOld} />
+                {/* catch all route */}
+                <Route component={Search} />
               </Switch>
              </>
            )}

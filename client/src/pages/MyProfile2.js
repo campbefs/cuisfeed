@@ -5,10 +5,12 @@ import AboutMe from '../components/AboutMe';
 import Followers from '../components/Followers';
 
 
-import { Box, Card, Text, Link, Button, Heading } from "gestalt";
+import { Box, Card, Text, Link, Button, Heading, Spinner } from "gestalt";
 import { makeStyles, StylesContext } from "@material-ui/styles";
 import { Avatar } from '@material-ui/core';
 
+import { useQuery } from "@apollo/client";
+import { MY_PROFILE, GET_ME_PROFILE } from "../utils/queries";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -31,21 +33,43 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyProfile() {
 
+  // const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
+  //   // fetchPolicy: "no-cache",
+  // });
+  const { loading: loading_feed, data: feed } = useQuery(MY_PROFILE,
+    { fetchPolicy: "no-cache" }
+    );
+
+  let feedData = feed?.myProfile || {}; // my posts for feed
+  // let followData = follow?.me || {};
+  // console.log('feedData', feedData);
+
+
   const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
   const [currentProfilePage, setCurrentProfilePage] = useState(profilePages[0]);
   
   const styles = useStyles();
+
+  if (loading_feed) {
+    return (
+      <div style={{marginTop: "80px"}}>
+        <Spinner show={true} accessibilityLabel="loading"/>
+      </div>
+    )
+  }
   
   return(
     // add padding for edges
-    <section 
+    <section
       className="topic-container"
-    > 
+    >
       <div className="middle-bar">
+        {/* <div style={{height: "40px"}}/> */}
         <br/>
 
         <Box display="flex" justifyContent="center" margin={2}>
           <Avatar
+              // name="Nicholas"
               alt="Nicholas"
               // src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg"
               className={styles.medium}
@@ -54,6 +78,7 @@ export default function MyProfile() {
             N
           </Avatar>
         </Box>
+
 
         <Box marginBottom={2}>
           <Heading size="lg" align="center">
@@ -105,32 +130,20 @@ export default function MyProfile() {
         </div>
 
         {
-          currentProfilePage === 'Posts' ? <Feed/> : 
-          currentProfilePage === 'Favorites' ? <Feed /> : 
+          currentProfilePage === 'Posts' ? <Feed
+            feedData={feedData}
+            loading={loading_feed}
+          /> : 
+          currentProfilePage === 'Favorites' ? <Feed 
+            feedData={feedData}
+            loading={loading_feed}
+          /> : 
           <div>Comments</div>
         }
 
       </div>
 
       <div className="right-bar">
-        
-        <Box
-          display="flex"
-          marginStart={-3}
-          marginEnd={-3}
-          marginTop={8}
-          direction="column"
-          rounding={3}
-          padding={2}
-          justifyContent="center"
-          alignItems="center"
-          // 280
-          width="280px"
-          // marginBottom doesn't work cause gestalt fucking sucks. use surrounding div
-        >
-          <Button color="blue" text="Follow" size="lg"/>
-        </Box>
-                
         <AboutMe />
         <FollowCard/>
       </div>

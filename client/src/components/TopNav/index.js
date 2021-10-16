@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heading, SearchField, Flex, IconButton, Layer, Popover, Box,
         Text,
         FixedZIndex} from 'gestalt';
 import Auth from '../../utils/auth';
 import Badge from '@material-ui/core/Badge';
-import { withStyles } from '@material-ui/core/styles';
+import { Redirect } from 'react-router';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 
-function Nav() {
-  const [value, setValue ] = React.useState('');
 
-  const [selectedMenu, setSelectedMenu] = React.useState(false);
-  const [selectedAccount, setSelectedAccount] = React.useState(false);
+function Nav(props) {
+
+  const {
+    currentPage,
+    setCurrentPage,
+    searchSubmit,
+    setSearchSubmit
+  } = props;
+
+  const [ searchInput, setSearchInput ] = useState('');
+
+  // linking out
+  const [toNext, setToNext] = useState(false);
+
+  const [selectedMenu, setSelectedMenu] = useState(false);
+  const [selectedAccount, setSelectedAccount] = useState(false);
 
   const anchorRef = React.useRef();
 
@@ -27,15 +40,45 @@ function Nav() {
   //   },
   // }))(Badge);
 
+  // if a person searches & redirects, this switches the indicator back to false
+  useEffect(() => {
+    setToNext(false);
+  }, [toNext]); // Only re-run the effect if count changes
+
+
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+
+    if (!searchInput) {
+      alert("Please enter text to search");
+      return false;
+    }
+
+    setCurrentPage('Search');
+    // window.location.replace(`/search/${searchInput}`);
+
+    setSearchSubmit(searchSubmit+1);
+    setToNext(true);
+    
+  }
+
+  let url = `/search/?q=${searchInput}`
+
   return ( 
     <header id='header'>
 
+      {toNext ? <Redirect to={url} /> : null}
+
       <Flex gap={4} alignItems="center" flex="grow">
         <Link id="home-link" to='/home'>
-          <Heading size="lg" id="head-title">Cuisfeed</Heading>
+          <div 
+            onClick={() => setCurrentPage('Home')}
+          >
+            <Heading size="lg" id="head-title">Cuisfeed</Heading>
+          </div>
         </Link>
         <Link id="home-link" to='/home'>
-          <div id="top-icon">
+          <div id="top-icon" onClick={() => setCurrentPage('Home')}>
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAYAAACMRWrdAAABGElEQVRoQ+2Z0Q3CMAxEr5vAaEwCbMIIsAmjwASgoID4SIsVW41trj9VpdT1+dlO605IekxJdeGvhB0A7CvJI4By/TAmewZQbF+N7X7MtYitIaw4cAOwrWdzfSOFFTE7ACdzVUCzxn4R09Zly765th5iFDaDIQQxabd8d9eilcI0haetsbTEeoIaIhUp7CsCIYilrTEKq/tXmH2MzSNa8yAxEuvJgcY92nfFHjdCbNAUxhrryQHW2PLAlMOcaMMcoyp4mXE1MLUSdgewyTbivtTPmFV/SlgRGWpH2+GGOr/0cApzi2bGMRIjMScRYCo6ASF2g8TEoXKykMScgBC7QWLiUDlZSGJOQIjdIDFxqJwsJDEnIMRuPAHZTaA39FQ9CQAAAABJRU5ErkJggg=="
               alt="cookbook"
             />
@@ -43,14 +86,17 @@ function Nav() {
         </Link>
 
         <Flex.Item flex="grow">
-          <SearchField
-            accessibilityLabel="Search Recipes"
-            accessibilityClearButtonLabel="Clear search field"
-            id="top-search-bar"
-            onChange={({value}) => setValue(value)}
-            placeholder="Search Recipes"
-            value={value}
-          />
+          <form onSubmit={handleFormSubmit}>
+            <SearchField
+              accessibilityLabel="Search Recipes or Chefs"
+              accessibilityClearButtonLabel="Clear search field"
+              id="top-search-bar"
+              onChange={({ value }) => setSearchInput(value)} // this has to be 'value'
+              placeholder="Search"
+              value={searchInput}
+              onBlur={() => setSearchInput("")}
+            />
+          </form>
         </Flex.Item>
 
         <React.Fragment>

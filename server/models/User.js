@@ -20,7 +20,7 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    follows: [
+    following: [
       {
         type: Schema.Types.ObjectId,  // question. how does this know to join on ID?
         ref: 'User',
@@ -28,6 +28,18 @@ const userSchema = new Schema(
     ],
     // save posts directly in the User model
     posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
+      }
+    ],
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      }
+    ],
+    favorites: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Post'
@@ -60,6 +72,16 @@ userSchema.methods.isCorrectPassword = async function (password) {
 // virtual - post count
 userSchema.virtual('postCount').get(function () {
   return this.posts.length;
+});
+
+// virtual - following count
+userSchema.virtual('followingCount').get(function () {
+  return this.following.length;
+});
+
+// virtual - followers count
+userSchema.virtual('followersCount').get(function () {
+  return this.followers.length;
 });
 
 const User = model('User', userSchema);
