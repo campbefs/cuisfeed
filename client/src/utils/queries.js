@@ -135,6 +135,7 @@ export const GET_SINGLE_POST_LIKES = gql`
   query getSinglePost($postId:ID!) {
     getSinglePost(postId:$postId) {
       likes
+      likesUser
       likeCount
     }
   }

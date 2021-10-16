@@ -427,46 +427,61 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
-      // if postdata likes includes your username
+      // if postdata likes includes your user id
       const userLikePost = await Post.findOne(
-        { _id: postId, likes: context.user.username },
+        { _id: postId, likesUser: context.user._id },
       );
-
-      console.log('likePost', userLikePost);
 
       // check if user already rated recipe
       if (!userLikePost) {
 
-        // if user didn't like recipe - ADD TO SET
+        // likesUser
         const post = await Post.findOneAndUpdate(
           {_id: postId },
-          { $addToSet: {likes: context.user.username}},
+          { $addToSet: {likesUser: context.user._id}},
           { new: true }
         )
+
         // add post to favorites in User model
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id },
+          { $addToSet: { favorites: postId }},
+          { new: true }
+        )
+
+        console.log('user', user);
+
 
         if (!post) {
           throw new UserInputError('No Post Found');
         }
 
         return post;
+
       } else {
-        // if user liked recipe - PULL USERNAME FROM POST LIKES
+        //  likes USER
         const post = await Post.findOneAndUpdate(
           {_id: postId },
-          { $pull: {likes: context.user.username}},
+          { $pull: {likesUser: context.user._id}},
           { new: true }
         )
 
         // remove post from 'favorites' in User model
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id },
+          { $pull: { favorites: postId }},
+          { new: true }
+        )
+
+        console.log('user', user);
 
         if (!post) {
           throw new UserInputError('No Post Found');
         }
 
         return post;
-      } 
 
+      } 
     },
 
     

@@ -40,6 +40,7 @@ const typeDefs = gql`
     recipe: Recipe    # ref Recipe model
     comments: [Comment]
     likes: [String]
+    likesUser: [ID]
     createdAt: String
     commentCount: Int
     likeCount: Int

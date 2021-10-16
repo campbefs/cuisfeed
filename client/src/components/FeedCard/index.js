@@ -188,19 +188,8 @@ export default function FeedCard(props) {
       })
   const postLikes = data?.getSinglePost || {};
 
-  console.log('me', me.username);
-  console.log('postLikes', postLikes.likes);
-  console.log('postId', postId);
-
-
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
-
-  // refetch if like count changes -- this might be stupid cause it already fetched
-  useEffect( () => {
-    refetch();
-    console.log('postLikes', postLikes.likes)
-  }, [postLikes.likeCount])
 
 
   // Handle post likes
@@ -260,7 +249,7 @@ export default function FeedCard(props) {
                   size='small'
                   onClick={handleLikePost}
                 >
-                  {postLikes.likes.includes(`${me.username}`) ? 
+                  {postLikes.likesUser.includes(`${me._id}`) ? 
                     // <FavoriteRoundedIcon color='secondary'/>
                       <FavoriteRoundedIcon className={styles.coloredHeart}/>
                     : <FavoriteBorderRoundedIcon/>}
