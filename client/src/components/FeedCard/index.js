@@ -203,6 +203,7 @@ export default function FeedCard(props) {
 
   // Handle Create Post
   const handleCreatePost = async() => {
+    console.log('recipe id', postData.recipe._id);
     try {
       await createPost({
         variables: {recipeId: postData.recipe._id}
@@ -257,11 +258,15 @@ export default function FeedCard(props) {
                     // <FavoriteRoundedIcon color='secondary'/>
                       <>
                         <FavoriteRoundedIcon className={styles.coloredHeart}/>
-                        <div style={{paddingLeft: "5px", fontSize: "14px", marginBottom: "2px"}}>{postLikes.likeCount}</div>
+                        <div style={{paddingLeft: "5px", fontSize: "14px", marginBottom: "2px"}}>
+                          {postLikes.likeCount}
+                        </div>
                       </>
                     : <>
                         <FavoriteBorderRoundedIcon/>
-                        <div style={{paddingLeft: "5px", fontSize: "14px", marginBottom: "2px"}}>{postLikes.likeCount}</div>
+                        <div style={{paddingLeft: "5px", fontSize: "14px", marginBottom: "2px"}}>
+                          {postLikes.likeCount}
+                        </div>
                       </>
                   }
                   {/* <FavoriteRoundedIcon/> */}
@@ -273,10 +278,14 @@ export default function FeedCard(props) {
                 <IconButton size='small'><ChatBubbleOutlineIcon/></IconButton>
               </Tooltip>
               <Tooltip title={'Post'}>
-                <IconButton size='small'><PostAddIcon/></IconButton>
+                <IconButton size='small' onClick={handleCreatePost}><PostAddIcon/></IconButton>
               </Tooltip>
               <Tooltip title={'Share'}>
-                <IconButton size='small'><ShareIcon/></IconButton>
+                <IconButton 
+                  size='small'
+                >
+                  <ShareIcon/>
+                </IconButton>
               </Tooltip>
               {/* <IconButton size='small'><TurnedInNotIcon/></IconButton> */}
             </Row>
