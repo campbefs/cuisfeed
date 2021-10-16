@@ -196,9 +196,10 @@ export default function FeedCard(props) {
   const styles = useStyles();
   const gap = { xs: 1, sm: 1.5, lg: 2 }
 
-  // refetch if like count changes
+  // refetch if like count changes -- this might be stupid cause it already fetched
   useEffect( () => {
     refetch();
+    console.log('postLikes', postLikes.likes)
   }, [postLikes.likeCount])
 
 
@@ -208,7 +209,9 @@ export default function FeedCard(props) {
       await likePost({
         variables: {postId}
       });
+
       refetch();
+
     } catch (e) {
       console.log(e);
     }
