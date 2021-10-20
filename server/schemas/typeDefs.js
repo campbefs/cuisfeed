@@ -28,10 +28,11 @@ const typeDefs = gql`
     ratingUsers: [String]
     updated: String
     avgRating: Float
-    ratingCount: Int
     totalTime: Int
     healthLabels: [String]
     cautions: [String]
+    ratingCount: Int
+    ingredientCount: Int
   }
  
   type Post {

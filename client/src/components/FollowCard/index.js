@@ -128,6 +128,7 @@ export default function FollowCard(props) {
                   paddingLeft="20px"
                   marginTop={1}
                   username={followInfo.username}
+                  key={followInfo._id}
                 />
               )
             })          

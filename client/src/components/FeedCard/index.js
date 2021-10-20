@@ -94,7 +94,7 @@ const CardHeader = props => {
   const styles = useCardHeaderStyles();
   const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
 
-  const { postData, me } = props;
+  const { postdata, me } = props;
 
   const StyledRating = withStyles({
     iconFilled: {
@@ -107,16 +107,34 @@ const CardHeader = props => {
   })(Rating);
 
   // Calc post age
-  let date = Date.now();
-  let postTime = postData.createdAtTS;
-  let diffTime = (date - postTime)/1000;
+  const date = Date.now();
+  const postTime = postdata.createdAtTS;
+  const diffTime = (date - postTime)/1000;
+
+  console.log('postdata', postdata.recipe.ingredientCount);
+  console.log('postdata', postdata.recipe.totalTime);
+
+  const difficultyFunc = (totalTime, ingredientCount) => {
+    if (ingredientCount > 15 || totalTime > 180) {
+      return 'hard';
+    } else if (ingredientCount > 8 || totalTime > 30) {
+      return 'medium';
+    } else {
+      return 'easy';
+    }
+  }
+
+  const difficulty = difficultyFunc(postdata.recipe.totalTime, postdata.recipe.ingredientCount);
+
+  console.log(difficulty);
+
 
   return (
     <>
       <Row {...props}>
         <Item position={'middle'} minWidth={'250px'}>
           <Typography className={styles.title}>
-            <b>{postData.recipe.label}</b>
+            <b>{postdata.recipe.label}</b>
             {/* <Text weight="bold" size='lg'>White-Bean Dip with Veggie Chips</Text> */}
           </Typography>
           {/* <hr/> */}
@@ -128,11 +146,18 @@ const CardHeader = props => {
               className={styles.title}
               precision={0.5}
             />
-            <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span>
+            { difficulty == 'easy' ?
+              <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span> 
+              : difficulty == 'medium' ?
+              <span style={{marginRight: "5px"}}><Label color='blue' horizontal>Med</Label></span>
+              :
+              <span style={{marginRight: "5px"}}><Label color='black' horizontal>Hard</Label></span>
+            }
+            
           </div>
           <Typography className={styles.subheader}>
-           Source: {postData.recipe.source}<br/>
-           {timeFormatter(diffTime, postData.createdAt)}
+           Source: {postdata.recipe.source}<br/>
+           {timeFormatter(diffTime, postdata.createdAt)}
 
           </Typography>
         </Item>
@@ -173,12 +198,12 @@ const useStyles = makeStyles(() => ({
 
 export default function FeedCard(props) {
 
-  const { postdata: postData, me } = props;
+  const { postdata: postdata, me } = props;
 
   const [likePost] = useMutation(LIKE_POST);
   const [createPost] = useMutation(CREATE_POST);
 
-  let postId = postData._id
+  let postId = postdata._id
 
   const { loading, data, refetch } = useQuery(GET_SINGLE_POST_LIKES,
       { 
@@ -222,10 +247,10 @@ export default function FeedCard(props) {
 
   // Handle Create Post
   const handleCreatePost = async() => {
-    console.log('recipe id', postData.recipe._id);
+    console.log('recipe id', postdata.recipe._id);
     try {
       await createPost({
-        variables: {recipeId: postData.recipe._id}
+        variables: {recipeId: postdata.recipe._id}
       });
       // alert('post created!');
 
@@ -253,12 +278,12 @@ export default function FeedCard(props) {
             <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
               <Item>
                 <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
-                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postData.recipe.image}/>
+                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postdata.recipe.image}/>
                 </Box>
               </Item>
               <Column>
-                <CardHeader postData={postData}/>
-                <BasicProfile username={postData.username} position={'bottom'} />
+                <CardHeader postdata={postdata}/>
+                <BasicProfile username={postdata.username} position={'bottom'} />
               </Column>
             </Row>
             <Row xs={12} 

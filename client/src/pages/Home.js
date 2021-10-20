@@ -21,7 +21,7 @@ export default function Home() {
   let followData = follow?.me.following || {};
 
   // console.log('followData', followData);
-  console.log('feedData', feedData);
+  // console.log('feedData', feedData);
 
   // pass loading down to the components - follow (feed spinner is in the Feed component)
   if (loading1) {

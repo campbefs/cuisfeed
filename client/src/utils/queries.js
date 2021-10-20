@@ -179,6 +179,8 @@ export const MY_FEED = gql`
         label
         image
         source
+        totalTime
+        ingredientCount
       }
       likesUser
       createdAt
