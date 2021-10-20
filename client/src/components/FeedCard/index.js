@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { timeFormatter } from '../../utils/helpers';
+import { timeFormatter, numFormatter } from '../../utils/helpers';
 import { useQuery, useMutation } from '@apollo/client';
 import { Spinner } from 'gestalt';
 
@@ -287,7 +287,7 @@ export default function FeedCard(props) {
                     : <>
                         <FavoriteBorderRoundedIcon/>
                         <div style={{paddingLeft: "5px", fontSize: "14px", marginBottom: "2px"}}>
-                          {postLikes.likeCount}
+                          {numFormatter(postLikes.likeCount)}
                         </div>
                       </>
                   }

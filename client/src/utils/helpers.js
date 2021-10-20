@@ -25,3 +25,15 @@ export function timeFormatter (diffTime, createdAt) {
     return createdAt;
   }
 }
+
+export const numFormatter = num => {
+  if (num >= 10000 ) {
+      let formatted_num = Math.round(Math.floor(num / 1000))
+      return `${formatted_num.toString()}k`
+  }
+  if (num >= 1000 ) {
+      let formatted_num = (Math.floor(num / 100)*.1).toFixed(1)
+      return `${formatted_num.toString()}k`
+  }
+  return num.toString();
+}
