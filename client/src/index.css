@@ -255,6 +255,7 @@ code {
 .link-hover:hover {
   background: rgb(238, 238, 238);
   border-radius: 10px;
+  transition: .3s;
 }
 
 #menu {
