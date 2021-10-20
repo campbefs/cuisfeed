@@ -74,7 +74,7 @@ export default function CardExample(props) {
   return (
     <Box maxWidth={236} padding={2} column={12} margin={8}>
       <Card image={
-            <Link href={profileLink}>
+            <Link href={profileLink} hoverStyle="none">
               <Avatar 
                 alt={username}
                 className={styles.medium}
@@ -84,7 +84,7 @@ export default function CardExample(props) {
               {/* <AvatarG name={username} outline="true"> {username.charAt(0).toUpperCase()}</AvatarG> */}
             </Link>}>
         <Text align="center" weight="bold">
-          <Link href={profileLink}>
+          <Link href={profileLink} hoverStyle="none">
             <Box paddingX={3} paddingY={2}>
               {username}
             </Box>

@@ -75,15 +75,19 @@ const BasicProfile = props => {
 
   const styles = useBasicProfileStyles();
   return (
-    <Link href={profileLink}>
-      <Row {...props} paddingBottom="5px">
-        <Item><Avatar className={styles.avatar}>{username.charAt(0).toUpperCase()}</Avatar></Item>
-        <Item className={styles.left} position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
-          <Typography className={styles.overline}>CHEF</Typography>
-          <Typography className={styles.name}>{username}</Typography>
-        </Item>
-      </Row>
-    </Link>
+    <div  style={{marginBottom: "-3px"}}>
+      <div className="link-hover">
+        <Link href={profileLink} hoverStyle="none">
+            <Row {...props} paddingTop="5px" paddingBottom="5px">
+              <Item><Avatar className={styles.avatar}>{username.charAt(0).toUpperCase()}</Avatar></Item>
+              <Item className={styles.left} position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
+                <Typography className={styles.overline}>CHEF</Typography>
+                <Typography className={styles.name}>{username}</Typography>
+              </Item>
+            </Row>
+        </Link>
+      </div>  
+    </div>
   );
 };
 

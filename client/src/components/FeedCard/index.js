@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { timeFormatter, numFormatter } from '../../utils/helpers';
 import { useQuery, useMutation } from '@apollo/client';
-import { Spinner } from 'gestalt';
+import { Spinner, Link } from 'gestalt';
 
 import { Grid, Box, Tooltip, Avatar, Typography, IconButton } from '@material-ui/core';
 
@@ -62,17 +62,22 @@ const useBasicProfileStyles = makeStyles(({ palette }) => ({
 
 const BasicProfile = props => {
 
-  const {username} = props;
+  const {username, profilelink} = props;
 
   const styles = useBasicProfileStyles();
   return (
-    <Row {...props} paddingBottom="5px">
-      <Item><Avatar className={styles.avatar}>{username.charAt(0).toUpperCase()}</Avatar></Item>
-      <Item position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
-        <Typography className={styles.overline}>CHEF</Typography>
-        <Typography className={styles.name}>{username}</Typography>
-      </Item>
-    </Row>
+      <Row {...props} paddingBottom="5px">
+        <Link href={profilelink} hoverStyle="none">
+          <Item><Avatar className={styles.avatar}>{username.charAt(0).toUpperCase()}</Avatar></Item>
+        </Link>
+        <Item position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
+          <Link href={profilelink} hoverStyle="none">
+            <Typography className={styles.overline}>CHEF</Typography>
+            <Typography className={styles.name}>{username}</Typography>
+          </Link>
+        </Item>
+        
+      </Row>
   );
 };
 
@@ -229,8 +234,6 @@ export default function FeedCard(props) {
     setState({ ...state, open: false});
   }
 
-
-
   // Handle post likes
   const handleLikePost = async () => {
     try {
@@ -261,6 +264,15 @@ export default function FeedCard(props) {
     }
   }
 
+  // Links
+
+  // let profileLink = `/`
+  let profileLink = `/profile/${postdata.username}`;
+  let recipeLink = `/post/${postdata.recipe._id}`;
+
+  console.log('profileLink', profileLink);
+  console.log('recipeLink', recipeLink);
+
   if (loading) {
     return(
       <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
@@ -275,17 +287,19 @@ export default function FeedCard(props) {
       <Grid container spacing={4} justifyContent={'center'}>
         <Grid item xs={12} sm={8} lg={7} className={styles.outerCard}>
           <Grid className={styles.card}>
-            <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
-              <Item>
-                <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
-                  <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postdata.recipe.image}/>
-                </Box>
-              </Item>
-              <Column>
-                <CardHeader postdata={postdata}/>
-                <BasicProfile username={postdata.username} position={'bottom'} />
-              </Column>
-            </Row>
+            <Link href={recipeLink} hoverStyle="none">
+              <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
+                <Item>
+                    <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
+                      <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postdata.recipe.image}/>
+                    </Box>
+                </Item>
+                <Column>
+                  <CardHeader postdata={postdata}/>
+                  <BasicProfile username={postdata.username} profilelink={profileLink} position={'bottom'} />
+                </Column>
+              </Row>
+            </Link>
             <Row xs={12} 
               display="flex" 
               flexDirection="row" 
@@ -306,7 +320,7 @@ export default function FeedCard(props) {
                       <>
                         <FavoriteRoundedIcon className={styles.coloredHeart}/>
                         <div style={{paddingLeft: "5px", fontSize: "14px", marginBottom: "2px"}}>
-                          {postLikes.likeCount}
+                          {numFormatter(postLikes.likeCount)}
                         </div>
                       </>
                     : <>
