@@ -99,7 +99,7 @@ const CardHeader = props => {
   const styles = useCardHeaderStyles();
   const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
 
-  const { postdata, me } = props;
+  const { postdata, recipelink } = props;
 
   const StyledRating = withStyles({
     iconFilled: {
@@ -124,6 +124,8 @@ const CardHeader = props => {
   return (
     <>
       <Row {...props}>
+        <Link href={recipelink} hoverStyle="none">
+
         <Item position={'middle'} minWidth={'250px'}>
           <Typography className={styles.title}>
             <b>{postdata.recipe.label}</b>
@@ -153,6 +155,8 @@ const CardHeader = props => {
 
           </Typography>
         </Item>
+        </Link>
+
         {/* <Item position={'right'} mr={-0.5}>
           <StyledTooltip title={'See details'}>
             <IconButton classes={iconBtnStyles}>
@@ -274,19 +278,19 @@ export default function FeedCard(props) {
       <Grid container spacing={4} justifyContent={'center'}>
         <Grid item xs={12} sm={8} lg={7} className={styles.outerCard}>
           <Grid className={styles.card}>
-            <Link href={recipeLink} hoverStyle="none">
               <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
                 <Item>
+                  <Link href={recipeLink} hoverStyle="none">
                     <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
                       <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postdata.recipe.image}/>
                     </Box>
+                  </Link>
                 </Item>
                 <Column>
-                  <CardHeader postdata={postdata}/>
+                  <CardHeader postdata={postdata} recipelink={recipeLink}/>
                   <BasicProfile username={postdata.username} profilelink={profileLink} position={'bottom'} />
                 </Column>
               </Row>
-            </Link>
             <Row xs={12} 
               display="flex" 
               flexDirection="row" 
