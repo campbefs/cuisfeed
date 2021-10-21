@@ -55,6 +55,24 @@ function App() {
 
   const [searchSubmit, setSearchSubmit] = useState(0);
 
+  // add some logic to check the URL and update currentPage if it doesn't match
+
+  let location = window.location.pathname
+  if (location === '/home' && currentPage !== 'Home') {
+    setCurrentPage('Home');
+  } else if (location === '/search' && currentPage !== 'Search') {
+    setCurrentPage('Search');
+  } else if (location === '/discover' && currentPage !== 'Discover') {
+    setCurrentPage('Discover');
+  } else if (location === '/inbox' && currentPage !== 'Inbox') {
+    setCurrentPage('INbox');
+  } else if (location === '/myrecipebook' && currentPage !== 'My Recipe Book') {
+    setCurrentPage('My Recipe Book');
+  } else if (location === '/myprofile' && currentPage !== 'Profile') {
+    setCurrentPage('Profile');
+  } else if (location === '/profile' && currentPage !== 'Profile') {
+    setCurrentPage('Profile');
+  }
   
   return (
     <ApolloProvider client={client}>
