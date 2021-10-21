@@ -67,11 +67,11 @@ const BasicProfile = props => {
   const styles = useBasicProfileStyles();
   return (
       <Row {...props} paddingBottom="5px">
-        <Link href={profilelink} hoverStyle="none">
+        <Link href={profilelink} hoverStyle="none" tapStyle="compress">
           <Item><Avatar className={styles.avatar}>{username.charAt(0).toUpperCase()}</Avatar></Item>
         </Link>
         <Item position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
-          <Link href={profilelink} hoverStyle="none">
+          <Link href={profilelink} hoverStyle="none" tapStyle="compress">
             <Typography className={styles.overline}>CHEF</Typography>
             <Typography className={styles.name}>{username}</Typography>
           </Link>
@@ -124,37 +124,37 @@ const CardHeader = props => {
   return (
     <>
       <Row {...props}>
-        <Link href={recipelink} hoverStyle="none">
+        <Link href={recipelink} hoverStyle="none" tapStyle="compress">
 
-        <Item position={'middle'} minWidth={'250px'}>
-          <Typography className={styles.title}>
-            <b>{postdata.recipe.label}</b>
-            {/* <Text weight="bold" size='lg'>White-Bean Dip with Veggie Chips</Text> */}
-          </Typography>
-          {/* <hr/> */}
-          <div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-between"}}>
-            <StyledRating
-              defaultValue={4.5}
-              readOnly
-              icon={<FavoriteIcon fontSize="inherit"/>}
-              className={styles.title}
-              precision={0.5}
-            />
-            { difficulty == 'easy' ?
-              <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span> 
-              : difficulty == 'medium' ?
-              <span style={{marginRight: "5px"}}><Label color='blue' horizontal>Med</Label></span>
-              :
-              <span style={{marginRight: "5px"}}><Label color='black' horizontal>Hard</Label></span>
-            }
-            
-          </div>
-          <Typography className={styles.subheader}>
-           Source: {postdata.recipe.source}<br/>
-           {timeFormatter(diffTime, postdata.createdAt)}
+          <Item position={'middle'} minWidth={'250px'}>
+            <Typography className={styles.title}>
+              <b>{postdata.recipe.label}</b>
+              {/* <Text weight="bold" size='lg'>White-Bean Dip with Veggie Chips</Text> */}
+            </Typography>
+            {/* <hr/> */}
+            <div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-between"}}>
+              <StyledRating
+                defaultValue={4.5}
+                readOnly
+                icon={<FavoriteIcon fontSize="inherit"/>}
+                className={styles.title}
+                precision={0.5}
+              />
+              { difficulty == 'easy' ?
+                <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span> 
+                : difficulty == 'medium' ?
+                <span style={{marginRight: "5px"}}><Label color='blue' horizontal>Med</Label></span>
+                :
+                <span style={{marginRight: "5px"}}><Label color='black' horizontal>Hard</Label></span>
+              }
+              
+            </div>
+            <Typography className={styles.subheader}>
+            Source: {postdata.recipe.source}<br/>
+            {timeFormatter(diffTime, postdata.createdAt)}
 
-          </Typography>
-        </Item>
+            </Typography>
+          </Item>
         </Link>
 
         {/* <Item position={'right'} mr={-0.5}>
@@ -280,7 +280,7 @@ export default function FeedCard(props) {
           <Grid className={styles.card}>
               <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
                 <Item>
-                  <Link href={recipeLink} hoverStyle="none">
+                  <Link href={recipeLink} hoverStyle="none" tapStyle="compress">
                     <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
                       <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postdata.recipe.image}/>
                     </Box>

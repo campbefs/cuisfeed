@@ -164,6 +164,8 @@ export default function Followers(props) {
         // color="blue"
         // size="lg" 
         onClick={() => setShouldShow(true)}
+        hoverStyle="none"
+        tapStyle="compress"
       >
         <Text weight="bold">{number} {type}</Text>
       </Link>

@@ -95,7 +95,7 @@ export default function MyProfile(props) {
           <Box margin={2}>
             <Text align="center">I am a surprisingly good actor</Text>
           </Box>
-          <Text weight="bold" align="center"> <Followers number={151} type="Followers"/> | <Followers number={259} type="Following"/></Text>
+          <Text weight="bold" align="center"><span className="profile-link"><Followers number={151} type="Followers"/></span> | <span className="profile-link"><Followers number={259} type="Following"/></span></Text>
         </Box>
 
 

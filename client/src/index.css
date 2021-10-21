@@ -258,6 +258,10 @@ code {
   transition: .3s;
 }
 
+.profile-link:hover {
+  cursor: pointer;
+}
+
 #menu {
   z-index: 99;
 }
