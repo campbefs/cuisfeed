@@ -37,3 +37,13 @@ export const numFormatter = num => {
   }
   return num.toString();
 }
+
+export const difficultyFunc = (totalTime, ingredientCount) => {
+  if (ingredientCount > 15 || totalTime > 180) {
+    return 'hard';
+  } else if (ingredientCount > 8 || totalTime > 30) {
+    return 'medium';
+  } else {
+    return 'easy';
+  }
+}

@@ -197,12 +197,15 @@ export const MY_PROFILE = gql`
       _id
       username
       createdAt
+      createdAtTS
       recipe {
+        _id
+        uri
         label
         image
-        # source
-        uri
-        url
+        source
+        totalTime
+        ingredientCount
       }
     }
   }

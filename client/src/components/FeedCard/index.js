@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { timeFormatter, numFormatter } from '../../utils/helpers';
+import { timeFormatter, numFormatter, difficultyFunc } from '../../utils/helpers';
 import { useQuery, useMutation } from '@apollo/client';
 import { Spinner, Link } from 'gestalt';
 
@@ -116,23 +116,10 @@ const CardHeader = props => {
   const postTime = postdata.createdAtTS;
   const diffTime = (date - postTime)/1000;
 
-  console.log('postdata', postdata.recipe.ingredientCount);
-  console.log('postdata', postdata.recipe.totalTime);
-
-  const difficultyFunc = (totalTime, ingredientCount) => {
-    if (ingredientCount > 15 || totalTime > 180) {
-      return 'hard';
-    } else if (ingredientCount > 8 || totalTime > 30) {
-      return 'medium';
-    } else {
-      return 'easy';
-    }
-  }
+  console.log('diffTime', diffTime);
+  console.log('postdata.createdat', postdata.createdAt);
 
   const difficulty = difficultyFunc(postdata.recipe.totalTime, postdata.recipe.ingredientCount);
-
-  console.log(difficulty);
-
 
   return (
     <>

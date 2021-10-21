@@ -35,16 +35,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyProfile(props) {
 
-  // const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
-  //   // fetchPolicy: "no-cache",
-  // });
+  const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
+    fetchPolicy: "no-cache",
+  });
   const { loading: loading_feed, data: feed } = useQuery(MY_PROFILE,
     { fetchPolicy: "no-cache" }
     );
 
   let feedData = feed?.myProfile || {}; // my posts for feed
-  // let followData = follow?.me || {};
+  let followData = follow?.me.following || {};
   // console.log('feedData', feedData);
+
+  console.log('followdata', followData);
 
 
   const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
@@ -54,7 +56,7 @@ export default function MyProfile(props) {
 
 
   
-  if (loading_feed) {
+  if (loading_feed || loading1) {
     return (
       <section className="topic-container">
         <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
@@ -151,7 +153,7 @@ export default function MyProfile(props) {
 
       <div className="right-bar">
         <AboutMe />
-        <FollowCard/>
+        <FollowCard followdata={followData}/>
       </div>
 
     </section>
