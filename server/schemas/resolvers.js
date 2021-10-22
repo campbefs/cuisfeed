@@ -84,10 +84,17 @@ const resolvers = {
 
         // Grab & sort my favorite posts
         const user = await User.find({_id: context.user._id})
-              .populate({path:'favorites', populate: { path: 'recipe'}}) // populate subpath
-              .sort([['createdAt', -1]])
+              .populate({path:'favorites',
+      
+                options:{ sort: [{'createdAt': 'desc' }] },
+                // options: { sort: [['createdAtTS', -1]]},
+                populate: { path: 'recipe'}}) // populate subpath
+              // .sort([{'favorites.createdAtTS': "desc"}) // need to sort posts somehow..
               .limit(20); // is this limit applying to # of users returned? wrong place
 
+        // const favorites = user[0].favorites
+        // console.log('fav', favorites);
+        
         return user;
       }
 
