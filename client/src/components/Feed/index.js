@@ -16,7 +16,7 @@ export default function Feed({feedData, loading}) {
 
   if (loading || loading2 ) {
     return (
-        <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
+        <div style={{marginTop: "120px", width: "100%", justifyContent: "center"}}>
           <Spinner show={true} accessibilityLabel="loading feed"/>
         </div>
     )

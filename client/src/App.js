@@ -55,9 +55,9 @@ function App() {
 
   const [searchSubmit, setSearchSubmit] = useState(0);
 
-  // add some logic to check the URL and update currentPage if it doesn't match
 
-  let location = window.location.pathname
+  // added some logic to check the URL and update currentPage if it doesn't match
+  let location = window.location.pathname;
   if (location === '/home' && currentPage !== 'Home') {
     setCurrentPage('Home');
   } else if (location === '/search' && currentPage !== 'Search') {

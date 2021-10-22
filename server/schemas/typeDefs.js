@@ -55,6 +55,7 @@ const typeDefs = gql`
     following: [User]
     posts: [Post]
     followers: [User]
+    favorites: [Post]
     postCount: Int
     followingCount: Int
     followersCount: Int
@@ -103,6 +104,8 @@ const typeDefs = gql`
     myFeed: [Post] # OK
 
     myProfile: [Post] # OK
+
+    myFavorites: [User] # OK
 
     userProfile(username: String!): [Post] # OK
 

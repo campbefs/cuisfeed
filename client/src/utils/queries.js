@@ -211,6 +211,34 @@ export const MY_PROFILE = gql`
   }
 `;
 
+export const MY_FAVORITES = gql`
+  query {
+    myFavorites {
+      _id
+      username
+      favorites {
+        _id
+        username
+        createdAt
+        createdAtTS
+        recipe{
+          _id
+          uri
+          label
+          image
+          source
+          totalTime
+          ingredientCount
+        }
+        likesUser
+        createdAt
+        likeCount
+        commentCount
+      }
+    }
+  }
+`;
+
 export const USER_PROFILE = gql`
   query userProfile($username:String!) {
     userProfile(username:$username) {

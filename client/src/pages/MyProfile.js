@@ -10,7 +10,7 @@ import { makeStyles } from "@material-ui/styles";
 import { Avatar } from '@material-ui/core';
 
 import { useQuery } from "@apollo/client";
-import { MY_PROFILE, GET_ME_PROFILE } from "../utils/queries";
+import { MY_PROFILE, GET_ME_PROFILE, MY_FAVORITES } from "../utils/queries";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -35,31 +35,34 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyProfile(props) {
 
+  // follow data
   const { loading: loading1, data: follow } = useQuery(GET_ME_PROFILE, {
     fetchPolicy: "no-cache",
   });
+
+  // feed data (my posts)
   const { loading: loading_feed, data: feed } = useQuery(MY_PROFILE,
     { fetchPolicy: "no-cache" }
     );
 
-  let feedData = feed?.myProfile || {}; // my posts for feed
+  // favorites data
+  const { loading: loading_favs, data: favorites } = useQuery(MY_FAVORITES,
+    // { fetchPolicy: "no-cache" }
+    );
+
   let followData = follow?.me.following || {};
-  // console.log('feedData', feedData);
-
-  console.log('followdata', followData);
-
+  let feedData = feed?.myProfile || {}; // my posts for feed
+  let favoritesData = favorites?.myFavorites[0].favorites || {};
 
   const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
   const [currentProfilePage, setCurrentProfilePage] = useState(profilePages[0]);
   
   const styles = useStyles();
-
-
   
   if (loading_feed || loading1) {
     return (
       <section className="topic-container">
-        <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
+        <div style={{marginTop: "120px", width: "100%", justifyContent: "center"}}>
           <Spinner show={true} accessibilityLabel="loading"/>
         </div>
       </section>
@@ -143,8 +146,8 @@ export default function MyProfile(props) {
             loading={loading_feed}
           /> : 
           currentProfilePage === 'Favorites' ? <Feed 
-            feedData={feedData}
-            loading={loading_feed}
+            feedData={favoritesData}
+            loading={loading_favs}
           /> : 
           <div>Comments</div>
         }

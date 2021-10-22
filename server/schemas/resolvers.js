@@ -79,6 +79,21 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
+    myFavorites: async (_parent, _args, context) => {
+      if (context.user) {
+
+        // Grab & sort my favorite posts
+        const user = await User.find({_id: context.user._id})
+              .populate({path:'favorites', populate: { path: 'recipe'}}) // populate subpath
+              .sort([['createdAt', -1]])
+              .limit(20); // is this limit applying to # of users returned? wrong place
+
+        return user;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
     userProfile: async (_parent, { username }, context) => {
       if (context.user) {
 
@@ -427,15 +442,15 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
-      // if postdata likes includes your user id
+      // grab your user id from the Post's likes
       const userLikePost = await Post.findOne(
         { _id: postId, likesUser: context.user._id },
       );
 
-      // check if user already rated recipe
+      // check if user already rated recipe. If not...
       if (!userLikePost) {
 
-        // likesUser
+        // Add username to set
         const post = await Post.findOneAndUpdate(
           {_id: postId },
           { $addToSet: {likesUser: context.user._id}},

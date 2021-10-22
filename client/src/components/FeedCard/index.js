@@ -116,9 +116,6 @@ const CardHeader = props => {
   const postTime = postdata.createdAtTS;
   const diffTime = (date - postTime)/1000;
 
-  console.log('diffTime', diffTime);
-  console.log('postdata.createdat', postdata.createdAt);
-
   const difficulty = difficultyFunc(postdata.recipe.totalTime, postdata.recipe.ingredientCount);
 
   return (
@@ -241,7 +238,7 @@ export default function FeedCard(props) {
 
   // Handle Create Post
   const handleCreatePost = async() => {
-    console.log('recipe id', postdata.recipe._id);
+
     try {
       await createPost({
         variables: {recipeId: postdata.recipe._id}
@@ -261,13 +258,10 @@ export default function FeedCard(props) {
   let profileLink = `/profile/${postdata.username}`;
   let recipeLink = `/post/${postdata.recipe._id}`;
 
-  console.log('profileLink', profileLink);
-  console.log('recipeLink', recipeLink);
-
   if (loading) {
     return(
-      <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
-        <Spinner show={true} accessibilityLabel="loading home"/>
+      <div style={{marginTop: "120px", width: "100%", justifyContent: "center"}}>
+        <Spinner show={true} accessibilityLabel="loading feed card"/>
       </div>
       )
   }
