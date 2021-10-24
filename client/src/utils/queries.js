@@ -46,6 +46,10 @@ query {
         _id
         username
       }
+      followers {
+        _id
+        username
+      }
       postCount
       posts {
         _id
@@ -61,6 +65,8 @@ query {
         # }
         createdAt
       }
+      followingCount
+      followersCount
     }
   }
 `;
@@ -124,7 +130,7 @@ export const GET_SINGLE_POST = gql`
         createdAt
       }
       commentCount
-      likes
+      likesUser
       likeCount
       createdAt
     }
@@ -134,7 +140,6 @@ export const GET_SINGLE_POST = gql`
 export const GET_SINGLE_POST_LIKES = gql`
   query getSinglePost($postId:ID!) {
     getSinglePost(postId:$postId) {
-      likes
       likesUser
       likeCount
     }
@@ -174,15 +179,19 @@ export const MY_FEED = gql`
       username
       createdAt
       createdAtTS
-      likes
-      likeCount
-      commentCount
-      recipe {
+      recipe{
+        _id
         uri
         label
         image
         source
+        totalTime
+        ingredientCount
       }
+      likesUser
+      createdAt
+      likeCount
+      commentCount
     }
   }
 `;
@@ -194,12 +203,43 @@ export const MY_PROFILE = gql`
       _id
       username
       createdAt
+      createdAtTS
       recipe {
+        _id
+        uri
         label
         image
-        # source
-        uri
-        url
+        source
+        totalTime
+        ingredientCount
+      }
+    }
+  }
+`;
+
+export const MY_FAVORITES = gql`
+  query {
+    myFavorites {
+      _id
+      username
+      favorites {
+        _id
+        username
+        createdAt
+        createdAtTS
+        recipe{
+          _id
+          uri
+          label
+          image
+          source
+          totalTime
+          ingredientCount
+        }
+        likesUser
+        createdAt
+        likeCount
+        commentCount
       }
     }
   }

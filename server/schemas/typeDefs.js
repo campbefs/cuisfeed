@@ -28,10 +28,11 @@ const typeDefs = gql`
     ratingUsers: [String]
     updated: String
     avgRating: Float
-    ratingCount: Int
     totalTime: Int
     healthLabels: [String]
     cautions: [String]
+    ratingCount: Int
+    ingredientCount: Int
   }
  
   type Post {
@@ -39,7 +40,7 @@ const typeDefs = gql`
     username: String
     recipe: Recipe    # ref Recipe model
     comments: [Comment]
-    likes: [String]
+    # likes: [String]
     likesUser: [ID]
     createdAt: String
     commentCount: Int
@@ -54,6 +55,7 @@ const typeDefs = gql`
     following: [User]
     posts: [Post]
     followers: [User]
+    favorites: [Post]
     postCount: Int
     followingCount: Int
     followersCount: Int
@@ -102,6 +104,8 @@ const typeDefs = gql`
     myFeed: [Post] # OK
 
     myProfile: [Post] # OK
+
+    myFavorites: [User] # OK
 
     userProfile(username: String!): [Post] # OK
 

@@ -15,6 +15,7 @@ const resolvers = {
                   populate: { path: 'posts',
                       populate: {path: 'recipe'}
                   }})
+          .populate({path: 'followers'})
           .populate({path:'posts', populate: { path: 'recipe'}}) // populate subpath
 
         return userData;
@@ -74,6 +75,27 @@ const resolvers = {
               .limit(10);
 
         return post;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+    myFavorites: async (_parent, _args, context) => {
+      if (context.user) {
+
+        // Grab & sort my favorite posts
+        const user = await User.find({_id: context.user._id})
+              .populate({path:'favorites',
+                options:{ sort: [{'createdAt': 'desc' }] },
+                // options: { sort: [['createdAtTS', -1]]},
+                populate: { path: 'recipe'}}) // populate subpath
+              // .sort([{'favorites.createdAtTS': "desc"}) // need to sort posts somehow..
+              .limit(20); // is this limit applying to # of users returned? wrong place
+
+        // const favorites = user[0].favorites
+        // console.log('fav', favorites);
+        
+        return user;
       }
 
       throw new AuthenticationError('Not logged in');
@@ -427,15 +449,15 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
-      // if postdata likes includes your user id
+      // grab your user id from the Post's likes
       const userLikePost = await Post.findOne(
         { _id: postId, likesUser: context.user._id },
       );
 
-      // check if user already rated recipe
+      // check if user already rated recipe. If not...
       if (!userLikePost) {
 
-        // likesUser
+        // Add username to set
         const post = await Post.findOneAndUpdate(
           {_id: postId },
           { $addToSet: {likesUser: context.user._id}},
@@ -448,9 +470,6 @@ const resolvers = {
           { $addToSet: { favorites: postId }},
           { new: true }
         )
-
-        console.log('user', user);
-
 
         if (!post) {
           throw new UserInputError('No Post Found');
@@ -472,8 +491,6 @@ const resolvers = {
           { $pull: { favorites: postId }},
           { new: true }
         )
-
-        console.log('user', user);
 
         if (!post) {
           throw new UserInputError('No Post Found');

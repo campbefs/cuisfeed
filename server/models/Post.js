@@ -20,7 +20,7 @@ const postSchema = new Schema({
       ref: 'Recipe'
     },
     comments: [commentSchema],
-    likes: [String],
+    // likes: [String],
     likesUser: [
       {
         type: Schema.Types.ObjectId,
@@ -50,7 +50,7 @@ postSchema.virtual('commentCount').get(function () {
 });
 
 postSchema.virtual('likeCount').get(function () {
-  return this.likes.length;
+  return this.likesUser.length;
 });
 
 const Post = model('Post', postSchema);

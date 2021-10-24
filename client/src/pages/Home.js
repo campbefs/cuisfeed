@@ -21,13 +21,13 @@ export default function Home() {
   let followData = follow?.me.following || {};
 
   // console.log('followData', followData);
-  console.log('feedData', feedData);
+  // console.log('feedData', feedData);
 
   // pass loading down to the components - follow (feed spinner is in the Feed component)
   if (loading1) {
     return (
-      <div style={{marginTop: "120px", width: "70%", justifyContent: "center"}}>
-        <Spinner show={true} accessibilityLabel="loading home"/>
+      <div style={{marginTop: "120px", width: "100%", justifyContent: "center"}}>
+        <Spinner show={true} accessibilityLabel="loading feed card"/>
       </div>
       )
   }

@@ -189,7 +189,7 @@ export const DELETE_POST = gql`
       comments{
         commentId
       }
-        likes
+      likesUser
       createdAt
       commentCount
       likeCount
@@ -206,7 +206,7 @@ export const LIKE_POST = gql`
         username
         commentText
       }
-      likes
+      likesUser
       createdAt
       commentCount
       likeCount  }
