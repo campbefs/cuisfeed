@@ -46,6 +46,10 @@ query {
         _id
         username
       }
+      followers {
+        _id
+        username
+      }
       postCount
       posts {
         _id
@@ -61,6 +65,8 @@ query {
         # }
         createdAt
       }
+      followingCount
+      followersCount
     }
   }
 `;

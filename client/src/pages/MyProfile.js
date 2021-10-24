@@ -53,6 +53,7 @@ export default function MyProfile(props) {
   let followData = follow?.me.following || {};
   let feedData = feed?.myProfile || {}; // my posts for feed
   let favoritesData = favorites?.myFavorites[0].favorites || {};
+  let me = follow?.me;
 
   const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
   const [currentProfilePage, setCurrentProfilePage] = useState(profilePages[0]);
@@ -80,25 +81,30 @@ export default function MyProfile(props) {
 
         <Box display="flex" justifyContent="center" margin={2}>
           <Avatar
-              // name="Nicholas"
-              alt="Nicholas"
+              alt="username"
               // src="https://i.pinimg.com/originals/bd/35/1e/bd351eff6c29b993ec26ccd9545c8d1c.jpg"
               className={styles.medium}
               // justifyContent="center" // throwing error 
           >
-            N
+            {me.username.charAt(0).toUpperCase()}
           </Avatar>
         </Box>
 
 
         <Box marginBottom={2}>
           <Heading size="lg" align="center">
-              Nicholas
+              {me.username}
           </Heading>
           <Box margin={2}>
-            <Text align="center">I am a surprisingly good actor</Text>
+            <Text align="center">I Love to Cook All the Things</Text>
           </Box>
-          <Text weight="bold" align="center"><span className="profile-link"><Followers number={151} type="Followers"/></span> | <span className="profile-link"><Followers number={259} type="Following"/></span></Text>
+          <Text weight="bold" align="center">
+              <span className="profile-link">
+                <Followers number={me.followersCount} type="Followers" users={me.followers}/>
+              </span> | <span className="profile-link">  {/* keep this here bc of formatting*/}
+                <Followers number={me.followingCount} type="Following" users={me.following}/>
+              </span>
+          </Text>
         </Box>
 
 

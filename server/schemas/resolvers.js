@@ -15,6 +15,7 @@ const resolvers = {
                   populate: { path: 'posts',
                       populate: {path: 'recipe'}
                   }})
+          .populate({path: 'followers'})
           .populate({path:'posts', populate: { path: 'recipe'}}) // populate subpath
 
         return userData;
@@ -85,7 +86,6 @@ const resolvers = {
         // Grab & sort my favorite posts
         const user = await User.find({_id: context.user._id})
               .populate({path:'favorites',
-      
                 options:{ sort: [{'createdAt': 'desc' }] },
                 // options: { sort: [['createdAtTS', -1]]},
                 populate: { path: 'recipe'}}) // populate subpath

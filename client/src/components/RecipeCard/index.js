@@ -17,6 +17,8 @@ import { Favorite as FavoriteIcon,
 // import CallMade from '@material-ui/icons/CallMade';
 import { Label } from 'semantic-ui-react';
 import { Button } from 'gestalt';
+
+// SnackBar
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -268,8 +270,12 @@ function RecipeCard(props) {
         key={'bottom' + 'right'}
         action={
           <React.Fragment>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-              <CloseIcon fontSize="small" />
+            <IconButton 
+              size="small" 
+              aria-label="close" 
+              color="inherit" 
+              onClick={handleClose}>
+                <CloseIcon fontSize="small" />
             </IconButton>
           </React.Fragment>
         }
