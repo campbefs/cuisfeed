@@ -252,6 +252,15 @@ code {
   /* width */
 }
 
+.link-hover:hover {
+  background: rgb(238, 238, 238);
+  border-radius: 10px;
+  transition: .3s;
+}
+
+.profile-link:hover {
+  cursor: pointer;
+}
 
 #menu {
   z-index: 99;

@@ -108,6 +108,9 @@ recipeSchema.virtual('ratingCount').get(function () {
   return this.ratings.length;
 });
 
+recipeSchema.virtual('ingredientCount').get(function () {
+  return this.ingredientLines.length;
+});
 
 const Recipe = model('Recipe', recipeSchema);
 

@@ -5,10 +5,11 @@ import { Text, Box, Link, CompositeZIndex, FixedZIndex, Flex, Layer, Modal, Text
 import { Avatar, Typography } from '@material-ui/core';
 import { Row, Item } from '@mui-treasury/components/flex';
 import { makeStyles, StylesContext } from "@material-ui/styles";
+import { BasicProfile } from '../BasicProfile';
 
-import Auth from '../../utils/auth';
+// import Auth from '../../utils/auth';
 
-import { useMutation } from '@apollo/client';
+// import { useMutation } from '@apollo/client';
 
 const useBasicProfileStyles = makeStyles(({ palette }) => ({
   avatar: {
@@ -31,22 +32,11 @@ const useBasicProfileStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-const BasicProfile = props => {
-  const styles = useBasicProfileStyles();
-  return (
-    <Row {...props} paddingBottom="5px">
-      <Item><Avatar className={styles.avatar}>S</Avatar></Item>
-      <Item position={'middle'} pl={{ sm: 0.5, lg: 0.5 }}>
-        <Typography className={styles.overline}>CHEF</Typography>
-        <Typography className={styles.name}>siriwatknp</Typography>
-      </Item>
-    </Row>
-  );
-};
-
 export default function Followers(props) {
 
-  const { number, type } = props;
+  const { number, type, users } = props;
+
+  console.log(type, users);
 
   // const [validated] = useState(false);
   // const [showAlert, setShowAlert] = useState(false);
@@ -71,81 +61,15 @@ export default function Followers(props) {
           size="sm"
         >
 
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-          
-          
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
-
-          <BasicProfile 
-            marginBottom="20px"
-            paddingLeft="20px"  
-          />
+          {users.map((user) => {
+            return (
+              <BasicProfile
+                marginBottom="20px"
+                paddingLeft="20px"
+                username={user.username}
+              />
+            )
+          })}
 
         </Modal>
       </>
@@ -164,6 +88,8 @@ export default function Followers(props) {
         // color="blue"
         // size="lg" 
         onClick={() => setShouldShow(true)}
+        hoverStyle="none"
+        tapStyle="compress"
       >
         <Text weight="bold">{number} {type}</Text>
       </Link>
