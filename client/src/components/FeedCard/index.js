@@ -99,7 +99,7 @@ const CardHeader = props => {
   const styles = useCardHeaderStyles();
   const iconBtnStyles = useSizedIconButtonStyles({ padding: 8, childSize: 20 });
 
-  const { postdata, recipelink } = props;
+  const { postdata, postlink } = props;
 
   const StyledRating = withStyles({
     iconFilled: {
@@ -121,7 +121,7 @@ const CardHeader = props => {
   return (
     <>
       <Row {...props}>
-        <Link href={recipelink} hoverStyle="none" tapStyle="compress">
+        <Link href={postlink} hoverStyle="none" tapStyle="compress">
 
           <Item position={'middle'} minWidth={'250px'}>
             <Typography className={styles.title}>
@@ -191,7 +191,7 @@ const useStyles = makeStyles(() => ({
 
 export default function FeedCard(props) {
 
-  const { postdata: postdata, me } = props;
+  const { postdata, me } = props;
 
   const [likePost] = useMutation(LIKE_POST);
   const [createPost] = useMutation(CREATE_POST);
@@ -256,7 +256,7 @@ export default function FeedCard(props) {
 
   // let profileLink = `/`
   let profileLink = `/profile/${postdata.username}`;
-  let recipeLink = `/post/${postdata.recipe._id}`;
+  let postLink = `/post/${postdata._id}`;
 
   if (loading) {
     return(
@@ -274,14 +274,14 @@ export default function FeedCard(props) {
           <Grid className={styles.card}>
               <Row p={{ xs: 0.5, sm: 0.75, lg: 1 }} gap={gap} className={styles.noBotPadding}>
                 <Item>
-                  <Link href={recipeLink} hoverStyle="none" tapStyle="compress">
+                  <Link href={postLink} hoverStyle="none" tapStyle="compress">
                     <Box minHeight={200} bgcolor={'#F4F7FA'} borderRadius={8} maxWidth={250}>
                       <img style={{width: "250px", height: "250px", borderRadius: "8px"}}alt="recipe image" src={postdata.recipe.image}/>
                     </Box>
                   </Link>
                 </Item>
                 <Column>
-                  <CardHeader postdata={postdata} recipelink={recipeLink}/>
+                  <CardHeader postdata={postdata} postlink={postLink}/>
                   <BasicProfile username={postdata.username} profilelink={profileLink} position={'bottom'} />
                 </Column>
               </Row>

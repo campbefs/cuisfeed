@@ -3,8 +3,11 @@ import Nutrients from '../components/Nutrients';
 import PostCommentsSelect from '../components/PostCommentsSelect';
 import PostComments from '../components/PostComments';
 import AddRecipeButton from '../components/AddRecipeButton';
+import { useQuery } from "@apollo/client";
+import { GET_SINGLE_POST } from "../utils/queries";
+import { useParams } from 'react-router-dom';
 
-import { Box, Text, Heading, Divider, Link as GestaltLink, Button } from 'gestalt';
+import { Box, Text, Heading, Divider, Link as GestaltLink, Button, Spinner } from 'gestalt';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Grid, Tooltip, Avatar, Typography, IconButton } from '@material-ui/core';
@@ -105,9 +108,18 @@ const ItemActions = props => {
 };
 
 
-
-
 export default function Post() {
+
+  const { postId } = useParams();
+
+  const { loading: loading, data: postdata } = useQuery(GET_SINGLE_POST, {
+    variables: { postId: postId }
+    // fetchPolicy: "no-cache",
+  })
+
+  let postData = postdata?.getSinglePost
+
+  console.log('postData', postData);
 
   const styles = useCardHeaderStyles();
 
@@ -121,6 +133,15 @@ export default function Post() {
     },
   })(Rating);
 
+  if (loading) {
+    return (
+      <div style={{marginTop: "120px", width: "100%", justifyContent: "center"}}>
+        <Spinner show={true} accessibilityLabel="loading feed card"/>
+      </div>
+      )
+  }
+
+
   return (
     <section className = 'topic-container' style={{flexDirection: "column"}}>
       
@@ -128,7 +149,7 @@ export default function Post() {
         <div className="top-left-post">
           <div className="upper-left-post the-white-box">
             <Box marginBottom={12}>
-              <Heading align="center">Pizza that's pretty good</Heading>
+              <Heading align="center">{postData.recipe.label}</Heading>
             </Box>
 
             {/* <Divider/> */}
@@ -139,13 +160,18 @@ export default function Post() {
 
             <Box marginBottom={6}>
               <ul>
-                <li key="1" ><Text>1 pack pizza base mix</Text></li>
+                {
+                  postData.recipe.ingredientLines.map((ingredient) => {
+                    return <li key={ingredient} ><Text>{ingredient}</Text></li>
+                  })
+                }
+                {/* <li key="1" ><Text>1 pack pizza base mix</Text></li>
                 <li key="2"><Text>3 tbsp tomato pizza sauce</Text></li>
                 <li key="3"><Text>2 small cooking chorizo, diced</Text></li>
                 <li key="4"><Text>1 tbsp capers, drained</Text></li>
                 <li key="5"><Text>handful cherry tomatoes, halved</Text></li>
                 <li key="6"><Text>handful rocket</Text></li>
-                <li key="7"><Text>olive oil, to drizzle</Text></li>
+                <li key="7"><Text>olive oil, to drizzle</Text></li> */}
               </ul>
             </Box>
 
@@ -156,11 +182,11 @@ export default function Post() {
             </Box>
 
             <div style={{textAlign: "left", marginTop: "5px", marginBottom: "15px", marginLeft: "15px", lineHeight: "1.5"}}>
-              <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>middle eastern</Text>
-              <Text><span style={{fontWeight: "bold"}}>Yield: </span>8</Text>
-              <Text><span style={{fontWeight: "bold"}}>Total Time: </span>20</Text>
-              <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>Low-Carb, Low-Sodium</Text>
-              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>Sulfites</Text>
+              <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>{postData.recipe.cuisineType.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Yield: </span>{postData.recipe.yield} servings</Text>
+              <Text><span style={{fontWeight: "bold"}}>Total Time: </span>{parseInt(postData.recipe.totalTime) === 0 ? '' : postData.recipe.totalTime} minutes</Text>
+              <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>{postData.recipe.dietLabels.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>MISSING FROM TABLE- FIX</Text>
             </div>
 
             <Divider/>
@@ -183,8 +209,8 @@ export default function Post() {
 
             <Box marginBottom={2}>
               <Text color="blue" weight="bold">
-                <GestaltLink href="https://www.marthastewart.com/1155033/lamb-sausages">
-                  <Box padding={2}>For more details visit Martha Stewart</Box>
+                <GestaltLink href={postData.recipe.url}>
+                  <Box padding={2}>For more details visit {postData.recipe.source}</Box>
                 </GestaltLink>
               </Text>
             </Box>
@@ -207,15 +233,16 @@ export default function Post() {
             <Box marginBottom={4}>
               <AddRecipeButton/>
             </Box>
-            <img style={{position: "-webkit-sticky", position: "sticky", width: "90%", maxWidth: "400px", borderRadius: "8px"}} alt="recipe image" src="https://www.edamam.com/web-img/7fe/7fee72cbf470edc0089493eb663a7a09.jpg"/>
+            <img style={{position: "-webkit-sticky", position: "sticky", width: "90%", maxWidth: "400px", borderRadius: "8px"}} alt="recipe image" src={postData.recipe.image}/>
 
             <div style={{marginTop: "30px", width: "85%", maxWidth: "400px", marginLeft: "50px", marginRight: "50px"}}>
               <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between",  flexWrap: "wrap"}}>
                 <div style={{display: "flex", flexDirection: "row", marginBottom: "10px", flexWrap: "wrap"}}>
                   <StyledRating
                     defaultValue={4.5}
-                    maxRating={5}
+                    // maxRating={5}
                     // readOnly
+                    name="recipe rating"
                     icon={<FavoriteIcon fontSize="inherit"/>}
                     // className={styles.title}
                     precision={0.5}

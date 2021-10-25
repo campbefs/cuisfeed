@@ -117,11 +117,20 @@ export const GET_SINGLE_POST = gql`
       recipe {
         _id
         label
-        ingredientLines
         image
-        avgRating
-        ratingCount
+        source
+        url
+        shareAs
+        yield
+        calories
+        dietLabels
+        ingredientLines
+        cuisineType
+        mealType
+        dishType
+        ratings
         ratingUsers
+        totalTime
       }
       comments{
         commentId
@@ -129,8 +138,8 @@ export const GET_SINGLE_POST = gql`
         username
         createdAt
       }
-      commentCount
       likesUser
+      commentCount
       likeCount
       createdAt
     }
