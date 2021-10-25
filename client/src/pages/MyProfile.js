@@ -55,6 +55,8 @@ export default function MyProfile(props) {
   let favoritesData = favorites?.myFavorites[0].favorites || {};
   let me = follow?.me;
 
+  console.log('feedData', feedData);
+
   const [profilePages] = useState([ 'Posts', 'Favorites', 'Comments' ]);
   const [currentProfilePage, setCurrentProfilePage] = useState(profilePages[0]);
   

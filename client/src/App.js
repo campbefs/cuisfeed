@@ -56,7 +56,7 @@ function App() {
   const [searchSubmit, setSearchSubmit] = useState(0);
 
 
-  // added some logic to check the URL and update currentPage if it doesn't match
+  // added some logic to check the URL and update currentPage if it doesn't match (e.g. page refresh)
   let location = window.location.pathname;
   if (location === '/home' && currentPage !== 'Home') {
     setCurrentPage('Home');
@@ -97,16 +97,14 @@ function App() {
               <Switch>
                 <Route exact path='/' component={Welcome} />
                 <Route exact path='/home' component={Home} />
-                <Route exact path='/myprofile/' component={MyProfile}/>
-
-                <Route exact path='/profile/:username' component={UserProfile}/>
                 <Route path='/search' component={Search} />
-                {/* <Route path="/none" render={(setCurrentPage) => <Search {...setCurrentPage, searchInput} title={`Search Page`} />} /> */}
 
-                <Route exact path='/post' component={Post} />
-                <Route exact path='/post/:postId' component={PostOld} />
+                <Route exact path='/myprofile/' component={MyProfile}/>
+                <Route path='/profile/:username' component={UserProfile}/>
+
+                <Route path='/post/:postId' component={Post} />
                 {/* catch all route */}
-                <Route component={Search} />
+                <Route component={Home} />
               </Switch>
              </>
            )}

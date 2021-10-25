@@ -90,7 +90,7 @@ export default function Followers(props) {
         onClick={() => setShouldShow(true)}
         hoverStyle="none"
         tapStyle="compress"
-      >
+     >
         <Text weight="bold">{number} {type}</Text>
       </Link>
       {shouldShow && (
