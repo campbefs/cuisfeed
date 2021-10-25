@@ -186,7 +186,8 @@ export default function Post() {
               <Text><span style={{fontWeight: "bold"}}>Yield: </span>{postData.recipe.yield} servings</Text>
               <Text><span style={{fontWeight: "bold"}}>Total Time: </span>{parseInt(postData.recipe.totalTime) === 0 ? '' : postData.recipe.totalTime} minutes</Text>
               <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>{postData.recipe.dietLabels.join(', ')}</Text>
-              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>MISSING FROM TABLE- FIX</Text>
+              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>{postData.recipe.cautions.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Health Labels: </span>{postData.recipe.healthLabels.join(', ')}</Text>
             </div>
 
             <Divider/>

@@ -131,6 +131,8 @@ export const GET_SINGLE_POST = gql`
         ratings
         ratingUsers
         totalTime
+        healthLabels
+        cautions
       }
       comments{
         commentId

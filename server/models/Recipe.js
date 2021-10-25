@@ -70,12 +70,13 @@ const recipeSchema = new Schema({
   totalTime: {
     type: Number
   },
-  // healthLabels: {
-  //   type: [String]
-  // },
-  // cautions: {
-  //   type: [String]
-  // },
+  // Why is cautions missing?
+  healthLabels: {
+    type: [String]
+  },
+  cautions: {
+    type: [String]
+  },
   updated: {
     type: Date,
     default: Date.now,
