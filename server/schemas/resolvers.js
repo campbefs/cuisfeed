@@ -21,7 +21,6 @@ const resolvers = {
         return userData;
       }
 
-
       throw new AuthenticationError('Not logged in');
     },
 
@@ -301,6 +300,9 @@ const resolvers = {
       if (!recipe) {
         recipe = await Recipe.create(input);
       }
+
+      recipe.markModified('totalNutrients');
+      await recipe.save();
 
       // Create the Post
       const postData = await Post.create( {

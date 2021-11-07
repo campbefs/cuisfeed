@@ -9,6 +9,16 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type SubRecipe {
+    label: String
+    quantity: Int
+    unit: String
+  } 
+
+  type TotalNutrients {
+    ENERC_KCAL: SubRecipe
+  }
+
   type Recipe {
     _id: ID
     uri: String
@@ -33,6 +43,7 @@ const typeDefs = gql`
     cautions: [String]
     ratingCount: Int
     ingredientCount: Int
+    totalNutrients: TotalNutrients
   }
  
   type Post {
@@ -85,6 +96,7 @@ const typeDefs = gql`
     totalTime: Int
     healthLabels: [String]
     cautions: [String]
+    totalNutrients: String
   }
 
 

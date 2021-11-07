@@ -3,6 +3,8 @@ import {Table, Text, Box, Mask, Image} from "gestalt";
 
 export default function Nutrients() {
 
+  
+
   return (
     <Table maxHeight={200}>
       <Table.Header sticky>
