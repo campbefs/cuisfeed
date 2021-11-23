@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
@@ -11,10 +11,8 @@ import Home from './pages/Home';
 
 import MyProfile from './pages/MyProfile';
 import UserProfile from './pages/UserProfile';
-import RecipeSearch from './pages/RecipeSearch';
 import Search from './pages/Search';
 import Post from './pages/Post';
-import PostOld from './pages/PostOld';
 
 
 const httpLink = createHttpLink({
@@ -55,24 +53,30 @@ function App() {
 
   const [searchSubmit, setSearchSubmit] = useState(0);
 
-
   // added some logic to check the URL and update currentPage if it doesn't match (e.g. page refresh)
   let location = window.location.pathname;
-  if (location === '/home' && currentPage !== 'Home') {
-    setCurrentPage('Home');
-  } else if (location === '/search' && currentPage !== 'Search') {
-    setCurrentPage('Search');
-  } else if (location === '/discover' && currentPage !== 'Discover') {
-    setCurrentPage('Discover');
-  } else if (location === '/inbox' && currentPage !== 'Inbox') {
-    setCurrentPage('INbox');
-  } else if (location === '/myrecipebook' && currentPage !== 'My Recipe Book') {
-    setCurrentPage('My Recipe Book');
-  } else if (location === '/myprofile' && currentPage !== 'Profile') {
-    setCurrentPage('Profile');
-  } else if (location === '/profile' && currentPage !== 'Profile') {
-    setCurrentPage('Profile');
-  }
+
+  useEffect ( () => {
+  
+    if (location === '/home' && currentPage !== 'Home') {
+      setCurrentPage('Home');
+    } else if ((location === '/search' || location === '/search/') 
+                && currentPage !== 'Search') {
+      setCurrentPage('Search');
+    } else if (location === '/discover' && currentPage !== 'Discover') {
+      setCurrentPage('Discover');
+    } else if (location === '/inbox' && currentPage !== 'Inbox') {
+      setCurrentPage('Inbox');
+    } else if (location === '/myrecipebook' && currentPage !== 'My Recipe Book') {
+      setCurrentPage('My Recipe Book');
+    } else if (location === '/myprofile' && currentPage !== 'Profile') {
+      setCurrentPage('Profile');
+    } else if (location === '/profile' && currentPage !== 'Profile') {
+      setCurrentPage('Profile');
+    }
+
+  })
+  
   
   return (
     <ApolloProvider client={client}>

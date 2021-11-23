@@ -151,6 +151,12 @@ function RecipeCard(props) {
   const handleAddPost = async () => {
     try {
 
+      console.log('recipedata', recipedata);
+
+      // convert the Object to a string to store in DB easier
+      recipedata.totalNutrients = JSON.stringify(recipedata.totalNutrients);
+      recipedata.totalDaily = JSON.stringify(recipedata.totalDaily);
+
       await addRecipeAndPost({
         variables: {
             uri: recipedata.uri,
@@ -170,6 +176,9 @@ function RecipeCard(props) {
             totalTime: recipedata.totalTime,
             healthLabels: recipedata.healthLabels,
             cautions: recipedata.cautions,
+
+            totalNutrients: recipedata.totalNutrients,
+            totalDaily: recipedata.totalDaily,
             
           }
       });

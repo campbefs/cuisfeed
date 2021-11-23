@@ -79,8 +79,8 @@ export const ADD_RECIPE_AND_POST = gql`
           $healthLabels: [String],
           $cautions: [String],
 
-          # $totalNutrients: String,
-          # $totalDaily: String
+          $totalNutrients: String,
+          $totalDaily: String
           ) {
 
     addRecipeAndPost( input:{ uri: $uri, label:$label, 
@@ -96,8 +96,8 @@ export const ADD_RECIPE_AND_POST = gql`
           healthLabels: $healthLabels,
           cautions: $cautions,
 
-          # totalNutrients: $totalNutrients,
-          # totalDaily: $totalDaily
+          totalNutrients: $totalNutrients,
+          totalDaily: $totalDaily
           })
     {
       username
@@ -118,6 +118,9 @@ export const ADD_RECIPE_AND_POST = gql`
           totalTime
           healthLabels
           cautions
+
+          totalNutrients
+          totalDaily
 
           # shareAs
           # yield

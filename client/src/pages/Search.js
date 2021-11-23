@@ -67,8 +67,8 @@ export default function Search(props) {
         let totalTime = hits[i].recipe.totalTime;
         let healthLabels = hits[i].recipe.healthLabels;
         let cautions = hits[i].recipe.cautions;
-        // let totalNutrients = hits[i].recipe.totalNutrients;
-        // let totalDaily = hits[i].recipe.totalDaily;
+        let totalNutrients = hits[i].recipe.totalNutrients;
+        let totalDaily = hits[i].recipe.totalDaily;
 
         recipedata.push({uri, image, label, ingredientLines, url, source, 
           yield: yield1,
@@ -81,10 +81,11 @@ export default function Search(props) {
           totalTime,
           healthLabels,
           cautions,
-        // totalNutrients,
-        // totalDaily
+          totalNutrients,
+          totalDaily
 
         });
+
       };
   
       // this is tracking if search results change to update page
@@ -102,12 +103,6 @@ export default function Search(props) {
     }
   }, [searchInput])
 
-  // print search results once received
-  // useEffect(() => {
-  //   if (searchedRecipes.length > 0) {
-  //     console.log('searched recipes new', searchedRecipes);
-  //   }
-  // }, [searchedRecipes])
 
   return (
     <section

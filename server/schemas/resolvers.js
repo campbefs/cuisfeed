@@ -297,6 +297,7 @@ const resolvers = {
       let recipe = await Recipe.findOne({ uri: input.uri });
   
       // if not, create recipe
+      // console.log('api input', input);
       if (!recipe) {
         recipe = await Recipe.create(input);
       }

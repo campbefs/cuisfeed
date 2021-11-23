@@ -115,29 +115,13 @@ const recipeSchema = new Schema({
   // }),
 
   totalNutrients: {
-    type: Schema.Types.Mixed,
+    // type: Schema.Types.Mixed,
+    type: String
   },
 
-  // totalNutrients: totalNutrients,
-
-  // {
-
-    // type: [recipeObjectSchema]
-
-    // ENERC_KCAL: {
-    //   label: {
-    //     type: String
-    //   },
-    //   quantity: {
-    //     type: Number
-    //   },
-    //   unit: {
-    //     type: String
-    //   }
-    // },
-
-  // },
-  // add totalDaily too
+  totalDaily: {
+    type: String
+  },
 
   updated: {
     type: Date,
