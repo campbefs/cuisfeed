@@ -182,12 +182,12 @@ export default function Post() {
             </Box>
 
             <div style={{textAlign: "left", marginTop: "5px", marginBottom: "15px", marginLeft: "15px", lineHeight: "1.5"}}>
-              <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>{postData.recipe.cuisineType.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>{postData.recipe.cuisineType.length == 0 ? 'n/a' : postData.recipe.cuisineType.join(', ')}</Text>
               <Text><span style={{fontWeight: "bold"}}>Yield: </span>{postData.recipe.yield} servings</Text>
-              <Text><span style={{fontWeight: "bold"}}>Total Time: </span>{parseInt(postData.recipe.totalTime) === 0 ? '' : postData.recipe.totalTime} minutes</Text>
-              <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>{postData.recipe.dietLabels.join(', ')}</Text>
-              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>{postData.recipe.cautions.join(', ')}</Text>
-              <Text><span style={{fontWeight: "bold"}}>Health Labels: </span>{postData.recipe.healthLabels.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Total Time: </span>{parseInt(postData.recipe.totalTime) == 0 ? '' : postData.recipe.totalTime} minutes</Text>
+              <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>{ postData.recipe.dietLabels.length == 0 ? 'n/a' : postData.recipe.dietLabels.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>{postData.recipe.cautions.length == 0 ? 'n/a' : postData.recipe.cautions.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Health Labels: </span>{postData.recipe.healthLabels.length == 0 ? 'n/a' : postData.recipe.healthLabels.join(', ')}</Text>
             </div>
 
             <Divider/>

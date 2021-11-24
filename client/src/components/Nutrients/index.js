@@ -9,20 +9,6 @@ export default function Nutrients(props) {
   const totalNutrients = JSON.parse(totalnutrients);
   const totalDaily = JSON.parse(totaldaily);
 
-  console.log('enerc_kcal', totalNutrients.ENERC_KCAL.label);
-
-  // const nutrients = {};
-  // for (i = 0; i < totalNutrients.length; i++ ) {
-  //   console.log(i, );
-  // }
-  // for (const [key, value] of Object.entries(totalNutrients)) {
-  //   console.log(key, value);
-  //   console.log(totalDaily[key]);
-  //   nutrients[key].label = 
-  // }
-
-  console.log('td', totalDaily.ENERC_KCAL.unit);
-
 
   return (
     <Table maxHeight={200}>
@@ -56,12 +42,13 @@ export default function Nutrients(props) {
               </Mask>
             </Box>
           </Table.Cell> */}
-          
+
           {/* <Table.Cell><Text>Energy</Text></Table.Cell>
           <Table.Cell><Text>2490kcal</Text></Table.Cell>
           <Table.Cell><Text>124%</Text></Table.Cell>
         </Table.Row> */}
 
+        {/* No Map function for Objects. Turn object into array of keys and map that */}
         {Object.keys(totalDaily).map((key, index) => {
           
           return (
