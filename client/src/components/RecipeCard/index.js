@@ -179,7 +179,7 @@ function RecipeCard(props) {
 
             totalNutrients: recipedata.totalNutrients,
             totalDaily: recipedata.totalDaily,
-            
+
           }
       });
       // alert('Post created!');

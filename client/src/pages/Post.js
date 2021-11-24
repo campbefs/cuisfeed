@@ -198,7 +198,10 @@ export default function Post() {
 
             <Box marginBottom={10}>
               {/* <Divider/> */}
-              <Nutrients />
+              <Nutrients 
+                totalnutrients={postData.recipe.totalNutrients}
+                totaldaily={postData.recipe.totalDaily}
+              />
               {/* <Divider/> */}
             </Box>
           

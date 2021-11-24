@@ -133,6 +133,8 @@ export const GET_SINGLE_POST = gql`
         totalTime
         healthLabels
         cautions
+        totalNutrients
+        totalDaily
       }
       comments{
         commentId
