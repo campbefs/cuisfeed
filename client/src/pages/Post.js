@@ -350,6 +350,7 @@ export default function Post() {
                 <CloseIcon fontSize="small" />
             </IconButton>
           </React.Fragment>
+        // width={'100px'}
         }
       >
         <Alert severity="error">You've Already Rated This Recipe!</Alert>

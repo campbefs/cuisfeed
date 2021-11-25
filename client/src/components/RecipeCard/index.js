@@ -21,11 +21,16 @@ import { Button } from 'gestalt';
 // SnackBar
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
+import MuiAlert from '@mui/material/Alert';
 
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 // import { useSizedIconButtonStyles } from '@mui-treasury/styles/iconButton/sized';
 import { useMutation } from '@apollo/client';
 import { ADD_RECIPE_AND_POST } from '../../utils/mutations';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const StyledTooltip = withStyles({
   tooltip: {
@@ -273,9 +278,10 @@ function RecipeCard(props) {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         open={open}
         onClose={handleClose}
-        message="Recipe Posted!"
+        // message="Recipe Posted!"
         key={'bottom' + 'right'}
         action={
+          // Duplicate -- just hear for show
           <React.Fragment>
             <IconButton 
               size="small" 
@@ -286,7 +292,23 @@ function RecipeCard(props) {
             </IconButton>
           </React.Fragment>
         }
-      />
+      >
+        <Alert 
+          severity="success" 
+          sx={{width: '200px'}}
+          action={
+            <React.Fragment>
+              <IconButton 
+                size="small" 
+                aria-label="close" 
+                color="inherit" 
+                onClick={handleClose}>
+                  <CloseIcon fontSize="small" />
+              </IconButton>
+            </React.Fragment>
+          }
+        >Recipe Posted!</Alert>
+      </Snackbar>
 
     </section>
   );
