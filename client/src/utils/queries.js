@@ -135,6 +135,7 @@ export const GET_SINGLE_POST = gql`
         cautions
         totalNutrients
         totalDaily
+        avgRating
       }
       comments{
         commentId

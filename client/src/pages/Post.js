@@ -3,9 +3,10 @@ import Nutrients from '../components/Nutrients';
 import PostCommentsSelect from '../components/PostCommentsSelect';
 import PostComments from '../components/PostComments';
 import AddRecipeButton from '../components/AddRecipeButton';
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_SINGLE_POST } from "../utils/queries";
 import { useParams } from 'react-router-dom';
+import { RATE_RECIPE } from '../utils/mutations';
 
 import { Box, Text, Heading, Divider, Link as GestaltLink, Button, Spinner } from 'gestalt';
 
@@ -112,14 +113,14 @@ export default function Post() {
 
   const { postId } = useParams();
 
-  const { loading: loading, data: postdata } = useQuery(GET_SINGLE_POST, {
-    variables: { postId: postId }
-    // fetchPolicy: "no-cache",
+  const { loading: loading, data: postdata, refetch } = useQuery(GET_SINGLE_POST, {
+    variables: { postId: postId },
+    fetchPolicy: "no-cache",
   })
 
-  let postData = postdata?.getSinglePost
+  let postData = postdata?.getSinglePost;
 
-  console.log('postData', postData);
+  const [rateRecipe] = useMutation(RATE_RECIPE);
 
   const styles = useCardHeaderStyles();
 
@@ -132,6 +133,23 @@ export default function Post() {
       color: '#ff3d47',
     },
   })(Rating);
+
+  const rateRecipeFunc = async (e, rating) => {
+    e.preventDefault();
+
+    console.log('rating - client', rating);
+
+    try {
+      await rateRecipe({
+        variables: {recipeId: postData.recipe._id, rating}
+      });
+      refetch();
+    } catch (e) {
+      alert(`You've already rated this recipe!`);
+      console.error(e);
+    }
+    
+  }
 
   if (loading) {
     return (
@@ -243,13 +261,16 @@ export default function Post() {
               <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between",  flexWrap: "wrap"}}>
                 <div style={{display: "flex", flexDirection: "row", marginBottom: "10px", flexWrap: "wrap"}}>
                   <StyledRating
-                    defaultValue={4.5}
+                    defaultValue={postData.recipe.avgRating}
                     // maxRating={5}
                     // readOnly
                     name="recipe rating"
                     icon={<FavoriteIcon fontSize="inherit"/>}
                     // className={styles.title}
                     precision={0.5}
+                    onChange={(e, rating) => {
+                      rateRecipeFunc(e, rating);
+                    }}
                   />
                   &nbsp;&nbsp;<span>&#8226;</span>&nbsp;&nbsp;<Text color="darkGray">21 Ratings</Text>                  
                 </div>
