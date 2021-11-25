@@ -151,8 +151,6 @@ function RecipeCard(props) {
   const handleAddPost = async () => {
     try {
 
-      console.log('recipedata', recipedata);
-
       // convert the Object to a string to store in DB easier
       recipedata.totalNutrients = JSON.stringify(recipedata.totalNutrients);
       recipedata.totalDaily = JSON.stringify(recipedata.totalDaily);

@@ -521,9 +521,6 @@ const resolvers = {
         throw new UserInputError('User Already Rated');
       };
 
-      console.log('recipeId', recipeId);
-      console.log('rating', rating);
-
       // add rating to Recipe
       const recipe = await Recipe.findOneAndUpdate(
         { _id: recipeId },

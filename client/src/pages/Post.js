@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Nutrients from '../components/Nutrients';
 import PostCommentsSelect from '../components/PostCommentsSelect';
 import PostComments from '../components/PostComments';
@@ -14,6 +14,11 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Grid, Tooltip, Avatar, Typography, IconButton } from '@material-ui/core';
 import { Row, Column, Item } from '@mui-treasury/components/flex';
 
+// Snackbar
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
+import MuiAlert from '@mui/material/Alert';
+
 import Rating from '@material-ui/lab/Rating';
 
 import { Favorite as FavoriteIcon, 
@@ -28,6 +33,9 @@ import { Favorite as FavoriteIcon,
 
 import { Label } from 'semantic-ui-react';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const useBasicProfileStyles = makeStyles(({ palette }) => ({
   avatar: {
@@ -120,7 +128,23 @@ export default function Post() {
 
   let postData = postdata?.getSinglePost;
 
+  ///////////////// Start Rating
   const [rateRecipe] = useMutation(RATE_RECIPE);
+
+  const [rateState, setRateState] = useState({
+    open: false,
+    vertical: 'top', 
+    horizontal: 'center'
+    // update color here -- set state to default. but change color IF alert
+  })
+
+  const { vertical, horizontal, open } = rateState;
+
+  const handleClose = () => {
+    setRateState({ ...rateState, open: false });
+  }
+  
+  /////////////// End Rating Recipe
 
   const styles = useCardHeaderStyles();
 
@@ -134,10 +158,10 @@ export default function Post() {
     },
   })(Rating);
 
+
+
   const rateRecipeFunc = async (e, rating) => {
     e.preventDefault();
-
-    console.log('rating - client', rating);
 
     try {
       await rateRecipe({
@@ -145,7 +169,9 @@ export default function Post() {
       });
       refetch();
     } catch (e) {
-      alert(`You've already rated this recipe!`);
+      // alert(`You've already rated this recipe!`);
+      setRateState({ ...rateState, open: true })
+
       console.error(e);
     }
     
@@ -308,11 +334,26 @@ export default function Post() {
         </div>
       </div>
 
-      {/* <div className="bottom-post-box the-white-box">
-        <Heading align="center">Engage</Heading>
-
-        <PostComments/>
-      </div> */}
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={open}
+        onClose={handleClose}
+        // message="You've Already Rated This Recipe!"
+        key={'bottom' + 'right'}
+        action={
+          <React.Fragment>
+            <IconButton 
+              size="small" 
+              aria-label="close" 
+              color="inherit" 
+              onClick={handleClose}>
+                <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      >
+        <Alert severity="error">You've Already Rated This Recipe!</Alert>
+      </Snackbar>
 
     </section>
   )
