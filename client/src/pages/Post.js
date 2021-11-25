@@ -353,7 +353,21 @@ export default function Post() {
         // width={'100px'}
         }
       >
-        <Alert severity="error">You've Already Rated This Recipe!</Alert>
+        <Alert 
+          severity="error"
+          sx={{width: '290px'}}
+          action={
+            <React.Fragment>
+              <IconButton 
+                size="small" 
+                aria-label="close" 
+                color="inherit" 
+                onClick={handleClose}>
+                  <CloseIcon fontSize="small" />
+              </IconButton>
+            </React.Fragment>
+          }
+        >You've Already Rated This Recipe!</Alert>
       </Snackbar>
 
     </section>
