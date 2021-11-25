@@ -53,21 +53,21 @@ export default function Nutrients(props) {
           
           return (
             <Table.Row>
-              <Table.Cell><Text>{totalDaily[key].label}</Text></Table.Cell>
-              <Table.Cell>
-                <Text>
-                  {/* Round to decimal place. 10 for 1. 100 for 2 decimals */}
-                  {Math.round(totalNutrients[key].quantity * 10) / 10}
-                  {totalNutrients[key].unit}
-                </Text>
-              </Table.Cell>
-              <Table.Cell>
-                <Text>
-                  {Math.round(totalDaily[key].quantity * 10) / 10}
-                  { totalDaily[key].unit}
-                </Text>
-              </Table.Cell>
-            </Table.Row>
+            <Table.Cell><Text>{totalDaily[key] ? totalDaily[key].label : ''}</Text></Table.Cell>
+            <Table.Cell>
+              <Text>
+                {/* Round to decimal place. 10 for 1. 100 for 2 decimals */}
+                {Math.round( (totalNutrients[key] ? totalNutrients[key].quantity : 0) * 10) / 10}
+                {totalNutrients[key].unit}
+              </Text>
+            </Table.Cell>
+            <Table.Cell>
+              <Text>
+                {Math.round( (totalDaily[key] ? totalDaily[key].quantity : 0) * 10) / 10}
+                { totalDaily[key] ? totalDaily[key].unit : ''}
+              </Text>
+            </Table.Cell>
+          </Table.Row>
           )
         })}
 
