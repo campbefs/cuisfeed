@@ -9,6 +9,9 @@ export default function Nutrients(props) {
   const totalNutrients = JSON.parse(totalnutrients);
   const totalDaily = JSON.parse(totaldaily);
 
+  {/* No Map function for Objects. Turn object into array of keys and map that */}
+  let totalDailyKeys = [ ...new Set(Object.keys(totalDaily)) ];
+
 
   return (
     <Table maxHeight={200}>
@@ -48,26 +51,27 @@ export default function Nutrients(props) {
           <Table.Cell><Text>124%</Text></Table.Cell>
         </Table.Row> */}
 
-        {/* No Map function for Objects. Turn object into array of keys and map that */}
-        {Object.keys(totalDaily).map((key, index) => {
+        {totalDailyKeys.map((key) => {
+
+          // {console.log('key', key)}
           
           return (
-            <Table.Row>
-            <Table.Cell><Text>{totalDaily[key] ? totalDaily[key].label : ''}</Text></Table.Cell>
-            <Table.Cell>
-              <Text>
-                {/* Round to decimal place. 10 for 1. 100 for 2 decimals */}
-                {Math.round( (totalNutrients[key] ? totalNutrients[key].quantity : 0) * 10) / 10}
-                {totalNutrients[key].unit}
-              </Text>
-            </Table.Cell>
-            <Table.Cell>
-              <Text>
-                {Math.round( (totalDaily[key] ? totalDaily[key].quantity : 0) * 10) / 10}
-                { totalDaily[key] ? totalDaily[key].unit : ''}
-              </Text>
-            </Table.Cell>
-          </Table.Row>
+            <Table.Row key={key}>
+              <Table.Cell><Text>{totalDaily[key] ? totalDaily[key].label : ''}</Text></Table.Cell>
+              <Table.Cell>
+                <Text>
+                  {/* Round to decimal place. 10 for 1. 100 for 2 decimals */}
+                  {Math.round( (totalNutrients[key] ? totalNutrients[key].quantity : 0) * 10) / 10}
+                  {totalNutrients[key].unit}
+                </Text>
+              </Table.Cell>
+              <Table.Cell>
+                <Text>
+                  {Math.round( (totalDaily[key] ? totalDaily[key].quantity : 0) * 10) / 10}
+                  { totalDaily[key] ? totalDaily[key].unit : ''}
+                </Text>
+              </Table.Cell>
+            </Table.Row>
           )
         })}
 

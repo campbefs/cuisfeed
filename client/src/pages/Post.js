@@ -123,7 +123,7 @@ export default function Post() {
 
   const { loading: loading, data: postdata, refetch } = useQuery(GET_SINGLE_POST, {
     variables: { postId: postId },
-    fetchPolicy: "no-cache",
+    // fetchPolicy: "no-cache",
   })
 
   let postData = postdata?.getSinglePost;
@@ -159,7 +159,6 @@ export default function Post() {
   })(Rating);
 
 
-
   const rateRecipeFunc = async (e, rating) => {
     e.preventDefault();
 
@@ -176,6 +175,10 @@ export default function Post() {
     }
     
   }
+
+    // de-dupe Ingredients list array
+    // console.log('postData', postData?.recipe?.ingredientLines);
+    let ingredientLines = [ ... new Set(postData?.recipe.ingredientLines)]
 
   if (loading) {
     return (
@@ -205,17 +208,12 @@ export default function Post() {
             <Box marginBottom={6}>
               <ul>
                 {
-                  postData.recipe.ingredientLines.map((ingredient) => {
+                  ingredientLines.map((ingredient) => {
                     return <li key={ingredient} ><Text>{ingredient}</Text></li>
                   })
                 }
                 {/* <li key="1" ><Text>1 pack pizza base mix</Text></li>
-                <li key="2"><Text>3 tbsp tomato pizza sauce</Text></li>
-                <li key="3"><Text>2 small cooking chorizo, diced</Text></li>
-                <li key="4"><Text>1 tbsp capers, drained</Text></li>
-                <li key="5"><Text>handful cherry tomatoes, halved</Text></li>
-                <li key="6"><Text>handful rocket</Text></li>
-                <li key="7"><Text>olive oil, to drizzle</Text></li> */}
+                <li key="2"><Text>3 tbsp tomato pizza sauce</Text></li>*/}
               </ul>
             </Box>
 
@@ -245,6 +243,7 @@ export default function Post() {
               <Nutrients 
                 totalnutrients={postData.recipe.totalNutrients}
                 totaldaily={postData.recipe.totalDaily}
+                key={postData.recipe.totalDaily}
               />
               {/* <Divider/> */}
             </Box>
