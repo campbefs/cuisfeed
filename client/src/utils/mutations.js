@@ -217,7 +217,7 @@ export const LIKE_POST = gql`
 `;
 
 export const RATE_RECIPE = gql`
-  mutation rateRecipe($recipeId:ID!, $rating:Int) {
+  mutation rateRecipe($recipeId:ID!, $rating:Float) {
     rateRecipe(recipeId:$recipeId, rating:$rating){
       _id
       uri

@@ -123,7 +123,7 @@ export default function Post() {
 
   const { loading: loading, data: postdata, refetch } = useQuery(GET_SINGLE_POST, {
     variables: { postId: postId },
-    // fetchPolicy: "no-cache",
+    fetchPolicy: "no-cache",
   })
 
   let postData = postdata?.getSinglePost;
@@ -134,11 +134,12 @@ export default function Post() {
   const [rateState, setRateState] = useState({
     open: false,
     vertical: 'top', 
-    horizontal: 'center'
+    horizontal: 'center',
+    message: 'User Already Rated!'
     // update color here -- set state to default. but change color IF alert
   })
 
-  const { vertical, horizontal, open } = rateState;
+  const { vertical, horizontal, open, message } = rateState;
 
   const handleClose = () => {
     setRateState({ ...rateState, open: false });
@@ -162,14 +163,33 @@ export default function Post() {
   const rateRecipeFunc = async (e, rating) => {
     e.preventDefault();
 
+    console.log('e start', e)
+    console.log('rating', rating);
+    console.log('postData', postData);
+
+    console.log('type', typeof rating);
+
     try {
-      await rateRecipe({
-        variables: {recipeId: postData.recipe._id, rating}
+      let recipe = await rateRecipe({
+        variables: {recipeId: postData?.recipe._id, rating}
       });
       refetch();
+      console.log('recipe client', recipe);
     } catch (e) {
+
+      // Having trouble with graphql responses
+      let jsError = {...e};
+      console.log('jsError', jsError.networkError?.response.status);
+      let status = jsError.networkError?.response.status;
+
+      if (status == 400) {
+        setRateState({ ...rateState, open: true, message: 'Something went Wrong!' })
+      } else {
+        setRateState({ ...rateState, open: true, message: 'User Already Rated!' })
+      }
+
       // alert(`You've already rated this recipe!`);
-      setRateState({ ...rateState, open: true })
+      console.log('e array', {...e});
 
       console.error(e);
     }
@@ -243,7 +263,7 @@ export default function Post() {
               <Nutrients 
                 totalnutrients={postData.recipe.totalNutrients}
                 totaldaily={postData.recipe.totalDaily}
-                key={postData.recipe.totalDaily}
+                // key={postData.recipe.totalDaily}
               />
               {/* <Divider/> */}
             </Box>
@@ -366,7 +386,7 @@ export default function Post() {
               </IconButton>
             </React.Fragment>
           }
-        >You've Already Rated This Recipe!</Alert>
+        >{message}</Alert>
       </Snackbar>
 
     </section>

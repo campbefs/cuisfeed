@@ -511,14 +511,22 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
+      console.log('rating', rating);
+      console.log('recipeId', recipeId);
+      console.log('username', context.user.username);
+
       // check if user already rated recipe
       const userRating = await Recipe.findOne(
         { _id: recipeId, ratingUsers: context.user.username }
       );
 
+      // this should be null -- not rated before
+      console.log('userRating', userRating);
+
       // if exists, throw user error
       if (userRating) {
         throw new UserInputError('User Already Rated');
+        // return 'user exists';
       };
 
       // add rating to Recipe
@@ -528,6 +536,8 @@ const resolvers = {
         // { $push: { ratings: 1, ratingUsers: "testrating1" }}, // for testing
         { new: true }
       );
+
+      console.log('recipe', recipe);
       
       // add username to Recipe -- above
 

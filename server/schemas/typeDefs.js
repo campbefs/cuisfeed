@@ -30,7 +30,7 @@ const typeDefs = gql`
     cuisineType: [String]
     mealType: [String]
     dishType: [String]
-    ratings: [Int]
+    ratings: [Float]
     ratingUsers: [String]
     updated: String
     avgRating: Float
@@ -145,7 +145,7 @@ const typeDefs = gql`
 
     likePost(postId: ID!): Post # OK
 
-    rateRecipe(recipeId: ID!, rating: Int): Recipe # OK
+    rateRecipe(recipeId: ID!, rating: Float): Recipe # OK
 
   }
 
