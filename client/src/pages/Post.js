@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Nutrients from '../components/Nutrients';
 import PostCommentsSelect from '../components/PostCommentsSelect';
 import PostComments from '../components/PostComments';
+
+import { timeFormatter, difficultyFunc } from '../utils/helpers';
+
 import AddRecipeButton from '../components/AddRecipeButton';
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_SINGLE_POST } from "../utils/queries";
@@ -116,6 +119,23 @@ const ItemActions = props => {
   );
 };
 
+const DifficultyTag = props => {
+
+  const { difficulty } = props;
+
+  return (
+    <>
+      { difficulty == 'easy' ?
+      <span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span> 
+      : difficulty == 'medium' ?
+      <span style={{marginRight: "5px"}}><Label color='blue' horizontal>Med</Label></span>
+      :
+      <span style={{marginRight: "5px"}}><Label color='black' horizontal>Hard</Label></span>
+      }
+    </>
+  )
+}
+
 
 export default function Post() {
 
@@ -144,8 +164,13 @@ export default function Post() {
   const handleClose = () => {
     setRateState({ ...rateState, open: false });
   }
-  
   /////////////// End Rating Recipe
+
+  const difficulty = difficultyFunc(postData?.recipe.totalTime, postData?.recipe.ingredientCount);
+
+  console.log('difficulty', difficulty);
+  console.log('time', postData?.recipe.totalTime);
+  console.log('ing count', postData?.recipe.ingredientCount);
 
   const styles = useCardHeaderStyles();
 
@@ -163,12 +188,6 @@ export default function Post() {
   const rateRecipeFunc = async (e, rating) => {
     e.preventDefault();
 
-    console.log('e start', e)
-    console.log('rating', rating);
-    console.log('postData', postData);
-
-    console.log('type', typeof rating);
-
     try {
       let recipe = await rateRecipe({
         variables: {recipeId: postData?.recipe._id, rating}
@@ -182,7 +201,7 @@ export default function Post() {
       console.log('jsError', jsError.networkError?.response.status);
       let status = jsError.networkError?.response.status;
 
-      if (status == 400) {
+      if (status === 400) {
         setRateState({ ...rateState, open: true, message: 'Something went Wrong!' })
       } else {
         setRateState({ ...rateState, open: true, message: 'User Already Rated!' })
@@ -244,12 +263,12 @@ export default function Post() {
             </Box>
 
             <div style={{textAlign: "left", marginTop: "5px", marginBottom: "15px", marginLeft: "15px", lineHeight: "1.5"}}>
-              <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>{postData.recipe.cuisineType.length == 0 ? 'n/a' : postData.recipe.cuisineType.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Cuisine Type: </span>{postData.recipe.cuisineType.length === 0 ? 'n/a' : postData.recipe.cuisineType.join(', ')}</Text>
               <Text><span style={{fontWeight: "bold"}}>Yield: </span>{postData.recipe.yield} servings</Text>
-              <Text><span style={{fontWeight: "bold"}}>Total Time: </span>{parseInt(postData.recipe.totalTime) == 0 ? '' : postData.recipe.totalTime} minutes</Text>
-              <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>{ postData.recipe.dietLabels.length == 0 ? 'n/a' : postData.recipe.dietLabels.join(', ')}</Text>
-              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>{postData.recipe.cautions.length == 0 ? 'n/a' : postData.recipe.cautions.join(', ')}</Text>
-              <Text><span style={{fontWeight: "bold"}}>Health Labels: </span>{postData.recipe.healthLabels.length == 0 ? 'n/a' : postData.recipe.healthLabels.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Total Time: </span>{parseInt(postData.recipe.totalTime) === 0 ? '' : postData.recipe.totalTime} minutes</Text>
+              <Text><span style={{fontWeight: "bold"}}>Diet Labels: </span>{ postData.recipe.dietLabels.length === 0 ? 'n/a' : postData.recipe.dietLabels.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Cautions: </span>{postData.recipe.cautions.length === 0 ? 'n/a' : postData.recipe.cautions.join(', ')}</Text>
+              <Text><span style={{fontWeight: "bold"}}>Health Labels: </span>{postData.recipe.healthLabels.length === 0 ? 'n/a' : postData.recipe.healthLabels.join(', ')}</Text>
             </div>
 
             <Divider/>
@@ -317,10 +336,10 @@ export default function Post() {
                       rateRecipeFunc(e, rating);
                     }}
                   />
-                  &nbsp;&nbsp;<span>&#8226;</span>&nbsp;&nbsp;<Text color="darkGray">21 Ratings</Text>                  
+                  &nbsp;&nbsp;<span>&#8226;</span>&nbsp;&nbsp;<Text color="darkGray">{postData.recipe.ratingCount} Ratings</Text>                  
                 </div>
 
-                <Text><span style={{marginRight: "5px"}}><Label color='green' horizontal>Easy</Label></span></Text>
+                <Text><span style={{marginRight: "5px"}}><DifficultyTag difficulty={difficulty}/></span></Text>
               </div>
               
 

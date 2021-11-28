@@ -511,17 +511,13 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
-      console.log('rating', rating);
-      console.log('recipeId', recipeId);
-      console.log('username', context.user.username);
-
       // check if user already rated recipe
       const userRating = await Recipe.findOne(
         { _id: recipeId, ratingUsers: context.user.username }
       );
 
       // this should be null -- not rated before
-      console.log('userRating', userRating);
+      // console.log('userRating', userRating);
 
       // if exists, throw user error
       if (userRating) {

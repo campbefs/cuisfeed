@@ -136,6 +136,8 @@ export const GET_SINGLE_POST = gql`
         totalNutrients
         totalDaily
         avgRating
+        ratingCount
+        ingredientCount
       }
       comments{
         commentId
@@ -182,6 +184,7 @@ export const GET_SINGLE_RECIPE = gql`
       updated
       avgRating
       ratingCount
+      ingredientCount
     }
   }
 `;
